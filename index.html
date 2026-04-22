@@ -245,8 +245,8 @@
           <div class="glass rounded-5 p-4 p-lg-5 road-card h-100 position-relative overflow-hidden">
             <div class="position-relative ps-5 mb-4">
               <div class="timeline-line"></div><div class="timeline-dot position-absolute start-0 top-0"></div>
-              <div class="fw-bold fs-5 mb-1">Level 0 — Pengenalan jaringan</div>
-              <div class="muted">Apa itu jaringan, fungsi jaringan, perangkat dasar, dan contoh jaringan di rumah / sekolah / kantor.</div>
+              <div class="fw-bold fs-5 mb-1">Level 0 — Pengenalan LAN dan jaringan dasar</div>
+              <div class="muted">Apa itu jaringan, fungsi jaringan, karakteristik LAN, perangkat dasar, dan contoh jaringan di rumah / sekolah / kantor.</div>
             </div>
             <div class="position-relative ps-5 mb-4">
               <div class="timeline-line"></div><div class="timeline-dot position-absolute start-0 top-0"></div>
@@ -429,16 +429,18 @@
         <div class="tab-pane fade" id="topologi">
           <div class="glass rounded-5 p-4 p-lg-5 module-card">
             <h3 class="fw-bold mb-3">Modul 2 — Topologi jaringan dasar</h3>
-            <p class="muted">Topologi adalah bentuk hubungan antar perangkat. Dengan memahami topologi, siswa bisa membaca jalur koneksi, mengenali pusat jaringan, dan mulai berpikir bagaimana data bergerak dari satu titik ke titik lain.</p>
+            <p class="muted">Topologi adalah bentuk hubungan antar perangkat dalam jaringan. Dari acuan Telkom University Jakarta, jenis topologi yang umum dibahas untuk dasar adalah <b>bus</b>, <b>star</b>, <b>ring</b>, <b>mesh</b>, <b>tree</b>, dan <b>hybrid</b>. Dengan memahami topologi, siswa bisa membaca alur koneksi dan memahami kenapa desain jaringan tertentu dipilih.</p>
             <div class="row g-3 mt-2">
-              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Star</div><div class="small muted">Paling umum. Semua perangkat terhubung ke satu pusat seperti switch. Mudah dikelola dan mudah ditelusuri jika ada masalah.</div></div></div>
-              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Bus</div><div class="small muted">Semua perangkat berbagi satu jalur utama. Sederhana tapi kurang cocok untuk jaringan modern yang butuh stabilitas.</div></div></div>
-              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Ring</div><div class="small muted">Perangkat membentuk lingkaran. Aliran data berjalan berurutan dari perangkat ke perangkat.</div></div></div>
-              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Tree / Mesh</div><div class="small muted">Lebih kompleks. Cocok untuk memahami jaringan bercabang atau jaringan yang butuh banyak jalur.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Star</div><div class="small muted">Semua perangkat terhubung ke satu titik pusat seperti switch. Ini paling umum di sekolah, kantor, dan lab komputer karena mudah dikelola dan gangguan lebih mudah dilacak.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Bus</div><div class="small muted">Perangkat terhubung pada satu jalur utama. Biaya bisa lebih hemat, tetapi jika jalur utama bermasalah maka banyak perangkat ikut terdampak.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Ring</div><div class="small muted">Perangkat membentuk lingkaran. Data mengalir dari satu perangkat ke perangkat lain secara berurutan.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Mesh</div><div class="small muted">Banyak perangkat saling terhubung langsung. Sangat baik untuk redundansi, tetapi lebih mahal dan kompleks.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Tree</div><div class="small muted">Gabungan beberapa topologi star yang bercabang. Cocok untuk jaringan yang bertingkat dan berkembang.</div></div></div>
+              <div class="col-md-6 col-xl-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Hybrid</div><div class="small muted">Gabungan dua atau lebih topologi untuk menyesuaikan kebutuhan jaringan yang lebih kompleks.</div></div></div>
             </div>
-            <div class="glass rounded-4 p-3 mt-3">
-              <div class="fw-semibold mb-2">Latihan pemahaman</div>
-              <div class="small muted">Kalau di lab komputer semua PC terhubung ke satu switch, topologi apa yang paling tepat? Jelaskan alasannya dengan bahasa sederhana.</div>
+            <div class="row g-3 mt-2">
+              <div class="col-lg-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold mb-2">Catatan penting</div><div class="small muted">Untuk kebutuhan sekolah / lab komputer, topologi <b>star</b> biasanya paling mudah diterapkan karena setiap komputer terhubung ke switch pusat dan troubleshooting menjadi lebih sederhana.</div></div></div>
+              <div class="col-lg-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold mb-2">Latihan pemahaman</div><div class="small muted">Kalau di lab komputer semua PC terhubung ke satu switch, topologi apa yang paling tepat? Jelaskan alasannya dengan bahasa sederhana dan sebutkan apa kelebihan utamanya.</div></div></div>
             </div>
           </div>
         </div>
@@ -464,6 +466,11 @@
                 <div class="row g-3">
                   <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold text-info mb-2">Konsep inti yang wajib paham</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li><b>Interface</b>: port atau jalur masuk/keluar koneksi</li><li><b>WAN</b>: sisi yang terhubung ke internet / uplink</li><li><b>LAN</b>: sisi jaringan lokal pengguna</li><li><b>IP Address</b>: identitas perangkat di jaringan</li><li><b>Gateway</b>: pintu keluar menuju jaringan lain</li><li><b>DNS</b>: penerjemah nama domain menjadi IP</li></ul></div></div>
                   <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold text-info mb-2">Fungsi layanan dasar</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li><b>DHCP Client</b>: menerima IP otomatis dari sisi internet</li><li><b>DHCP Server</b>: membagikan IP ke perangkat lokal</li><li><b>NAT</b>: memungkinkan banyak client berbagi satu akses internet</li><li><b>Routing</b>: menentukan jalur tujuan paket data</li><li><b>Firewall dasar</b>: menyaring akses tertentu</li></ul></div></div>
+                </div>
+                <div class="glass rounded-4 p-3 mt-3">
+                  <div class="fw-semibold mb-2">Istilah MikroTik yang sering muncul</div>
+                  <div class="small muted">Dari acuan Labkom, istilah dan fitur yang sering muncul pada belajar awal MikroTik antara lain: <b>DHCP</b>, <b>DNS</b>, <b>Firewall & NAT</b>, <b>Routing</b>, <b>Bridge</b>, <b>VLAN</b>, <b>Hotspot</b>, <b>Tools</b>, dan <b>WinBox</b>. Untuk level dasar TKJ/ASJ, fokus pertama tetap pada DHCP, DNS, NAT, routing dasar, dan WinBox.</div>
+                </div>
                 </div>
                 <div class="glass rounded-4 p-3 mt-3">
                   <div class="fw-semibold mb-2">Urutan praktik pemula yang benar</div>
@@ -549,10 +556,14 @@
         </div>
       </div>
       <div class="row g-4">
-        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">LAN</div><div class="small muted">Jaringan lokal pada area terbatas seperti rumah, sekolah, atau kantor.</div></div></div>
-        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">RJ45</div><div class="small muted">Konektor yang dipasang di ujung kabel UTP untuk koneksi ke port jaringan.</div></div></div>
-        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">DHCP</div><div class="small muted">Layanan yang membagikan IP address secara otomatis ke client.</div></div></div>
-        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">NAT</div><div class="small muted">Mekanisme yang membantu banyak perangkat berbagi akses internet.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">LAN</div><div class="small muted">Jaringan lokal pada area terbatas seperti rumah, sekolah, kantor, atau laboratorium komputer. Fungsinya menghubungkan perangkat agar bisa berbagi data dan resource.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">RJ45</div><div class="small muted">Konektor yang dipasang di ujung kabel UTP untuk koneksi ke port jaringan pada NIC, switch, router, atau access point.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">DHCP</div><div class="small muted">Layanan yang membagikan IP address, gateway, dan DNS secara otomatis ke client sehingga pengaturan jaringan tidak perlu dilakukan manual satu per satu.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">NAT</div><div class="small muted">Mekanisme yang membantu banyak perangkat lokal berbagi satu akses internet dengan menerjemahkan alamat IP lokal ke alamat IP keluar.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">Server</div><div class="small muted">Komputer atau perangkat yang menyediakan layanan, data, atau resource untuk client dalam jaringan.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">Client</div><div class="small muted">Perangkat pengguna yang meminta layanan atau mengakses data dari server maupun dari jaringan.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">Gateway</div><div class="small muted">Jalur keluar dari jaringan lokal menuju jaringan lain, biasanya menuju router atau internet.</div></div></div>
+        <div class="col-md-6 col-xl-3"><div class="glass rounded-5 p-4 glossary-card h-100"><div class="fw-bold text-info mb-2">NIC</div><div class="small muted">Network Interface Card, yaitu perangkat yang menghubungkan komputer ke jaringan kabel atau jaringan lokal.</div></div></div>
       </div>
     </section>
 
@@ -596,7 +607,7 @@
         </div>
         <div class="muted">Bisa dipakai pemateri dan siswa untuk eksplorasi lanjutan</div>
       </div>
-      <div class="row g-4">
+      <div class="row g-4 mb-4">
         <div class="col-md-6 col-xl-3">
           <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://help.mikrotik.com/docs/spaces/ROS/pages/328129/WinBox" target="_blank" rel="noopener">
             <div class="text-info fw-bold mb-2">MikroTik WinBox</div>
@@ -612,26 +623,27 @@
           </a>
         </div>
         <div class="col-md-6 col-xl-3">
-          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.cloudflare.com/learning/network-layer/what-is-a-network-topology/" target="_blank" rel="noopener">
-            <div class="text-info fw-bold mb-2">Topologi Jaringan</div>
-            <div class="small muted mb-3">Artikel pengantar untuk memahami bentuk hubungan antar perangkat dalam jaringan.</div>
-            <span class="pill pill-info">Reference</span>
-          </a>
-        </div>
-        <div class="col-md-6 col-xl-3">
-          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.computercablestore.com/straight-through-crossover-and-rollover-wiring" target="_blank" rel="noopener">
-            <div class="text-info fw-bold mb-2">Straight vs Crossover</div>
-            <div class="small muted mb-3">Referensi dasar membedakan susunan kabel straight dan crossover.</div>
-            <span class="pill pill-info">Reference</span>
-          </a>
-        </div>
-        <div class="col-md-6 col-xl-3">
           <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.techtarget.com/searchnetworking/definition/fiber-to-the-home-FTTH" target="_blank" rel="noopener">
             <div class="text-info fw-bold mb-2">FTTH Overview</div>
             <div class="small muted mb-3">Gambaran umum FTTH dan distribusi fiber sampai pelanggan.</div>
             <span class="pill pill-info">Reference</span>
           </a>
         </div>
+      </div>
+      <div class="glass rounded-5 p-4 p-lg-5">
+        <div class="badge-soft mb-3">Sumber acuan materi yang ditanam</div>
+        <h3 class="fw-bold mb-3">Rujukan isi materi versi sekarang</h3>
+        <div class="row g-4">
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://jakarta.telkomuniversity.ac.id/jenis-jenis-topologi-jaringan-komputer/" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">Telkom University Jakarta — Topologi Jaringan</div><div class="small muted">Acuan untuk jenis topologi seperti bus, star, ring, mesh, tree, dan hybrid.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.gramedia.com/literasi/pengertian-lan/" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">Gramedia — Pengertian LAN</div><div class="small muted">Acuan untuk definisi LAN, karakteristik LAN, fungsi LAN, dan komponen dasar jaringan lokal.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://fikom.udb.ac.id/id/artikel/detail/local-area-network-lan-pengertian-karekteristik-dan-fungsi-jaringan-local-area-network" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">UDB — LAN dan Karakteristiknya</div><div class="small muted">Acuan tambahan untuk area cakupan LAN, perangkat LAN, dan fungsi jaringan lokal di sekolah / kantor.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://lmsspada.kemdiktisaintek.go.id/mod/book/view.php?id=82708&chapterid=538" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">SPADA / Kemdikti — Istilah Internet</div><div class="small muted">Acuan istilah dasar seperti web, browser, URL, HTTP, upload, download, client, server, dan alamat IP.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://badoystudio.com/istilah-jaringan-komputer/" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">Badoy Studio — Istilah Jaringan</div><div class="small muted">Acuan glosarium seperti server, client, LAN, MAN, WAN, router, hub, gateway, DHCP, protokol, dan NIC.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://labkom.co.id/mikrotik/istilah-dan-fitur-pada-mikrotik#gsc.tab=0" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">Labkom — Istilah & Fitur MikroTik</div><div class="small muted">Acuan istilah RouterOS seperti DHCP, DNS, firewall NAT, routing, bridge, VLAN, hotspot, tools, dan WinBox.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.idn.id/konfigurasi-dasar-mikrotik/" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">IDN.ID — Konfigurasi Dasar MikroTik</div><div class="small muted">Acuan urutan praktik awal: DHCP Client di WAN, IP LAN, DHCP Server, DNS, NAT, dan verifikasi koneksi.</div></a></div>
+          <div class="col-md-6 col-xl-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://teknik.univpancasila.ac.id/labkom/praktikum/Modul%20Praktikum/Jarkom/MODUL%20JARINGAN%20KOMPUTER%20DASAR%20-%20PERTEMUAN%204.pdf" target="_blank" rel="noopener"><div class="fw-bold text-info mb-2">Universitas Pancasila — Modul Praktikum</div><div class="small muted">Disimpan sebagai rujukan lanjutan untuk penguatan materi praktikum jaringan komputer dasar.</div></a></div>
+        </div>
+        <div class="small muted mt-4">Catatan: beberapa situs menerapkan proteksi anti-bot, jadi saya pakai kombinasi fetch yang berhasil, ringkasan snippet, dan penyusunan ulang materi agar tetap rapi dan aman dipakai sebagai bahan belajar.</div>
       </div>
     </section>
 
