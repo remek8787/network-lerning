@@ -1,20 +1,18 @@
-# Network Learning
+# Alvii Network Learning Hub
 
-MVP awal website apps pembelajaran jaringan untuk anak PKL / Prakerin.
+Platform belajar jaringan modern untuk siswa SMK TKJ/ASJ.
 
-Fokus materi awal:
-- Kabel UTP
-- Topologi jaringan
-- Router / MikroTik dasar
-- OLT
-- FTTH
+## Fitur saat ini
+- UI modern, mobile-friendly
+- Admin login demo
+- Siswa login demo
+- Kelola materi via localStorage browser
+- Dashboard admin dan siswa
+- PWA ringan (manifest + service worker)
 
-Versi awal ini berupa landing page + konsep login pemateri/siswa + roadmap modul awal.
+## Akun demo
+- Admin: `admin` / `admin123`
+- Siswa: `siswa` / `siswa123`
 
-## Next plan
-- dashboard pemateri
-- dashboard siswa
-- modul dinamis
-- upload PDF / gambar / video
-- kuis / tugas
-- progress tracking
+## Catatan
+Versi ini masih frontend-first. Data materi disimpan di browser menggunakan localStorage.
