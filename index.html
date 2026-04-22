@@ -272,6 +272,11 @@
                 <td>Bisa menjelaskan peran router, DHCP, dan NAT secara sederhana</td>
               </tr>
               <tr>
+                <td>Jaringan Fundamental (gaya K13)</td>
+                <td>Memahami perangkat jaringan, media transmisi, pengalamatan IP, topologi, layanan dasar jaringan, dan troubleshooting ringan</td>
+                <td>Bisa menjelaskan alur jaringan lokal sederhana dari perangkat pengguna ke gateway / internet</td>
+              </tr>
+              <tr>
                 <td>OLT / FTTH</td>
                 <td>Mengenali komponen dasar distribusi fiber</td>
                 <td>Bisa menggambarkan alur internet dari pusat sampai rumah pelanggan</td>
@@ -283,6 +288,34 @@
               </tr>
             </tbody>
           </table>
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-lg-6">
+            <div class="glass rounded-4 p-4 h-100">
+              <div class="fw-bold text-info mb-2">Jaringan Fundamental untuk siswa SMK</div>
+              <div class="small muted mb-3">Kalau ditarik ke pola K13 / kompetensi dasar, materi fundamental jaringan biasanya dibangun dari pondasi berikut:</div>
+              <ol class="small muted mb-0 ps-3" style="line-height:1.8">
+                <li>mengenali perangkat jaringan: PC, switch, router, access point, modem</li>
+                <li>mengenali media jaringan: UTP, konektor RJ45, dan fiber optic</li>
+                <li>memahami topologi jaringan dan fungsi tiap perangkat</li>
+                <li>memahami IP address, subnet sederhana, gateway, dan DNS</li>
+                <li>memahami layanan dasar: DHCP, NAT, dan distribusi akses internet</li>
+                <li>melakukan identifikasi gangguan dasar pada koneksi jaringan</li>
+              </ol>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="glass rounded-4 p-4 h-100">
+              <div class="fw-bold text-info mb-2">Output belajar yang diharapkan</div>
+              <ul class="small muted mb-0 ps-3" style="line-height:1.8">
+                <li>siswa tidak hanya hafal nama perangkat, tapi tahu fungsinya</li>
+                <li>siswa bisa membaca jalur koneksi dari client ke router</li>
+                <li>siswa paham kenapa IP, gateway, dan DNS dibutuhkan</li>
+                <li>siswa bisa membedakan masalah fisik dan masalah logis dasar</li>
+                <li>siswa siap naik ke administrasi jaringan yang lebih teknis</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -359,31 +392,67 @@
         <div class="tab-pane fade" id="mikrotik">
           <div class="glass rounded-5 p-4 p-lg-5 module-card">
             <div class="row g-4">
-              <div class="col-lg-7">
-                <h3 class="fw-bold mb-3">Modul 3 — Router dan MikroTik dasar</h3>
-                <p class="muted">Router adalah perangkat yang mengatur lalu lintas data antar jaringan. Dalam banyak implementasi sekolah, kantor kecil, RT/RW net, dan ISP skala menengah, MikroTik sering dipakai karena fiturnya lengkap dan cocok untuk belajar.</p>
+              <div class="col-lg-8">
+                <h3 class="fw-bold mb-3">Modul 3 — MikroTik Fundamental untuk siswa TKJ/ASJ</h3>
+                <p class="muted">Pada level fundamental, tujuan belajar MikroTik bukan langsung jadi jago konfigurasi kompleks, tapi memahami <b>fungsi router</b>, <b>arah lalu lintas jaringan</b>, dan <b>urutan setup dasar</b>. Pendekatan ini paling cocok untuk siswa SMK agar paham konsep dulu sebelum praktik lebih dalam.</p>
                 <div class="glass rounded-4 p-3 mb-3">
-                  <div class="fw-semibold mb-2">Materi inti</div>
-                  <ul class="small muted mb-0 ps-3">
-                    <li>apa itu router</li>
-                    <li>fungsi MikroTik dalam distribusi internet</li>
-                    <li>pengenalan Winbox</li>
-                    <li>IP address dasar</li>
-                    <li>DHCP dasar</li>
-                    <li>NAT dasar</li>
+                  <div class="fw-semibold mb-2">Kompetensi dasar MikroTik fundamental</div>
+                  <ul class="small muted mb-0 ps-3" style="line-height:1.8">
+                    <li>memahami apa itu router dan posisi MikroTik dalam jaringan</li>
+                    <li>mengenali interface WAN dan LAN</li>
+                    <li>memahami IP address, subnet, gateway, dan DNS dasar</li>
+                    <li>memahami fungsi DHCP Server dan DHCP Client</li>
+                    <li>memahami fungsi NAT untuk berbagi akses internet</li>
+                    <li>memahami routing dasar: ke mana paket harus diarahkan</li>
+                    <li>mengenal WinBox sebagai alat konfigurasi awal</li>
                   </ul>
                 </div>
-                <div class="glass rounded-4 p-3">
-                  <div class="fw-semibold mb-2">Contoh alur sederhana</div>
-                  <div class="small muted">Internet dari modem / uplink masuk ke router MikroTik. Dari router, koneksi dibagi ke switch, access point, atau langsung ke perangkat client. Artinya, router adalah pengatur arah koneksi.</div>
+                <div class="row g-3">
+                  <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold text-info mb-2">Konsep inti yang wajib paham</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li><b>Interface</b>: port atau jalur masuk/keluar koneksi</li><li><b>WAN</b>: sisi yang terhubung ke internet / uplink</li><li><b>LAN</b>: sisi jaringan lokal pengguna</li><li><b>IP Address</b>: identitas perangkat di jaringan</li><li><b>Gateway</b>: pintu keluar menuju jaringan lain</li><li><b>DNS</b>: penerjemah nama domain menjadi IP</li></ul></div></div>
+                  <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-semibold text-info mb-2">Fungsi layanan dasar</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li><b>DHCP Client</b>: menerima IP otomatis dari sisi internet</li><li><b>DHCP Server</b>: membagikan IP ke perangkat lokal</li><li><b>NAT</b>: memungkinkan banyak client berbagi satu akses internet</li><li><b>Routing</b>: menentukan jalur tujuan paket data</li><li><b>Firewall dasar</b>: menyaring akses tertentu</li></ul></div></div>
+                </div>
+                <div class="glass rounded-4 p-3 mt-3">
+                  <div class="fw-semibold mb-2">Urutan praktik pemula yang benar</div>
+                  <ol class="small muted mb-0 ps-3" style="line-height:1.8">
+                    <li>hubungkan kabel internet / uplink ke interface WAN</li>
+                    <li>hubungkan laptop / PC ke interface LAN</li>
+                    <li>akses router lewat WinBox</li>
+                    <li>cek penamaan interface dan fungsi masing-masing port</li>
+                    <li>atur IP LAN</li>
+                    <li>aktifkan DHCP Server untuk client lokal</li>
+                    <li>atur DHCP Client atau IP statis di sisi WAN</li>
+                    <li>atur DNS</li>
+                    <li>aktifkan NAT masquerade agar client bisa internetan</li>
+                    <li>uji koneksi dari router lalu dari client</li>
+                  </ol>
+                </div>
+                <div class="glass rounded-4 p-3 mt-3">
+                  <div class="fw-semibold mb-2">Alur logika sederhana</div>
+                  <div class="small muted">Internet masuk dari ISP ke port WAN MikroTik. MikroTik menerima koneksi, lalu mengatur dan membagikannya ke jaringan lokal lewat port LAN. Client menerima IP dari DHCP Server, menggunakan gateway router, lalu NAT membantu banyak client keluar ke internet menggunakan koneksi yang sama.</div>
                 </div>
               </div>
-              <div class="col-lg-5">
-                <div class="glass rounded-4 p-4 h-100">
+              <div class="col-lg-4">
+                <div class="glass rounded-4 p-4 h-100 mb-3">
                   <div class="text-info fw-bold mb-2">Istilah penting</div>
-                  <div class="small muted mb-3">Router, gateway, Winbox, IP address, DHCP, NAT, interface, client.</div>
-                  <div class="text-info fw-bold mb-2">Latihan</div>
-                  <div class="small muted">Jelaskan bedanya modem, router, switch, dan access point. Fokus pada fungsi utamanya saja.</div>
+                  <div class="small muted mb-3">RouterOS, WinBox, interface, WAN, LAN, IP address, subnet, gateway, DNS, DHCP Client, DHCP Server, NAT, routing.</div>
+                  <div class="text-info fw-bold mb-2">Kesalahan pemula yang sering terjadi</div>
+                  <ul class="small muted mb-0 ps-3" style="line-height:1.8">
+                    <li>salah membedakan port WAN dan LAN</li>
+                    <li>IP LAN bentrok dengan IP modem / perangkat lain</li>
+                    <li>DHCP Server belum aktif</li>
+                    <li>NAT belum dibuat sehingga client belum bisa internet</li>
+                    <li>DNS belum diset dengan benar</li>
+                  </ul>
+                </div>
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="text-info fw-bold mb-2">Latihan bergaya K13</div>
+                  <ol class="small muted mb-0 ps-3" style="line-height:1.8">
+                    <li>jelaskan fungsi router dalam jaringan sekolah</li>
+                    <li>bedakan DHCP Client dan DHCP Server</li>
+                    <li>mengapa NAT dibutuhkan saat banyak client memakai satu internet?</li>
+                    <li>apa fungsi gateway bagi client?</li>
+                    <li>buat skema sederhana ISP → MikroTik → switch → PC</li>
+                  </ol>
                 </div>
               </div>
             </div>
@@ -478,6 +547,13 @@
           <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://help.mikrotik.com/docs/spaces/ROS/pages/328129/WinBox" target="_blank" rel="noopener">
             <div class="text-info fw-bold mb-2">MikroTik WinBox</div>
             <div class="small muted mb-3">Referensi resmi pengenalan WinBox dan akses ke perangkat MikroTik.</div>
+            <span class="pill pill-info">Official</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://help.mikrotik.com/docs/spaces/ROS/pages/328151/First+Time+Configuration" target="_blank" rel="noopener">
+            <div class="text-info fw-bold mb-2">MikroTik First Time Configuration</div>
+            <div class="small muted mb-3">Urutan konfigurasi awal RouterOS dari sumber resmi untuk pemula.</div>
             <span class="pill pill-info">Official</span>
           </a>
         </div>
