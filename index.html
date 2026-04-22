@@ -55,6 +55,9 @@
     .demo-note{background:rgba(34,211,238,.08);border:1px dashed rgba(125,211,252,.25);color:#cfefff}
     .hidden-panel{display:none}
     .login-alert{display:none}
+    .material-item{border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03)}
+    .material-item textarea,.material-item input,.material-item select,#materialForm textarea,#materialForm input,#materialForm select{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.08)!important;color:#fff!important}
+    .material-item textarea::placeholder,#materialForm textarea::placeholder,#materialForm input::placeholder{color:#8ca0bd}
     @media (max-width: 992px){.hero-actions,.audit-grid{grid-template-columns:1fr!important}}
   </style>
 </head>
@@ -194,19 +197,54 @@
       <div class="glass rounded-5 p-4 p-lg-5">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
           <div>
-            <div class="badge-soft mb-2">Dashboard Demo</div>
+            <div class="badge-soft mb-2">Dashboard Admin</div>
             <h2 class="section-title mb-0">Panel Admin / Pemateri</h2>
           </div>
           <button class="btn btn-outline-light rounded-4" onclick="logoutDemo()">Logout</button>
         </div>
-        <div class="row g-4">
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Total modul</div><div class="display-6 fw-bold">5</div><div class="small muted">UTP, Topologi, MikroTik, OLT, FTTH</div></div></div>
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Siswa aktif</div><div class="display-6 fw-bold">28</div><div class="small muted">data demo untuk simulasi</div></div></div>
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Tugas pending</div><div class="display-6 fw-bold">3</div><div class="small muted">belum dinilai</div></div></div>
+        <div class="row g-4 mb-4">
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Total materi aktif</div><div id="adminMaterialCount" class="display-6 fw-bold">0</div><div class="small muted">disimpan di browser</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Mode</div><div class="display-6 fw-bold">Local</div><div class="small muted">frontend usable tanpa backend</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Sinkron siswa</div><div class="display-6 fw-bold">Auto</div><div class="small muted">materi langsung tampil di panel siswa</div></div></div>
         </div>
-        <div class="row g-4 mt-1">
-          <div class="col-lg-7"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Aksi cepat admin</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li>kelola materi dan urutan modul</li><li>tambah referensi belajar</li><li>cek progres siswa</li><li>siapkan kuis / tugas berikutnya</li></ul></div></div>
-          <div class="col-lg-5"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Status akun</div><div class="small muted mb-2">Login berhasil sebagai <b>admin/pemateri</b>.</div><div class="small muted">Versi ini masih demo frontend, tapi alur login sudah bisa dicoba langsung.</div></div></div>
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <div class="glass rounded-4 p-4 h-100">
+              <div class="fw-bold text-info mb-3">Form materi</div>
+              <form id="materialForm">
+                <input type="hidden" id="materialId">
+                <div class="mb-3"><input id="materialTitle" class="form-control rounded-4" placeholder="Judul materi, contoh: Dasar DHCP MikroTik" required></div>
+                <div class="mb-3">
+                  <select id="materialCategory" class="form-select rounded-4" required>
+                    <option value="">Pilih kategori</option>
+                    <option>LAN</option>
+                    <option>UTP</option>
+                    <option>Topologi</option>
+                    <option>MikroTik</option>
+                    <option>OLT / FTTH</option>
+                    <option>Istilah Jaringan</option>
+                  </select>
+                </div>
+                <div class="mb-3"><input id="materialSource" class="form-control rounded-4" placeholder="Sumber / link referensi"></div>
+                <div class="mb-3"><textarea id="materialSummary" class="form-control rounded-4" rows="7" placeholder="Ringkasan materi untuk siswa" required></textarea></div>
+                <div class="d-flex gap-2 flex-wrap">
+                  <button type="submit" class="btn btn-info text-dark fw-semibold rounded-4 px-4">Simpan materi</button>
+                  <button type="button" class="btn btn-outline-light rounded-4 px-4" onclick="resetMaterialForm()">Reset</button>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-7">
+            <div class="glass rounded-4 p-4 h-100">
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <div>
+                  <div class="fw-bold text-info">Daftar materi admin</div>
+                  <div class="small muted">Admin bisa tambah, edit, dan hapus materi di sini.</div>
+                </div>
+              </div>
+              <div id="adminMaterialsList" class="d-grid gap-3"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -215,19 +253,19 @@
       <div class="glass rounded-5 p-4 p-lg-5">
         <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
           <div>
-            <div class="badge-soft mb-2">Dashboard Demo</div>
+            <div class="badge-soft mb-2">Dashboard Siswa</div>
             <h2 class="section-title mb-0">Panel Siswa</h2>
           </div>
           <button class="btn btn-outline-light rounded-4" onclick="logoutDemo()">Logout</button>
         </div>
-        <div class="row g-4">
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Modul selesai</div><div class="display-6 fw-bold">2/5</div><div class="small muted">data demo</div></div></div>
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Nilai kuis terakhir</div><div class="display-6 fw-bold">85</div><div class="small muted">simulasi progres siswa</div></div></div>
-          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Modul berikutnya</div><div class="display-6 fw-bold">MikroTik</div><div class="small muted">siap dipelajari</div></div></div>
+        <div class="row g-4 mb-4">
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Total materi tersedia</div><div id="studentMaterialCount" class="display-6 fw-bold">0</div><div class="small muted">otomatis dari panel admin</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Status akses</div><div class="display-6 fw-bold">Aktif</div><div class="small muted">bisa membaca materi kapan saja</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Mode belajar</div><div class="display-6 fw-bold">Mandiri</div><div class="small muted">baca ringkasan dan sumber</div></div></div>
         </div>
-        <div class="row g-4 mt-1">
-          <div class="col-lg-7"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Akses siswa</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li>buka materi dasar dan glosarium</li><li>lihat roadmap belajar</li><li>baca referensi tambahan</li><li>siapkan diri untuk kuis berikutnya</li></ul></div></div>
-          <div class="col-lg-5"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Status akun</div><div class="small muted mb-2">Login berhasil sebagai <b>siswa</b>.</div><div class="small muted">Versi ini masih demo frontend supaya alurnya bisa Tuan Besar tes dulu.</div></div></div>
+        <div class="glass rounded-4 p-4">
+          <div class="fw-bold text-info mb-3">Materi untuk siswa</div>
+          <div id="studentMaterialsList" class="d-grid gap-3"></div>
         </div>
       </div>
     </section>
@@ -687,6 +725,31 @@
       siswa: { username: 'siswa', password: 'siswa123', panel: 'studentPanel', role: 'Siswa' }
     };
 
+    const STORAGE_KEY = 'network-learning-materials-v1';
+    const defaultMaterials = [
+      {
+        id: 'm1',
+        title: 'Pengertian LAN dan fungsi jaringan lokal',
+        category: 'LAN',
+        source: 'https://www.gramedia.com/literasi/pengertian-lan/',
+        summary: 'LAN adalah jaringan komputer dalam cakupan area terbatas seperti sekolah, kantor, rumah, atau lab. LAN dipakai untuk menghubungkan perangkat agar bisa berbagi data, printer, dan akses jaringan dengan lebih cepat dan mudah.'
+      },
+      {
+        id: 'm2',
+        title: 'Jenis topologi jaringan yang umum dipakai',
+        category: 'Topologi',
+        source: 'https://jakarta.telkomuniversity.ac.id/jenis-jenis-topologi-jaringan-komputer/',
+        summary: 'Topologi jaringan yang umum dipelajari adalah star, bus, ring, mesh, tree, dan hybrid. Untuk sekolah dan lab komputer, topologi star paling sering dipakai karena mudah dikelola dan gangguan lebih cepat dilacak.'
+      },
+      {
+        id: 'm3',
+        title: 'Konfigurasi dasar MikroTik untuk pemula',
+        category: 'MikroTik',
+        source: 'https://www.idn.id/konfigurasi-dasar-mikrotik/',
+        summary: 'Urutan dasar belajar MikroTik biasanya dimulai dari WAN, DHCP Client, IP LAN, DHCP Server, DNS, lalu NAT. Setelah itu koneksi diuji dari router dan dari client agar internet benar-benar berjalan.'
+      }
+    ];
+
     function showAlert(message, type='info') {
       const alertBox = document.getElementById('loginAlert');
       alertBox.className = `alert alert-${type} rounded-4 login-alert`;
@@ -700,13 +763,118 @@
       document.getElementById('studentPanel').style.display = 'none';
     }
 
+    function getMaterials() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultMaterials));
+        return [...defaultMaterials];
+      }
+      try {
+        return JSON.parse(raw);
+      } catch {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultMaterials));
+        return [...defaultMaterials];
+      }
+    }
+
+    function saveMaterials(materials) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(materials));
+      renderMaterials();
+    }
+
+    function renderMaterials() {
+      const materials = getMaterials();
+      document.getElementById('adminMaterialCount').textContent = materials.length;
+      document.getElementById('studentMaterialCount').textContent = materials.length;
+
+      const adminList = document.getElementById('adminMaterialsList');
+      const studentList = document.getElementById('studentMaterialsList');
+
+      adminList.innerHTML = materials.length ? materials.map(item => `
+        <div class="material-item rounded-4 p-3">
+          <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
+            <div>
+              <div class="fw-bold">${item.title}</div>
+              <div class="small muted">${item.category}</div>
+            </div>
+            <div class="d-flex gap-2 flex-wrap">
+              <button class="btn btn-sm btn-outline-info rounded-3" onclick="editMaterial('${item.id}')">Edit</button>
+              <button class="btn btn-sm btn-outline-danger rounded-3" onclick="deleteMaterial('${item.id}')">Hapus</button>
+            </div>
+          </div>
+          <div class="small muted mb-2">${item.summary}</div>
+          ${item.source ? `<a href="${item.source}" target="_blank" rel="noopener" class="small text-info">Buka sumber</a>` : ''}
+        </div>
+      `).join('') : '<div class="small muted">Belum ada materi.</div>';
+
+      studentList.innerHTML = materials.length ? materials.map(item => `
+        <div class="material-item rounded-4 p-3">
+          <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
+            <div>
+              <div class="fw-bold">${item.title}</div>
+              <div class="small muted">Kategori: ${item.category}</div>
+            </div>
+          </div>
+          <div class="small muted mb-2">${item.summary}</div>
+          ${item.source ? `<a href="${item.source}" target="_blank" rel="noopener" class="small text-info">Lihat referensi</a>` : ''}
+        </div>
+      `).join('') : '<div class="small muted">Belum ada materi tersedia.</div>';
+    }
+
+    function resetMaterialForm() {
+      document.getElementById('materialForm').reset();
+      document.getElementById('materialId').value = '';
+    }
+
+    function editMaterial(id) {
+      const item = getMaterials().find(m => m.id === id);
+      if (!item) return;
+      document.getElementById('materialId').value = item.id;
+      document.getElementById('materialTitle').value = item.title;
+      document.getElementById('materialCategory').value = item.category;
+      document.getElementById('materialSource').value = item.source || '';
+      document.getElementById('materialSummary').value = item.summary;
+      document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function deleteMaterial(id) {
+      const materials = getMaterials().filter(m => m.id !== id);
+      saveMaterials(materials);
+      showAlert('Materi berhasil dihapus.', 'warning');
+      resetMaterialForm();
+    }
+
+    function upsertMaterial(event) {
+      event.preventDefault();
+      const id = document.getElementById('materialId').value.trim();
+      const title = document.getElementById('materialTitle').value.trim();
+      const category = document.getElementById('materialCategory').value.trim();
+      const source = document.getElementById('materialSource').value.trim();
+      const summary = document.getElementById('materialSummary').value.trim();
+      if (!title || !category || !summary) {
+        showAlert('Judul, kategori, dan ringkasan materi wajib diisi.', 'danger');
+        return;
+      }
+      const materials = getMaterials();
+      if (id) {
+        const idx = materials.findIndex(m => m.id === id);
+        if (idx >= 0) materials[idx] = { id, title, category, source, summary };
+        showAlert('Materi berhasil diperbarui.', 'success');
+      } else {
+        materials.unshift({ id: 'm' + Date.now(), title, category, source, summary });
+        showAlert('Materi baru berhasil ditambahkan.', 'success');
+      }
+      saveMaterials(materials);
+      resetMaterialForm();
+    }
+
     function loginDemo(type) {
       const account = demoAccounts[type];
       const username = document.getElementById(type === 'admin' ? 'adminUsername' : 'studentUsername').value.trim();
       const password = document.getElementById(type === 'admin' ? 'adminPassword' : 'studentPassword').value.trim();
-
       if (username === account.username && password === account.password) {
         hidePanels();
+        renderMaterials();
         document.getElementById(account.panel).style.display = 'block';
         showAlert(`Login berhasil sebagai ${account.role}.`, 'success');
         document.getElementById(account.panel).scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -722,8 +890,10 @@
       document.getElementById('login').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
+    document.getElementById('materialForm').addEventListener('submit', upsertMaterial);
     document.getElementById('adminLoginBtn').addEventListener('click', () => loginDemo('admin'));
     document.getElementById('studentLoginBtn').addEventListener('click', () => loginDemo('siswa'));
+    renderMaterials();
   </script>
 </body>
 </html>
