@@ -52,6 +52,9 @@
     .login-box input::placeholder{color:#8ca0bd}
     .table-darkish td,.table-darkish th{background:transparent;color:#dce7f5;border-color:rgba(255,255,255,.07)}
     .footer-note{color:#7f93af;font-size:.92rem}
+    .demo-note{background:rgba(34,211,238,.08);border:1px dashed rgba(125,211,252,.25);color:#cfefff}
+    .hidden-panel{display:none}
+    .login-alert{display:none}
     @media (max-width: 992px){.hero-actions,.audit-grid{grid-template-columns:1fr!important}}
   </style>
 </head>
@@ -154,15 +157,24 @@
     </section>
 
     <section id="login" class="mb-5">
+      <div class="glass rounded-5 p-4 p-lg-4 demo-note mb-4">
+        <div class="fw-bold mb-2">Login demo untuk uji coba</div>
+        <div class="small mb-2">Tuan Besar bisa langsung tes login tanpa backend dulu.</div>
+        <div class="small mb-0">
+          <b>Admin/Pemateri:</b> username <code>admin</code> / password <code>admin123</code><br>
+          <b>Siswa:</b> username <code>siswa</code> / password <code>siswa123</code>
+        </div>
+      </div>
+      <div id="loginAlert" class="alert alert-info rounded-4 login-alert" role="alert"></div>
       <div class="row g-4">
         <div class="col-lg-6">
           <div class="glass rounded-5 p-4 p-lg-5 login-box h-100">
             <div class="badge-soft mb-3">Portal Pemateri</div>
             <h2 class="section-title mb-3">Login pemateri</h2>
             <p class="muted mb-4">Untuk mengelola modul, upload materi, menambah sumber belajar, dan menilai progres siswa.</p>
-            <div class="mb-3"><input class="form-control form-control-lg rounded-4" placeholder="Email / Username Pemateri"></div>
-            <div class="mb-3"><input type="password" class="form-control form-control-lg rounded-4" placeholder="Password"></div>
-            <button class="btn btn-info text-dark fw-semibold px-4 py-3 rounded-4 w-100">Masuk sebagai Pemateri</button>
+            <div class="mb-3"><input id="adminUsername" class="form-control form-control-lg rounded-4" placeholder="Username Pemateri" value="admin"></div>
+            <div class="mb-3"><input id="adminPassword" type="password" class="form-control form-control-lg rounded-4" placeholder="Password" value="admin123"></div>
+            <button id="adminLoginBtn" class="btn btn-info text-dark fw-semibold px-4 py-3 rounded-4 w-100">Masuk sebagai Pemateri</button>
           </div>
         </div>
         <div class="col-lg-6">
@@ -170,10 +182,52 @@
             <div class="badge-soft mb-3">Portal Siswa</div>
             <h2 class="section-title mb-3">Login siswa</h2>
             <p class="muted mb-4">Untuk membaca materi, membuka referensi, menonton video nanti, dan mengerjakan latihan / kuis.</p>
-            <div class="mb-3"><input class="form-control form-control-lg rounded-4" placeholder="Username / ID Siswa"></div>
-            <div class="mb-3"><input type="password" class="form-control form-control-lg rounded-4" placeholder="Password"></div>
-            <button class="btn btn-outline-light px-4 py-3 rounded-4 w-100">Masuk sebagai Siswa</button>
+            <div class="mb-3"><input id="studentUsername" class="form-control form-control-lg rounded-4" placeholder="Username / ID Siswa" value="siswa"></div>
+            <div class="mb-3"><input id="studentPassword" type="password" class="form-control form-control-lg rounded-4" placeholder="Password" value="siswa123"></div>
+            <button id="studentLoginBtn" class="btn btn-outline-light px-4 py-3 rounded-4 w-100">Masuk sebagai Siswa</button>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="adminPanel" class="mb-5 hidden-panel">
+      <div class="glass rounded-5 p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+          <div>
+            <div class="badge-soft mb-2">Dashboard Demo</div>
+            <h2 class="section-title mb-0">Panel Admin / Pemateri</h2>
+          </div>
+          <button class="btn btn-outline-light rounded-4" onclick="logoutDemo()">Logout</button>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Total modul</div><div class="display-6 fw-bold">5</div><div class="small muted">UTP, Topologi, MikroTik, OLT, FTTH</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Siswa aktif</div><div class="display-6 fw-bold">28</div><div class="small muted">data demo untuk simulasi</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Tugas pending</div><div class="display-6 fw-bold">3</div><div class="small muted">belum dinilai</div></div></div>
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-lg-7"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Aksi cepat admin</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li>kelola materi dan urutan modul</li><li>tambah referensi belajar</li><li>cek progres siswa</li><li>siapkan kuis / tugas berikutnya</li></ul></div></div>
+          <div class="col-lg-5"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Status akun</div><div class="small muted mb-2">Login berhasil sebagai <b>admin/pemateri</b>.</div><div class="small muted">Versi ini masih demo frontend, tapi alur login sudah bisa dicoba langsung.</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="studentPanel" class="mb-5 hidden-panel">
+      <div class="glass rounded-5 p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+          <div>
+            <div class="badge-soft mb-2">Dashboard Demo</div>
+            <h2 class="section-title mb-0">Panel Siswa</h2>
+          </div>
+          <button class="btn btn-outline-light rounded-4" onclick="logoutDemo()">Logout</button>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Modul selesai</div><div class="display-6 fw-bold">2/5</div><div class="small muted">data demo</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Nilai kuis terakhir</div><div class="display-6 fw-bold">85</div><div class="small muted">simulasi progres siswa</div></div></div>
+          <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><div class="text-info fw-bold mb-2">Modul berikutnya</div><div class="display-6 fw-bold">MikroTik</div><div class="small muted">siap dipelajari</div></div></div>
+        </div>
+        <div class="row g-4 mt-1">
+          <div class="col-lg-7"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Akses siswa</div><ul class="small muted mb-0 ps-3" style="line-height:1.8"><li>buka materi dasar dan glosarium</li><li>lihat roadmap belajar</li><li>baca referensi tambahan</li><li>siapkan diri untuk kuis berikutnya</li></ul></div></div>
+          <div class="col-lg-5"><div class="glass rounded-4 p-4 h-100"><div class="fw-bold text-info mb-2">Status akun</div><div class="small muted mb-2">Login berhasil sebagai <b>siswa</b>.</div><div class="small muted">Versi ini masih demo frontend supaya alurnya bisa Tuan Besar tes dulu.</div></div></div>
         </div>
       </div>
     </section>
@@ -615,5 +669,49 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const demoAccounts = {
+      admin: { username: 'admin', password: 'admin123', panel: 'adminPanel', role: 'Admin / Pemateri' },
+      siswa: { username: 'siswa', password: 'siswa123', panel: 'studentPanel', role: 'Siswa' }
+    };
+
+    function showAlert(message, type='info') {
+      const alertBox = document.getElementById('loginAlert');
+      alertBox.className = `alert alert-${type} rounded-4 login-alert`;
+      alertBox.textContent = message;
+      alertBox.style.display = 'block';
+      alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function hidePanels() {
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('studentPanel').style.display = 'none';
+    }
+
+    function loginDemo(type) {
+      const account = demoAccounts[type];
+      const username = document.getElementById(type === 'admin' ? 'adminUsername' : 'studentUsername').value.trim();
+      const password = document.getElementById(type === 'admin' ? 'adminPassword' : 'studentPassword').value.trim();
+
+      if (username === account.username && password === account.password) {
+        hidePanels();
+        document.getElementById(account.panel).style.display = 'block';
+        showAlert(`Login berhasil sebagai ${account.role}.`, 'success');
+        document.getElementById(account.panel).scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        hidePanels();
+        showAlert(`Login gagal untuk ${account.role}. Coba username/password demo yang tersedia.`, 'danger');
+      }
+    }
+
+    function logoutDemo() {
+      hidePanels();
+      showAlert('Logout berhasil. Silakan login lagi sebagai admin atau siswa.', 'info');
+      document.getElementById('login').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('adminLoginBtn').addEventListener('click', () => loginDemo('admin'));
+    document.getElementById('studentLoginBtn').addEventListener('click', () => loginDemo('siswa'));
+  </script>
 </body>
 </html>
