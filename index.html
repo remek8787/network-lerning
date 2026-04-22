@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Alvii Network Learning Hub</title>
-  <meta name="description" content="Platform belajar jaringan modern untuk siswa SMK TKJ/ASJ dengan UI profesional, mobile-friendly, dan bisa dipasang sebagai PWA." />
-  <meta name="theme-color" content="#0f172a" />
+  <title>Alvii Learning Hub</title>
+  <meta name="description" content="Portal belajar jaringan yang lebih rapi, hidup, dan nyaman dipakai untuk admin maupun siswa." />
+  <meta name="theme-color" content="#081226" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/icon.svg" type="image/svg+xml" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -17,8 +17,8 @@
             sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
           },
           boxShadow: {
-            glow: '0 0 0 1px rgba(255,255,255,.06), 0 18px 50px rgba(15,23,42,.35)',
-            soft: '0 10px 35px rgba(2,6,23,.25)'
+            glow: '0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(8,18,38,.36)',
+            soft: '0 16px 45px rgba(2,6,23,.22)'
           },
           keyframes: {
             floaty: {
@@ -26,23 +26,28 @@
               '50%': { transform: 'translateY(-10px)' }
             },
             pulseGlow: {
-              '0%,100%': { boxShadow: '0 0 0 0 rgba(34,211,238,.18)' },
-              '50%': { boxShadow: '0 0 0 12px rgba(34,211,238,0)' }
+              '0%,100%': { boxShadow: '0 0 0 0 rgba(56,189,248,.22)' },
+              '50%': { boxShadow: '0 0 0 12px rgba(56,189,248,0)' }
             },
             fadeUp: {
               '0%': { opacity: '0', transform: 'translateY(16px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' }
             },
-            shine: {
+            shimmer: {
               '0%': { backgroundPosition: '-200% 0' },
               '100%': { backgroundPosition: '200% 0' }
+            },
+            drift: {
+              '0%,100%': { transform: 'translate3d(0,0,0) scale(1)' },
+              '50%': { transform: 'translate3d(0,-16px,0) scale(1.03)' }
             }
           },
           animation: {
-            floaty: 'floaty 6s ease-in-out infinite',
+            floaty: 'floaty 7s ease-in-out infinite',
             pulseGlow: 'pulseGlow 2.8s infinite',
-            fadeUp: 'fadeUp .7s ease forwards',
-            shine: 'shine 5s linear infinite'
+            fadeUp: 'fadeUp .75s ease forwards',
+            shimmer: 'shimmer 6s linear infinite',
+            drift: 'drift 9s ease-in-out infinite'
           }
         }
       }
@@ -52,269 +57,270 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#08111f;
-      --bg-2:#0f172a;
+    :root {
+      --bg:#07101f;
+      --bg-2:#0b162b;
       --panel:rgba(15,23,42,.72);
       --panel-2:rgba(30,41,59,.55);
       --line:rgba(255,255,255,.08);
       --text:#e5eefb;
-      --muted:#94a3b8;
-      --cyan:#22d3ee;
-      --sky:#38bdf8;
+      --muted:#93a4c5;
+      --cyan:#38bdf8;
+      --sky:#60a5fa;
       --violet:#8b5cf6;
       --pink:#ec4899;
-      --lime:#22c55e;
+      --emerald:#34d399;
       --amber:#f59e0b;
+      --rose:#fb7185;
     }
-    html{scroll-behavior:smooth}
-    body{
-      color:var(--text);
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, rgba(34,211,238,.18), transparent 22%),
-        radial-gradient(circle at 90% 15%, rgba(139,92,246,.18), transparent 20%),
-        radial-gradient(circle at 80% 80%, rgba(236,72,153,.14), transparent 22%),
-        linear-gradient(135deg,#020617,#08111f,#0f172a);
-      min-height:100vh;
-      overflow-x:hidden;
+        radial-gradient(circle at 10% 10%, rgba(56,189,248,.18), transparent 22%),
+        radial-gradient(circle at 85% 14%, rgba(168,85,247,.18), transparent 18%),
+        radial-gradient(circle at 86% 80%, rgba(236,72,153,.14), transparent 20%),
+        linear-gradient(180deg, #07101f 0%, #081226 40%, #091427 100%);
+      min-height: 100vh;
     }
-    .glass{
-      background:linear-gradient(180deg, rgba(15,23,42,.8), rgba(15,23,42,.62));
-      border:1px solid var(--line);
-      backdrop-filter: blur(18px);
-      box-shadow:0 0 0 1px rgba(255,255,255,.02), 0 20px 60px rgba(2,6,23,.35);
+    .glass {
+      background: linear-gradient(180deg, rgba(15,23,42,.78), rgba(15,23,42,.56));
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 18px 60px rgba(2,6,23,.28);
     }
-    .glass-soft{
-      background:linear-gradient(180deg, rgba(30,41,59,.55), rgba(15,23,42,.42));
-      border:1px solid rgba(255,255,255,.06);
-      backdrop-filter: blur(14px);
+    .glass-soft {
+      background: linear-gradient(180deg, rgba(15,23,42,.62), rgba(15,23,42,.4));
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .gradient-border{
-      position:relative;
-      isolation:isolate;
+    .gradient-border {
+      position: relative;
+      isolation: isolate;
     }
-    .gradient-border::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      border-radius:inherit;
-      padding:1px;
-      background:linear-gradient(135deg, rgba(34,211,238,.5), rgba(139,92,246,.45), rgba(236,72,153,.38));
-      -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      -webkit-mask-composite:xor;
-      mask-composite:exclude;
-      pointer-events:none;
-      z-index:-1;
+    .gradient-border::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      padding: 1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(56,189,248,.45), rgba(139,92,246,.25), rgba(236,72,153,.18));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: -1;
     }
-    .noise::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:radial-gradient(rgba(255,255,255,.045) 1px, transparent 1px);
-      background-size:22px 22px;
-      opacity:.18;
-      pointer-events:none;
-      border-radius:inherit;
+    .grid-lines {
+      background-image:
+        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size: 28px 28px;
+      background-position: center;
     }
-    .section-divider{
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(34,211,238,.5), rgba(236,72,153,.45), transparent);
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: .08;
+      mix-blend-mode: soft-light;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,.35) 0 1px, transparent 1px),
+        radial-gradient(circle at 80% 50%, rgba(255,255,255,.25) 0 1px, transparent 1px),
+        radial-gradient(circle at 60% 80%, rgba(255,255,255,.25) 0 1px, transparent 1px);
+      background-size: 18px 18px, 26px 26px, 22px 22px;
     }
-    .outline-glow{box-shadow:0 0 0 1px rgba(34,211,238,.1), 0 0 30px rgba(34,211,238,.08)}
-    .text-gradient{
-      background:linear-gradient(135deg,#f8fafc 0%, #67e8f9 40%, #c084fc 75%, #f9a8d4 100%);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
+    .text-gradient {
+      background: linear-gradient(90deg, #ffffff 0%, #9ae6ff 25%, #d8b4fe 60%, #fbcfe8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% 100%;
     }
-    .chip{
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.045);
+    .hero-card {
+      animation: floaty 8s ease-in-out infinite;
     }
-    .nav-link-active{
-      background:linear-gradient(135deg, rgba(34,211,238,.14), rgba(139,92,246,.16));
-      border-color:rgba(103,232,249,.22)!important;
+    .hero-card:nth-child(2) { animation-delay: -2s; }
+    .hero-card:nth-child(3) { animation-delay: -4s; }
+    .input-ui, .textarea-ui, .select-ui {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(8,15,30,.72);
+      color: white;
+      transition: .18s ease;
     }
-    .material-rich p{margin:.55rem 0}
-    .material-rich ul{padding-left:1rem; margin:.5rem 0}
-    .material-rich li{margin:.28rem 0}
-    .material-card:hover{transform:translateY(-3px); border-color:rgba(103,232,249,.22)}
-    .material-card{transition:.25s ease}
-    .reveal{opacity:0; transform:translateY(16px)}
-    .reveal.show{opacity:1; transform:translateY(0); transition:all .6s ease}
-    .blob{filter:blur(30px); opacity:.28}
-    .input-ui, .select-ui, .textarea-ui{
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
+    .input-ui:focus, .textarea-ui:focus, .select-ui:focus {
+      border-color: rgba(56,189,248,.38);
+      box-shadow: 0 0 0 4px rgba(56,189,248,.08);
+      outline: none;
     }
-    .input-ui::placeholder, .textarea-ui::placeholder{color:#94a3b8}
-    .hero-grid{background-image:linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px); background-size:28px 28px}
-    .shine-text{background:linear-gradient(90deg, #e2e8f0 20%, #67e8f9 40%, #f5d0fe 50%, #e2e8f0 80%); background-size:200% auto; -webkit-background-clip:text; background-clip:text; color:transparent}
+    .dot-active { box-shadow: 0 0 0 8px rgba(52,211,153,.12); }
+    .dot-idle { box-shadow: 0 0 0 8px rgba(148,163,184,.10); }
+    .hidden-safe { display: none !important; }
+    .reveal { opacity: 0; transform: translateY(12px); }
+    .reveal.in { opacity: 1; transform: translateY(0); transition: all .7s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-card, .animate-floaty, .animate-pulseGlow, .animate-drift, .animate-shimmer { animation: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
-<body class="font-sans">
-  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-    <div class="blob absolute left-[-6rem] top-[4rem] h-48 w-48 rounded-full bg-cyan-400"></div>
-    <div class="blob absolute right-[2rem] top-[7rem] h-56 w-56 rounded-full bg-fuchsia-500"></div>
-    <div class="blob absolute left-[35%] bottom-[5rem] h-60 w-60 rounded-full bg-violet-500"></div>
+<body>
+  <div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute left-[-8%] top-[8%] h-64 w-64 rounded-full bg-cyan-400/16 blur-3xl animate-drift"></div>
+    <div class="absolute right-[-4%] top-[14%] h-72 w-72 rounded-full bg-fuchsia-500/16 blur-3xl animate-drift" style="animation-delay:-3s"></div>
+    <div class="absolute bottom-[6%] left-[28%] h-72 w-72 rounded-full bg-violet-500/14 blur-3xl animate-drift" style="animation-delay:-6s"></div>
   </div>
 
-  <header class="sticky top-0 z-40 border-b border-white/5 bg-slate-950/60 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-      <a href="#home" class="flex items-center gap-3">
-        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 via-sky-500 to-violet-500 font-black text-slate-950 shadow-glow">A</div>
+  <header class="sticky top-0 z-40 border-b border-white/5 bg-slate-950/45 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3">
+        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-cyan-400 via-sky-500 to-violet-500 text-sm font-black text-slate-950 shadow-glow">A</div>
         <div>
-          <div class="text-sm font-semibold text-white">Alvii Learning Hub</div>
-          <div class="text-xs text-slate-400">TKJ / ASJ Network Academy</div>
+          <div class="text-sm font-bold text-white">Alvii Learning Hub</div>
+          <div class="text-xs text-slate-400">Portal materi jaringan yang siap dipakai ngajarin</div>
         </div>
-      </a>
-      <nav class="hidden items-center gap-2 md:flex">
-        <a class="rounded-xl border border-white/5 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-white" href="#features">Fitur</a>
-        <a class="rounded-xl border border-white/5 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-white" href="#materi">Materi</a>
-        <a class="rounded-xl border border-white/5 px-4 py-2 text-sm text-slate-300 transition hover:border-cyan-400/20 hover:text-white" href="#portal">Portal</a>
-        <a class="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-400/15" href="#portal">Masuk</a>
+      </div>
+      <nav class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
+        <a href="#fitur" class="transition hover:text-white">Fitur</a>
+        <a href="#portal" class="transition hover:text-white">Portal</a>
+        <a href="#materi" class="transition hover:text-white">Materi</a>
+        <a href="#aktivitas" class="transition hover:text-white">Aktivitas</a>
       </nav>
-      <button id="mobileMenuBtn" class="md:hidden rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-300">Menu</button>
+      <button id="mobileMenuBtn" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white md:hidden">Menu</button>
     </div>
-    <div id="mobileMenu" class="hidden border-t border-white/5 bg-slate-950/80 px-4 py-4 md:hidden">
-      <div class="flex flex-col gap-2">
-        <a class="rounded-xl border border-white/5 px-4 py-3 text-sm text-slate-300" href="#features">Fitur</a>
-        <a class="rounded-xl border border-white/5 px-4 py-3 text-sm text-slate-300" href="#materi">Materi</a>
-        <a class="rounded-xl border border-white/5 px-4 py-3 text-sm text-slate-300" href="#portal">Portal</a>
+    <div id="mobileMenu" class="mx-4 mb-4 hidden rounded-3xl border border-white/10 bg-slate-950/65 p-4 text-sm text-slate-300 md:hidden">
+      <div class="flex flex-col gap-3">
+        <a href="#fitur">Fitur</a>
+        <a href="#portal">Portal</a>
+        <a href="#materi">Materi</a>
+        <a href="#aktivitas">Aktivitas</a>
       </div>
     </div>
   </header>
 
-  <main id="home" class="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8 lg:pt-10">
-    <section class="relative overflow-hidden rounded-[2rem] glass gradient-border noise hero-grid px-6 py-10 sm:px-8 lg:px-12 lg:py-14 reveal show">
-      <div class="absolute inset-0 bg-gradient-to-br from-cyan-400/5 via-transparent to-fuchsia-500/5"></div>
-      <div class="relative grid items-center gap-10 lg:grid-cols-[1.2fr_.8fr]">
+  <main class="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
+    <section class="relative overflow-hidden rounded-[2rem] glass gradient-border grid-lines noise px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <div class="grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:items-center">
         <div>
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/15 bg-cyan-400/10 px-4 py-2 text-xs font-semibold text-cyan-200 shadow-soft animate-pulseGlow">
-            Modern Learning Experience • Mobile Friendly • PWA Ready
-          </div>
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/15 bg-cyan-400/10 px-4 py-2 text-xs font-semibold text-cyan-200 animate-pulseGlow">Belajar lebih nyaman • tampilan lebih hidup</div>
           <h1 class="max-w-4xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-            Belajar jaringan dengan <span class="text-gradient">UI modern</span>, materi rapi, dan pengalaman baca yang <span class="shine-text animate-shine">lebih betah</span>.
+            Portal belajar jaringan yang <span class="text-gradient animate-shimmer">lebih rapi, lebih detail, dan lebih enak dipakai</span> buat admin maupun siswa.
           </h1>
           <p class="mt-5 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
-            Platform ini saya rombak untuk terasa seperti website modern masa sekarang: warna lebih hidup, animasi halus, dashboard lebih proper, tampilan mobile lebih enak, dan ada mode aplikasi ringan untuk admin maupun siswa.
+            Sekarang arahnya bukan cuma tampilan yang cantik. Portal ini dibikin lebih siap dipakai ngajarin: ada manajemen siswa, materi, pantauan aktivitas, dan catatan masuk-keluar yang sederhana tapi berguna.
           </p>
-          <div class="mt-7 flex flex-wrap gap-3">
-            <a href="#portal" class="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-6 py-3 text-sm font-bold text-slate-950 shadow-soft transition hover:scale-[1.02]">Coba Portal</a>
-            <a href="#materi" class="rounded-2xl border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/30 hover:bg-white/10">Lihat Materi</a>
+          <div class="mt-6 flex flex-wrap gap-3">
+            <a href="#portal" class="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-soft transition hover:scale-[1.02]">Buka Portal</a>
+            <a href="#fitur" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:border-cyan-300/30 hover:bg-white/10">Lihat Fitur</a>
           </div>
-          <div class="mt-7 grid gap-3 sm:grid-cols-3">
-            <div class="rounded-2xl glass-soft p-4 outline-glow">
-              <div class="text-xs font-semibold uppercase tracking-[.2em] text-cyan-300">Focus</div>
-              <div class="mt-1 text-sm text-white">UTP, LAN, Topologi, MikroTik, OLT/FTTH</div>
+          <div class="mt-8 grid gap-4 sm:grid-cols-3">
+            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
+              <div class="text-xs uppercase tracking-[.2em] text-cyan-300">Admin</div>
+              <div class="mt-2 text-2xl font-black">Kelola siswa</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Tambah akun siswa, lihat aktivitas, dan cek siapa yang masih aktif.</p>
             </div>
-            <div class="rounded-2xl glass-soft p-4 outline-glow">
-              <div class="text-xs font-semibold uppercase tracking-[.2em] text-fuchsia-300">Platform</div>
-              <div class="mt-1 text-sm text-white">Android, Desktop, Browser installable</div>
+            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
+              <div class="text-xs uppercase tracking-[.2em] text-fuchsia-300">Materi</div>
+              <div class="mt-2 text-2xl font-black">Siap diajarin</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Materi bisa ditambah, dirapikan, dan dibuka siswa dari portal yang sama.</p>
             </div>
-            <div class="rounded-2xl glass-soft p-4 outline-glow">
-              <div class="text-xs font-semibold uppercase tracking-[.2em] text-emerald-300">Mode</div>
-              <div class="mt-1 text-sm text-white">Admin manage materi, siswa baca materi</div>
+            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
+              <div class="text-xs uppercase tracking-[.2em] text-emerald-300">Aktivitas</div>
+              <div class="mt-2 text-2xl font-black">Lebih kebaca</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Scroll, klik, atau gerak di halaman akan dibaca sebagai aktivitas siswa.</p>
             </div>
           </div>
         </div>
 
-        <div class="relative">
-          <div class="absolute -left-4 top-8 h-20 w-20 rounded-full bg-cyan-400/20 blur-2xl"></div>
-          <div class="absolute right-0 top-0 h-24 w-24 rounded-full bg-fuchsia-500/20 blur-2xl"></div>
-          <div class="relative glass gradient-border rounded-[2rem] p-5 sm:p-6 animate-floaty">
-            <div class="mb-4 flex items-center justify-between">
-              <div>
-                <div class="text-sm font-bold text-white">Preview Experience</div>
-                <div class="text-xs text-slate-400">Professional dashboard style</div>
-              </div>
-              <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">Live</div>
+        <div class="rounded-[2rem] glass p-5 sm:p-6">
+          <div class="mb-4 flex items-center justify-between">
+            <div>
+              <div class="text-sm font-bold text-white">Sekilas tampilan</div>
+              <div class="text-xs text-slate-400">lebih matang, tetap ringan dipakai</div>
             </div>
-            <div class="grid gap-3 sm:grid-cols-2">
-              <div class="rounded-2xl bg-gradient-to-br from-cyan-400/10 to-sky-500/10 p-4 border border-cyan-400/10">
-                <div class="text-xs uppercase tracking-[.18em] text-cyan-300">UI</div>
-                <div class="mt-2 text-2xl font-black">Modern</div>
-                <div class="mt-1 text-sm text-slate-300">glassmorphism, gradient, motion</div>
-              </div>
-              <div class="rounded-2xl bg-gradient-to-br from-violet-500/10 to-pink-500/10 p-4 border border-fuchsia-400/10">
-                <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300">PWA</div>
-                <div class="mt-2 text-2xl font-black">Ready</div>
-                <div class="mt-1 text-sm text-slate-300">installable feel on Android/Desktop</div>
-              </div>
-              <div class="rounded-2xl bg-gradient-to-br from-white/5 to-white/[.02] p-4 border border-white/10 sm:col-span-2">
-                <div class="text-sm font-semibold text-white">Arah versi sekarang</div>
-                <ul class="mt-3 space-y-2 text-sm text-slate-300">
-                  <li>• tampilan lebih premium dan tidak kaku</li>
-                  <li>• admin bisa kelola materi dari browser</li>
-                  <li>• siswa bisa baca materi lebih nyaman</li>
-                  <li>• siap jadi fondasi untuk backend berikutnya</li>
-                </ul>
-              </div>
+            <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">aktif</div>
+          </div>
+          <div class="grid gap-3 sm:grid-cols-2">
+            <div class="rounded-2xl border border-cyan-400/10 bg-gradient-to-br from-cyan-400/10 to-sky-500/10 p-4">
+              <div class="text-xs uppercase tracking-[.18em] text-cyan-300">Nuansa</div>
+              <div class="mt-2 text-2xl font-black">Lebih hidup</div>
+              <div class="mt-1 text-sm text-slate-300">warna, glow, dan animasi halus yang nggak berlebihan</div>
+            </div>
+            <div class="rounded-2xl border border-fuchsia-400/10 bg-gradient-to-br from-violet-500/10 to-pink-500/10 p-4">
+              <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300">Akses</div>
+              <div class="mt-2 text-2xl font-black">Lebih fleksibel</div>
+              <div class="mt-1 text-sm text-slate-300">nyaman dibuka dari Android, laptop, atau mode aplikasi</div>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[.02] p-4 sm:col-span-2">
+              <div class="text-sm font-semibold text-white">Yang dibawa di versi ini</div>
+              <ul class="mt-3 space-y-2 text-sm text-slate-300">
+                <li>• admin bisa tambah siswa dan pantau status aktif</li>
+                <li>• ada log login dan logout sederhana</li>
+                <li>• materi bisa dikelola langsung dari browser</li>
+                <li>• pengalaman baca lebih santai dan nggak terasa kaku</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="features" class="mt-10 reveal">
-      <div class="mb-4 flex items-center gap-3">
-        <div class="h-10 w-1 rounded-full bg-gradient-to-b from-cyan-400 to-fuchsia-500"></div>
+    <section id="fitur" class="mt-10 reveal">
+      <div class="mb-5 flex items-center justify-between gap-3">
         <div>
-          <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">experience upgrade</div>
-          <h2 class="text-2xl font-black sm:text-3xl">Yang saya upgrade dari versi sebelumnya</h2>
+          <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">yang dibikin lebih enak</div>
+          <h2 class="mt-1 text-2xl font-black sm:text-3xl">Bagian pentingnya sudah lebih matang</h2>
         </div>
+        <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">siap dipakai</div>
       </div>
       <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div class="glass gradient-border rounded-[1.6rem] p-5 reveal">
-          <div class="mb-4 inline-flex rounded-2xl bg-cyan-400/10 px-3 py-2 text-cyan-300">🎨</div>
-          <h3 class="text-lg font-bold">Visual lebih hidup</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Warna, pemisah gradasi, glow outline, dan layout dibuat lebih profesional seperti website modern saat ini.</p>
+        <div class="rounded-[1.5rem] glass-soft p-5">
+          <div class="text-sm font-bold text-white">Panel lebih lega</div>
+          <p class="mt-2 text-sm leading-7 text-slate-300">Titik fokusnya dibikin jelas supaya admin maupun siswa nggak capek cari bagian penting.</p>
         </div>
-        <div class="glass gradient-border rounded-[1.6rem] p-5 reveal">
-          <div class="mb-4 inline-flex rounded-2xl bg-fuchsia-400/10 px-3 py-2 text-fuchsia-300">✨</div>
-          <h3 class="text-lg font-bold">Animasi halus</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Ada floating motion, fade-up, hover response, glow pulse, dan transisi halus supaya pengalaman baca tidak kaku.</p>
+        <div class="rounded-[1.5rem] glass-soft p-5">
+          <div class="text-sm font-bold text-white">Warna lebih luwes</div>
+          <p class="mt-2 text-sm leading-7 text-slate-300">Aksen warnanya hidup, tapi tetap dijaga biar nggak terasa ramai sendiri.</p>
         </div>
-        <div class="glass gradient-border rounded-[1.6rem] p-5 reveal">
-          <div class="mb-4 inline-flex rounded-2xl bg-emerald-400/10 px-3 py-2 text-emerald-300">📱</div>
-          <h3 class="text-lg font-bold">Support mobile</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Tampilan dirapikan untuk Android dan desktop, dengan jarak, tombol, dan panel yang tetap enak disentuh dan dibaca.</p>
+        <div class="rounded-[1.5rem] glass-soft p-5">
+          <div class="text-sm font-bold text-white">Pantauan aktivitas</div>
+          <p class="mt-2 text-sm leading-7 text-slate-300">Gerak siswa di halaman dibaca sebagai tanda aktif sehingga admin bisa lihat siapa yang masih online.</p>
         </div>
-        <div class="glass gradient-border rounded-[1.6rem] p-5 reveal">
-          <div class="mb-4 inline-flex rounded-2xl bg-amber-400/10 px-3 py-2 text-amber-300">🧩</div>
-          <h3 class="text-lg font-bold">PWA ringan</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Bisa dipasang seperti aplikasi ringan di layar utama, cocok untuk akses cepat dari HP atau desktop browser.</p>
+        <div class="rounded-[1.5rem] glass-soft p-5">
+          <div class="text-sm font-bold text-white">Portal siap diajarin</div>
+          <p class="mt-2 text-sm leading-7 text-slate-300">Materi, akun siswa, dan log sederhana sudah ada dalam satu tempat yang sama.</p>
         </div>
       </div>
     </section>
 
-    <div class="my-10 section-divider"></div>
-
-    <section id="portal" class="grid gap-6 lg:grid-cols-[.9fr_1.1fr] reveal">
+    <section id="portal" class="mt-10 grid gap-6 lg:grid-cols-[.92fr_1.08fr] reveal">
       <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
         <div class="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-slate-300">Portal Login</div>
-        <h2 class="text-2xl font-black sm:text-3xl">Masuk sebagai admin atau siswa</h2>
-        <p class="mt-3 text-sm leading-7 text-slate-300">Admin login sengaja tidak menampilkan kredensial di UI. Untuk testing, alur admin dan siswa tetap aktif. Versi ini fokus ke pengalaman yang lebih rapi dan profesional.</p>
-
-        <div id="loginAlert" class="mt-5 hidden rounded-2xl border border-cyan-400/15 bg-cyan-400/10 px-4 py-3 text-sm"></div>
-
+        <h2 class="text-2xl font-black sm:text-3xl">Masuk ke portal</h2>
+        <p class="mt-3 text-sm leading-7 text-slate-300">Halaman masuk dibikin tetap bersih. Akses admin dan siswa tetap jalan, tapi kredensial admin tidak dipajang di layar.</p>
+        <div id="loginAlert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
         <div class="mt-6 grid gap-4 sm:grid-cols-2">
           <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="mb-2 text-sm font-bold text-cyan-300">Admin / Pemateri</div>
-            <p class="mb-4 text-sm text-slate-400">Kelola materi, edit, hapus, dan susun ulang ringkasan belajar.</p>
+            <div class="mb-2 text-sm font-bold text-cyan-300">Admin</div>
+            <p class="mb-4 text-sm text-slate-400">Kelola materi, siswa, status aktivitas, dan log portal.</p>
             <div class="space-y-3">
-              <input id="adminUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none focus:border-cyan-400/30" placeholder="Username admin" />
-              <input id="adminPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none focus:border-cyan-400/30" placeholder="Password admin" />
+              <input id="adminUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username admin" autocomplete="username" />
+              <input id="adminPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password admin" autocomplete="current-password" />
               <button id="adminLoginBtn" class="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.01]">Masuk sebagai Admin</button>
             </div>
           </div>
           <div class="rounded-[1.6rem] glass-soft p-5">
             <div class="mb-2 text-sm font-bold text-fuchsia-300">Siswa</div>
-            <p class="mb-4 text-sm text-slate-400">Buka materi, baca ringkasan, dan akses sumber pendalaman belajar.</p>
+            <p class="mb-4 text-sm text-slate-400">Masuk ke portal, baca materi, dan tercatat saat aktif di halaman.</p>
             <div class="space-y-3">
-              <input id="studentUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none focus:border-fuchsia-400/30" placeholder="Username siswa" value="siswa" />
-              <input id="studentPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none focus:border-fuchsia-400/30" placeholder="Password siswa" value="siswa123" />
+              <input id="studentUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username siswa" autocomplete="username" />
+              <input id="studentPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password siswa" autocomplete="current-password" />
               <button id="studentLoginBtn" class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white transition hover:border-fuchsia-400/25 hover:bg-white/10">Masuk sebagai Siswa</button>
             </div>
           </div>
@@ -324,230 +330,313 @@
       <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
         <div class="mb-5 flex items-center justify-between gap-3">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">Highlights</div>
-            <h3 class="mt-1 text-xl font-black">Pengalaman belajar dibuat lebih betah</h3>
+            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">sekilas</div>
+            <h3 class="mt-1 text-xl font-black">Rasanya sekarang lebih enak dipakai</h3>
           </div>
-          <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">UI Refresh</div>
+          <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">lebih rapi</div>
         </div>
         <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-[1.4rem] bg-gradient-to-br from-cyan-400/10 via-sky-500/10 to-transparent p-5 border border-cyan-400/10">
-            <div class="text-sm font-bold text-white">Dashboard cantik</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Panel admin dan siswa dibikin lebih clean, modern, dan fokus ke konten.</p>
+          <div class="rounded-[1.4rem] border border-cyan-400/10 bg-gradient-to-br from-cyan-400/10 via-sky-500/10 to-transparent p-5">
+            <div class="text-sm font-bold text-white">Panel lebih lega</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Titik fokusnya dibenerin supaya mata lebih gampang nangkap isi penting.</p>
           </div>
-          <div class="rounded-[1.4rem] bg-gradient-to-br from-violet-500/10 via-fuchsia-500/10 to-transparent p-5 border border-fuchsia-400/10">
-            <div class="text-sm font-bold text-white">Warna modern</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Kombinasi cyan, violet, sky, dan pink untuk nuansa modern tanpa terlalu norak.</p>
+          <div class="rounded-[1.4rem] border border-fuchsia-400/10 bg-gradient-to-br from-violet-500/10 via-fuchsia-500/10 to-transparent p-5">
+            <div class="text-sm font-bold text-white">Warna lebih luwes</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Aksen warnanya dibuat hidup, tapi tetap dijaga biar nggak terasa ramai sendiri.</p>
           </div>
-          <div class="rounded-[1.4rem] bg-gradient-to-br from-emerald-400/10 via-cyan-400/5 to-transparent p-5 border border-emerald-400/10">
-            <div class="text-sm font-bold text-white">Mobile nyaman</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Spacing, card, tombol, dan area baca lebih nyaman di layar HP maupun desktop.</p>
+          <div class="rounded-[1.4rem] border border-emerald-400/10 bg-gradient-to-br from-emerald-400/10 via-cyan-400/5 to-transparent p-5">
+            <div class="text-sm font-bold text-white">Baca lebih santai</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Jarak, ukuran panel, dan ritme kontennya dibikin lebih adem buat layar kecil maupun besar.</p>
           </div>
-          <div class="rounded-[1.4rem] bg-gradient-to-br from-amber-400/10 via-orange-400/5 to-transparent p-5 border border-amber-400/10">
-            <div class="text-sm font-bold text-white">PWA installable</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Bisa dibuka terasa seperti aplikasi ringan dengan ikon dan manifest.</p>
+          <div class="rounded-[1.4rem] border border-amber-400/10 bg-gradient-to-br from-amber-400/10 via-orange-400/5 to-transparent p-5">
+            <div class="text-sm font-bold text-white">Akses cepat</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Tetap enak dibuka kapan saja, dan kalau dipasang di perangkat rasanya lebih ringkas.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="adminPanel" class="mt-10 hidden reveal">
+    <section id="adminPanel" class="mt-10 hidden-safe reveal">
       <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <div class="text-xs font-bold uppercase tracking-[.22em] text-cyan-300">Admin dashboard</div>
-            <h2 class="mt-1 text-2xl font-black">Kelola materi belajar</h2>
+            <h2 class="mt-1 text-2xl font-black">Kelola kelas dan pantau aktivitas siswa</h2>
           </div>
           <div class="flex flex-wrap gap-3">
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Total materi: <span id="adminMaterialCount" class="font-bold text-white">0</span></div>
-            <button onclick="logoutDemo()" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/25 hover:bg-white/5">Logout</button>
+            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Siswa aktif: <span id="onlineStudentCount" class="font-bold text-white">0</span></div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Total siswa: <span id="totalStudentCount" class="font-bold text-white">0</span></div>
+            <button id="adminLogoutBtn" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/25 hover:bg-white/5">Logout</button>
           </div>
         </div>
-        <div class="grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="mb-4 text-lg font-bold text-white">Form materi</div>
-            <form id="materialForm" class="space-y-4">
-              <input type="hidden" id="materialId" />
-              <input id="materialTitle" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none" placeholder="Judul materi" required />
-              <select id="materialCategory" class="select-ui w-full rounded-2xl px-4 py-3 text-sm outline-none" required>
-                <option value="">Pilih kategori</option>
-                <option>LAN</option>
-                <option>UTP</option>
-                <option>Topologi</option>
-                <option>MikroTik</option>
-                <option>OLT / FTTH</option>
-                <option>Istilah Jaringan</option>
-              </select>
-              <input id="materialSource" class="input-ui w-full rounded-2xl px-4 py-3 text-sm outline-none" placeholder="Link sumber / referensi" />
-              <textarea id="materialSummary" rows="8" class="textarea-ui w-full rounded-2xl px-4 py-3 text-sm outline-none" placeholder="Ringkasan materi yang enak dibaca siswa" required></textarea>
-              <div class="flex flex-wrap gap-3">
-                <button type="submit" class="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.01]">Simpan Materi</button>
-                <button type="button" onclick="resetMaterialForm()" class="rounded-2xl border border-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/5">Reset</button>
+
+        <div class="grid gap-6 xl:grid-cols-[.9fr_1.1fr]">
+          <div class="space-y-6">
+            <div class="rounded-[1.6rem] glass-soft p-5">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-lg font-bold text-white">Tambah siswa</div>
+                  <div class="text-sm text-slate-400">Buat akun siswa baru dari panel admin.</div>
+                </div>
               </div>
-            </form>
-          </div>
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="mb-4 flex items-center justify-between gap-3">
-              <div>
-                <div class="text-lg font-bold text-white">Daftar materi admin</div>
-                <div class="text-sm text-slate-400">Tambah, edit, dan hapus materi langsung dari dashboard ini.</div>
-              </div>
+              <form id="studentForm" class="space-y-3">
+                <input id="studentNameInput" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Nama siswa" required />
+                <input id="studentUserInput" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username siswa" required />
+                <input id="studentPassInput" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password siswa" required />
+                <button class="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.01]">Simpan siswa</button>
+              </form>
             </div>
-            <div id="adminMaterialsList" class="grid gap-3"></div>
+
+            <div class="rounded-[1.6rem] glass-soft p-5">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-lg font-bold text-white">Tambah materi</div>
+                  <div class="text-sm text-slate-400">Materi baru langsung tampil di portal siswa.</div>
+                </div>
+                <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">Materi: <span id="adminMaterialCount">0</span></div>
+              </div>
+              <form id="materialForm" class="space-y-3">
+                <input id="materialTitle" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Judul materi" required />
+                <div class="grid gap-3 sm:grid-cols-2">
+                  <input id="materialCategory" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Kategori" required />
+                  <input id="materialSource" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Link sumber" />
+                </div>
+                <textarea id="materialSummary" class="textarea-ui h-32 w-full rounded-2xl px-4 py-3 text-sm" placeholder="Ringkasan materi" required></textarea>
+                <button class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white transition hover:border-cyan-300/25 hover:bg-white/10">Simpan materi</button>
+              </form>
+            </div>
           </div>
+
+          <div class="space-y-6">
+            <div class="rounded-[1.6rem] glass-soft p-5">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-lg font-bold text-white">Daftar siswa</div>
+                  <div class="text-sm text-slate-400">Status aktif diambil dari aktivitas terbaru siswa.</div>
+                </div>
+                <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">live</div>
+              </div>
+              <div id="studentList" class="space-y-3"></div>
+            </div>
+
+            <div class="rounded-[1.6rem] glass-soft p-5">
+              <div class="mb-4 flex items-center justify-between gap-3">
+                <div>
+                  <div class="text-lg font-bold text-white">Log login & logout</div>
+                  <div class="text-sm text-slate-400">Ringkas dan cukup buat lihat aktivitas portal.</div>
+                </div>
+              </div>
+              <div id="activityLogList" class="space-y-3"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 rounded-[1.6rem] glass-soft p-5">
+          <div class="mb-4 text-lg font-bold text-white">Materi yang tersedia</div>
+          <div id="adminMaterialList" class="grid gap-4 md:grid-cols-2"></div>
         </div>
       </div>
     </section>
 
-    <section id="studentPanel" class="mt-10 hidden reveal">
+    <section id="studentPanel" class="mt-10 hidden-safe reveal">
       <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-3">
+        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.22em] text-fuchsia-300">Student dashboard</div>
-            <h2 class="mt-1 text-2xl font-black">Ruang baca siswa</h2>
+            <div class="text-xs font-bold uppercase tracking-[.22em] text-fuchsia-300">Portal siswa</div>
+            <h2 class="mt-1 text-2xl font-black">Belajar lebih santai, materi lebih gampang diikuti</h2>
+            <p id="studentWelcome" class="mt-2 text-sm text-slate-400"></p>
           </div>
           <div class="flex flex-wrap gap-3">
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Materi tersedia: <span id="studentMaterialCount" class="font-bold text-white">0</span></div>
-            <button onclick="logoutDemo()" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-300/25 hover:bg-white/5">Logout</button>
+            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Status: <span id="studentStatusText" class="font-bold text-emerald-300">Aktif</span></div>
+            <button id="studentLogoutBtn" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-400/25 hover:bg-white/5">Logout</button>
+          </div>
+        </div>
+        <div id="materi" class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
+      </div>
+    </section>
+
+    <section id="aktivitas" class="mt-10 reveal">
+      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
+        <div class="mb-5 flex items-center justify-between gap-3">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">cara kerja aktivitas</div>
+            <h3 class="mt-1 text-xl font-black">Status siswa dibaca dari kegiatan di halaman</h3>
           </div>
         </div>
         <div class="grid gap-4 md:grid-cols-3">
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="text-sm font-bold text-cyan-300">Mode baca</div>
-            <div class="mt-2 text-2xl font-black">Nyaman</div>
-            <div class="mt-2 text-sm text-slate-400">Konten dibuat singkat, padat, dan bisa lanjut ke sumber asli.</div>
+          <div class="rounded-[1.4rem] glass-soft p-5">
+            <div class="text-sm font-bold text-white">Kalau siswa gerak</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Scroll, klik, sentuh layar, atau menekan tombol akan menyegarkan status aktif siswa.</p>
           </div>
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="text-sm font-bold text-fuchsia-300">Akses</div>
-            <div class="mt-2 text-2xl font-black">Mobile</div>
-            <div class="mt-2 text-sm text-slate-400">Tetap enak dibaca di Android dan desktop.</div>
+          <div class="rounded-[1.4rem] glass-soft p-5">
+            <div class="text-sm font-bold text-white">Kalau sudah diam</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Kalau lama tidak ada aktivitas, status otomatis dianggap offline supaya admin lebih mudah pantau.</p>
           </div>
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="text-sm font-bold text-emerald-300">Referensi</div>
-            <div class="mt-2 text-2xl font-black">Aktif</div>
-            <div class="mt-2 text-sm text-slate-400">Siswa bisa buka sumber untuk pendalaman.</div>
+          <div class="rounded-[1.4rem] glass-soft p-5">
+            <div class="text-sm font-bold text-white">Log sederhana</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300">Masuk dan keluar portal langsung tercatat singkat agar admin tahu alur pemakaian.</p>
           </div>
         </div>
-        <div class="mt-6 rounded-[1.6rem] glass-soft p-5">
-          <div class="mb-4 text-lg font-bold text-white">Materi untuk siswa</div>
-          <div id="studentMaterialsList" class="grid gap-3"></div>
-        </div>
       </div>
-    </section>
 
-    <div class="my-10 section-divider"></div>
 
-    <section id="materi" class="reveal">
-      <div class="mb-4 flex items-center gap-3">
-        <div class="h-10 w-1 rounded-full bg-gradient-to-b from-fuchsia-500 to-cyan-400"></div>
-        <div>
-          <div class="text-xs font-bold uppercase tracking-[.25em] text-fuchsia-300">content direction</div>
-          <h2 class="text-2xl font-black sm:text-3xl">Materi utama untuk TKJ / ASJ</h2>
-        </div>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <article class="glass gradient-border rounded-[1.6rem] p-5 material-card reveal">
-          <div class="mb-3 inline-flex rounded-2xl bg-cyan-400/10 px-3 py-2 text-cyan-300">LAN</div>
-          <h3 class="text-lg font-bold">Jaringan lokal & perangkat dasar</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Pahami LAN, fungsi jaringan lokal, karakteristik, client-server, NIC, gateway, dan alur koneksi dasar.</p>
-        </article>
-        <article class="glass gradient-border rounded-[1.6rem] p-5 material-card reveal">
-          <div class="mb-3 inline-flex rounded-2xl bg-sky-400/10 px-3 py-2 text-sky-300">UTP</div>
-          <h3 class="text-lg font-bold">UTP, RJ45, dan crimping</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Belajar media fisik jaringan: straight, crossover, urutan warna, tester kabel, dan kesalahan umum.</p>
-        </article>
-        <article class="glass gradient-border rounded-[1.6rem] p-5 material-card reveal">
-          <div class="mb-3 inline-flex rounded-2xl bg-violet-400/10 px-3 py-2 text-violet-300">MikroTik</div>
-          <h3 class="text-lg font-bold">MikroTik fundamental</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">WAN, LAN, DHCP, DNS, NAT, routing dasar, WinBox, dan urutan konfigurasi paling dasar untuk pemula.</p>
-        </article>
-        <article class="glass gradient-border rounded-[1.6rem] p-5 material-card reveal">
-          <div class="mb-3 inline-flex rounded-2xl bg-fuchsia-400/10 px-3 py-2 text-fuchsia-300">Fiber</div>
-          <h3 class="text-lg font-bold">OLT, ONT, FTTH</h3>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Naik ke distribusi fiber agar siswa paham alur internet dari pusat sampai pelanggan rumah.</p>
-        </article>
-      </div>
-    </section>
-
-    <div class="my-10 section-divider"></div>
-
-    <section class="reveal">
+    <section id="visual" class="mt-10 reveal">
       <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-5 flex items-center justify-between gap-3 flex-wrap">
+        <div class="mb-5 flex items-center justify-between gap-3">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.22em] text-cyan-300">Sumber & acuan</div>
-            <h2 class="mt-1 text-2xl font-black">Referensi materi yang dipakai</h2>
+            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">visual bantu ajar</div>
+            <h3 class="mt-1 text-xl font-black">Ilustrasi biar penjelasan lebih gampang ditangkap</h3>
           </div>
-          <div class="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs text-slate-300">Tetap bisa dikembangkan lagi</div>
+          <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">siap dipakai</div>
         </div>
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://jakarta.telkomuniversity.ac.id/jenis-jenis-topologi-jaringan-komputer/" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">Telkom University Jakarta</div>
-            <div class="mt-2 text-sm text-slate-400">Acuan topologi jaringan: bus, star, ring, mesh, tree, hybrid.</div>
-          </a>
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://www.gramedia.com/literasi/pengertian-lan/" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">Gramedia</div>
-            <div class="mt-2 text-sm text-slate-400">Acuan LAN, fungsi jaringan lokal, dan komponen dasar.</div>
-          </a>
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://www.idn.id/konfigurasi-dasar-mikrotik/" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">IDN.ID</div>
-            <div class="mt-2 text-sm text-slate-400">Acuan konfigurasi awal MikroTik untuk pemula.</div>
-          </a>
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://labkom.co.id/mikrotik/istilah-dan-fitur-pada-mikrotik#gsc.tab=0" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">Labkom</div>
-            <div class="mt-2 text-sm text-slate-400">Istilah dan fitur RouterOS seperti DHCP, NAT, routing, VLAN, tools, WinBox.</div>
-          </a>
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://badoystudio.com/istilah-jaringan-komputer/" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">Badoy Studio</div>
-            <div class="mt-2 text-sm text-slate-400">Glosarium server, client, gateway, protokol, NIC, dan istilah jaringan lain.</div>
-          </a>
-          <a class="rounded-[1.4rem] glass-soft p-5 transition hover:border-cyan-300/20 hover:bg-white/[.06]" href="https://fikom.udb.ac.id/id/artikel/detail/local-area-network-lan-pengertian-karekteristik-dan-fungsi-jaringan-local-area-network" target="_blank" rel="noopener">
-            <div class="text-sm font-bold text-white">UDB</div>
-            <div class="mt-2 text-sm text-slate-400">Tambahan penguatan tentang LAN dan karakteristiknya.</div>
-          </a>
+        <div class="grid gap-5 lg:grid-cols-2">
+          <article class="rounded-[1.6rem] glass-soft p-4">
+            <img src="images-lan.svg" alt="Ilustrasi LAN" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
+            <div class="mt-4">
+              <div class="text-lg font-bold text-white">LAN dan hubungan perangkat lokal</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Cocok dipakai saat jelasin hubungan komputer, switch, dan pertukaran data dalam satu area seperti lab sekolah atau kantor kecil.</p>
+            </div>
+          </article>
+          <article class="rounded-[1.6rem] glass-soft p-4">
+            <img src="images-topologi.svg" alt="Ilustrasi topologi jaringan" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
+            <div class="mt-4">
+              <div class="text-lg font-bold text-white">Topologi jaringan yang umum dipelajari</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Bisa langsung dipakai untuk bandingin star, ring, dan bus supaya siswa lebih cepat paham bentuk dan logika jalurnya.</p>
+            </div>
+          </article>
+          <article class="rounded-[1.6rem] glass-soft p-4">
+            <img src="images-mikrotik.svg" alt="Ilustrasi MikroTik" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
+            <div class="mt-4">
+              <div class="text-lg font-bold text-white">Dasar konfigurasi MikroTik</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Enak dipakai buat jelasin alur WAN ke LAN, DHCP, DNS, dan NAT sebelum masuk praktik langsung di router.</p>
+            </div>
+          </article>
+          <article class="rounded-[1.6rem] glass-soft p-4">
+            <img src="images-ip.svg" alt="Ilustrasi IP address" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
+            <div class="mt-4">
+              <div class="text-lg font-bold text-white">IP address, subnet, dan host</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300">Bagian ini bantu jelasin pecahan IP secara visual biar siswa nggak cuma hafal angka, tapi paham fungsi tiap bloknya.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <footer class="mt-12 pb-6 pt-10 text-center text-sm text-slate-400">
-      <div class="mb-3 text-base font-bold text-white">Alvii Network Learning Hub</div>
-      <div>Modern UI • Mobile Friendly • PWA Ready • TKJ / ASJ Learning Portal</div>
-    </footer>
+    <section id="rundown" class="mt-10 reveal">
+      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
+        <div class="mb-5">
+          <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">alur ngajarnya</div>
+          <h3 class="mt-1 text-xl font-black">Urutan materi yang enak dipakai saat mengajar</h3>
+        </div>
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">1. Dasar jaringan</div><p class="mt-2 text-sm leading-7 text-slate-300">Mulai dari LAN, manfaat jaringan, dan contoh sederhana yang dekat dengan keseharian siswa.</p></div>
+          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">2. Topologi & perangkat</div><p class="mt-2 text-sm leading-7 text-slate-300">Lanjut ke bentuk jaringan, fungsi router, switch, access point, kabel, dan konektor.</p></div>
+          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">3. IP & konfigurasi</div><p class="mt-2 text-sm leading-7 text-slate-300">Masuk ke IP address, subnet, gateway, lalu latihan dasar konfigurasi perangkat dan klien.</p></div>
+          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">4. Praktik & cek gangguan</div><p class="mt-2 text-sm leading-7 text-slate-300">Tutup dengan crimping, pengujian koneksi, dan alur troubleshooting agar siswa lebih siap praktik.</p></div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script>
-    const demoAccounts = {
-      admin: { username: 'admin', password: 'admin123', panel: 'adminPanel', role: 'Admin / Pemateri' },
-      siswa: { username: 'siswa', password: 'siswa123', panel: 'studentPanel', role: 'Siswa' }
+    const ADMIN_CREDENTIAL = { username: 'admin', password: 'admin2026' };
+    const STORAGE = {
+      materials: 'alvii-learning-materials-v2',
+      students: 'alvii-learning-students-v2',
+      logs: 'alvii-learning-logs-v2',
+      session: 'alvii-learning-session-v2'
     };
+    const ACTIVE_WINDOW_MS = 90000;
 
-    const STORAGE_KEY = 'network-learning-materials-v2';
     const defaultMaterials = [
       {
         id: 'm1',
         title: 'Pengertian LAN dan fungsi jaringan lokal',
         category: 'LAN',
         source: 'https://www.gramedia.com/literasi/pengertian-lan/',
-        summary: 'LAN adalah jaringan komputer dalam area terbatas seperti rumah, sekolah, kantor, atau lab. LAN memudahkan perangkat saling terhubung untuk berbagi data, printer, dan akses jaringan secara lokal.'
+        summary: 'LAN adalah jaringan komputer dalam area terbatas seperti rumah, sekolah, kantor, atau lab. LAN dipakai untuk menghubungkan perangkat agar bisa berbagi data, printer, dan akses jaringan secara lokal.'
       },
       {
         id: 'm2',
         title: 'Jenis topologi jaringan yang umum dipakai',
         category: 'Topologi',
         source: 'https://jakarta.telkomuniversity.ac.id/jenis-jenis-topologi-jaringan-komputer/',
-        summary: 'Topologi dasar yang umum dipelajari adalah star, bus, ring, mesh, tree, dan hybrid. Untuk lab komputer, topologi star paling sering dipakai karena mudah dikelola dan mudah troubleshooting.'
+        summary: 'Topologi yang umum dipelajari adalah star, bus, ring, mesh, tree, dan hybrid. Di lingkungan sekolah atau lab, topologi star paling sering dipakai karena mudah dikelola dan mudah ditelusuri saat ada gangguan.'
       },
       {
         id: 'm3',
         title: 'Konfigurasi dasar MikroTik untuk pemula',
         category: 'MikroTik',
         source: 'https://www.idn.id/konfigurasi-dasar-mikrotik/',
-        summary: 'Urutan dasar belajar MikroTik: atur WAN, aktifkan DHCP Client bila ISP memberi IP otomatis, buat IP LAN, DHCP Server, DNS, lalu NAT masquerade, kemudian lakukan uji koneksi.'
+        summary: 'Langkah dasar belajar MikroTik biasanya dimulai dari pengaturan WAN, IP LAN, DHCP Server, DNS, NAT masquerade, lalu pengujian koneksi dari klien hingga internet.'
+      },
+      {
+        id: 'm4',
+        title: 'Pengenalan IP Address dan subnet sederhana',
+        category: 'IP Address',
+        source: '',
+        summary: 'Siswa perlu paham bedanya network address, host address, gateway, serta cara membaca subnet sederhana agar tidak bingung saat praktek konfigurasi perangkat.'
+      },
+      {
+        id: 'm5',
+        title: 'Perangkat jaringan dan fungsi dasarnya',
+        category: 'Perangkat',
+        source: '',
+        summary: 'Kenali fungsi router, switch, access point, modem, kabel UTP, konektor RJ45, dan server agar siswa tidak hanya hafal nama, tapi paham perannya dalam alur jaringan.'
+      },
+      {
+        id: 'm6',
+        title: 'Langkah crimping kabel straight dan crossover',
+        category: 'Praktik Kabel',
+        source: '',
+        summary: 'Urutan warna kabel, perbedaan straight dan crossover, serta cara tes hasil crimping penting untuk praktik dasar di lab jaringan.'
+      },
+      {
+        id: 'm7',
+        title: 'Troubleshooting dasar koneksi jaringan',
+        category: 'Troubleshooting',
+        source: '',
+        summary: 'Mulai dari cek power perangkat, lampu indikator, kabel, IP client, ping gateway, sampai uji DNS dan internet agar siswa punya alur cek yang runtut.'
+      },
+      {
+        id: 'm8',
+        title: 'Pengenalan routing dan gateway',
+        category: 'Routing',
+        source: '',
+        summary: 'Gateway adalah pintu keluar menuju jaringan lain. Dari sini siswa bisa mulai paham kenapa router dibutuhkan dan bagaimana paket data diarahkan.'
+      }
+    ];
+
+    const defaultStudents = [
+      {
+        id: 's1',
+        name: 'Siswa Demo',
+        username: 'siswa',
+        password: 'siswa123',
+        lastSeen: 0,
+        isLoggedIn: false,
+        createdAt: Date.now()
       }
     ];
 
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    function formatDateTime(ts) {
+      if (!ts) return '-';
+      return new Date(ts).toLocaleString('id-ID', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    function uid(prefix='id') {
+      return `${prefix}_${Math.random().toString(36).slice(2, 9)}_${Date.now().toString(36)}`;
+    }
 
     function showAlert(message, type='info') {
       const alertBox = document.getElementById('loginAlert');
@@ -560,146 +649,380 @@
       alertBox.className = `mt-5 rounded-2xl border px-4 py-3 text-sm ${palette[type] || palette.info}`;
       alertBox.textContent = message;
       alertBox.classList.remove('hidden');
-      alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
     function hidePanels() {
-      document.getElementById('adminPanel').classList.add('hidden');
-      document.getElementById('studentPanel').classList.add('hidden');
+      document.getElementById('adminPanel').classList.add('hidden-safe');
+      document.getElementById('studentPanel').classList.add('hidden-safe');
     }
 
     function getMaterials() {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(STORAGE.materials);
       if (!raw) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultMaterials));
+        localStorage.setItem(STORAGE.materials, JSON.stringify(defaultMaterials));
         return [...defaultMaterials];
       }
       try {
         return JSON.parse(raw);
       } catch {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultMaterials));
+        localStorage.setItem(STORAGE.materials, JSON.stringify(defaultMaterials));
         return [...defaultMaterials];
       }
     }
 
     function saveMaterials(materials) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(materials));
-      renderMaterials();
+      localStorage.setItem(STORAGE.materials, JSON.stringify(materials));
+      renderAll();
     }
 
-    function cardTemplate(item, mode='student') {
+    function getStudents() {
+      const raw = localStorage.getItem(STORAGE.students);
+      if (!raw) {
+        localStorage.setItem(STORAGE.students, JSON.stringify(defaultStudents));
+        return [...defaultStudents];
+      }
+      try {
+        return JSON.parse(raw);
+      } catch {
+        localStorage.setItem(STORAGE.students, JSON.stringify(defaultStudents));
+        return [...defaultStudents];
+      }
+    }
+
+    function saveStudents(students) {
+      localStorage.setItem(STORAGE.students, JSON.stringify(students));
+      renderAll();
+    }
+
+    function getLogs() {
+      const raw = localStorage.getItem(STORAGE.logs);
+      if (!raw) return [];
+      try { return JSON.parse(raw); } catch { return []; }
+    }
+
+    function addLog(type, actor, detail) {
+      const logs = getLogs();
+      logs.unshift({ id: uid('log'), type, actor, detail, time: Date.now() });
+      localStorage.setItem(STORAGE.logs, JSON.stringify(logs.slice(0, 60)));
+      renderLogs();
+    }
+
+    function getSession() {
+      const raw = sessionStorage.getItem(STORAGE.session);
+      if (!raw) return null;
+      try { return JSON.parse(raw); } catch { return null; }
+    }
+
+    function setSession(data) {
+      sessionStorage.setItem(STORAGE.session, JSON.stringify(data));
+    }
+
+    function clearSession() {
+      sessionStorage.removeItem(STORAGE.session);
+    }
+
+    function studentStatus(student) {
+      const active = student.isLoggedIn && Date.now() - (student.lastSeen || 0) <= ACTIVE_WINDOW_MS;
+      return active ? 'active' : 'offline';
+    }
+
+    function materialCard(item, mode='student') {
       return `
-        <article class="material-card rounded-[1.35rem] border border-white/10 bg-white/[.03] p-4 shadow-soft">
-          <div class="mb-3 flex flex-wrap items-start justify-between gap-3">
+        <article class="rounded-[1.4rem] border border-white/10 bg-white/[.03] p-5 shadow-soft">
+          <div class="mb-3 flex items-start justify-between gap-3">
             <div>
               <div class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.2em] text-cyan-200">${item.category}</div>
               <h3 class="mt-3 text-lg font-bold text-white">${item.title}</h3>
             </div>
-            ${mode === 'admin' ? `
-              <div class="flex gap-2">
-                <button class="rounded-xl border border-cyan-400/20 bg-cyan-400/10 px-3 py-2 text-xs font-semibold text-cyan-200" onclick="editMaterial('${item.id}')">Edit</button>
-                <button class="rounded-xl border border-rose-400/20 bg-rose-400/10 px-3 py-2 text-xs font-semibold text-rose-200" onclick="deleteMaterial('${item.id}')">Hapus</button>
-              </div>` : ''}
+            ${mode === 'admin' ? `<button data-delete-material="${item.id}" class="rounded-xl border border-rose-400/20 bg-rose-400/10 px-3 py-2 text-xs font-semibold text-rose-200">Hapus</button>` : ''}
           </div>
-          <div class="material-rich text-sm leading-7 text-slate-300"><p>${item.summary}</p></div>
-          ${item.source ? `<a href="${item.source}" target="_blank" rel="noopener" class="mt-4 inline-flex rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-cyan-200 transition hover:border-cyan-300/30">Buka sumber materi</a>` : ''}
+          <p class="text-sm leading-7 text-slate-300">${item.summary}</p>
+          <div class="mt-4 flex items-center justify-between gap-3">
+            <div class="text-xs text-slate-400">${item.source ? 'Sumber tersedia' : 'Ringkasan internal'}</div>
+            ${item.source ? `<a class="text-sm font-semibold text-cyan-300 hover:text-cyan-200" href="${item.source}" target="_blank" rel="noreferrer">Buka sumber</a>` : ''}
+          </div>
         </article>
       `;
     }
 
-    function renderMaterials() {
+    function studentRow(student) {
+      const status = studentStatus(student);
+      const isActive = status === 'active';
+      return `
+        <div class="rounded-[1.35rem] border ${isActive ? 'border-emerald-400/18 bg-emerald-400/10' : 'border-white/10 bg-white/[.03]'} p-4">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="h-3 w-3 rounded-full ${isActive ? 'bg-emerald-400 dot-active' : 'bg-slate-500 dot-idle'}"></span>
+                <div>
+                  <div class="font-bold text-white">${student.name}</div>
+                  <div class="text-xs text-slate-400">@${student.username}</div>
+                </div>
+              </div>
+              <div class="mt-3 grid gap-1 text-xs text-slate-400 sm:grid-cols-2">
+                <div>Status: <span class="font-semibold ${isActive ? 'text-emerald-300' : 'text-slate-300'}">${isActive ? 'Aktif' : 'Offline'}</span></div>
+                <div>Terakhir aktif: <span class="text-slate-200">${formatDateTime(student.lastSeen)}</span></div>
+              </div>
+            </div>
+            <button data-delete-student="${student.id}" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white hover:border-rose-400/25 hover:text-rose-200">Hapus</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderAdminStudents() {
+      const students = getStudents();
+      document.getElementById('studentList').innerHTML = students.length
+        ? students.map(studentRow).join('')
+        : `<div class="rounded-[1.35rem] border border-white/10 bg-white/[.03] p-4 text-sm text-slate-400">Belum ada siswa.</div>`;
+      document.getElementById('totalStudentCount').textContent = students.length;
+      document.getElementById('onlineStudentCount').textContent = students.filter(s => studentStatus(s) === 'active').length;
+    }
+
+    function renderLogs() {
+      const logs = getLogs();
+      const wrap = document.getElementById('activityLogList');
+      wrap.innerHTML = logs.length
+        ? logs.slice(0, 10).map(log => `
+          <div class="rounded-[1.25rem] border border-white/10 bg-white/[.03] p-4">
+            <div class="flex items-center justify-between gap-3">
+              <div>
+                <div class="font-semibold text-white">${log.actor}</div>
+                <div class="mt-1 text-sm text-slate-300">${log.detail}</div>
+              </div>
+              <div class="text-right">
+                <div class="text-xs font-semibold uppercase tracking-[.16em] ${log.type === 'login' ? 'text-emerald-300' : 'text-amber-300'}">${log.type}</div>
+                <div class="mt-1 text-xs text-slate-500">${formatDateTime(log.time)}</div>
+              </div>
+            </div>
+          </div>`).join('')
+        : `<div class="rounded-[1.25rem] border border-white/10 bg-white/[.03] p-4 text-sm text-slate-400">Belum ada catatan aktivitas.</div>`;
+    }
+
+    function renderAdminMaterials() {
       const materials = getMaterials();
       document.getElementById('adminMaterialCount').textContent = materials.length;
-      document.getElementById('studentMaterialCount').textContent = materials.length;
-      document.getElementById('adminMaterialsList').innerHTML = materials.length ? materials.map(m => cardTemplate(m, 'admin')).join('') : '<div class="text-sm text-slate-400">Belum ada materi.</div>';
-      document.getElementById('studentMaterialsList').innerHTML = materials.length ? materials.map(m => cardTemplate(m, 'student')).join('') : '<div class="text-sm text-slate-400">Belum ada materi.</div>';
+      document.getElementById('adminMaterialList').innerHTML = materials.map(item => materialCard(item, 'admin')).join('');
     }
 
-    function resetMaterialForm() {
-      document.getElementById('materialForm').reset();
-      document.getElementById('materialId').value = '';
+    function renderStudentMaterials() {
+      const materials = getMaterials();
+      document.getElementById('materi').innerHTML = materials.map(item => materialCard(item, 'student')).join('');
     }
 
-    function editMaterial(id) {
-      const item = getMaterials().find(m => m.id === id);
-      if (!item) return;
-      document.getElementById('materialId').value = item.id;
-      document.getElementById('materialTitle').value = item.title;
-      document.getElementById('materialCategory').value = item.category;
-      document.getElementById('materialSource').value = item.source || '';
-      document.getElementById('materialSummary').value = item.summary;
+    function renderStudentWelcome() {
+      const session = getSession();
+      if (session?.role !== 'student') return;
+      const students = getStudents();
+      const activeStudent = students.find(s => s.id === session.studentId);
+      document.getElementById('studentWelcome').textContent = activeStudent
+        ? `Halo, ${activeStudent.name}. Silakan lanjut belajar dari materi yang tersedia di bawah.`
+        : '';
+    }
+
+    function renderAll() {
+      renderAdminStudents();
+      renderLogs();
+      renderAdminMaterials();
+      renderStudentMaterials();
+      renderStudentWelcome();
+    }
+
+    function loginAdmin() {
+      const username = document.getElementById('adminUsername').value.trim();
+      const password = document.getElementById('adminPassword').value;
+      if (username !== ADMIN_CREDENTIAL.username || password !== ADMIN_CREDENTIAL.password) {
+        showAlert('Username atau password admin tidak cocok.', 'danger');
+        return;
+      }
+      setSession({ role: 'admin', loginAt: Date.now() });
+      hidePanels();
+      document.getElementById('adminPanel').classList.remove('hidden-safe');
+      document.getElementById('studentPanel').classList.add('hidden-safe');
+      addLog('login', 'Admin', 'Masuk ke dashboard admin');
+      renderAll();
+      showAlert('Admin berhasil masuk.', 'success');
       document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function deleteMaterial(id) {
-      const materials = getMaterials().filter(m => m.id !== id);
-      saveMaterials(materials);
-      showAlert('Materi berhasil dihapus.', 'warning');
-      resetMaterialForm();
+    function loginStudent() {
+      const username = document.getElementById('studentUsername').value.trim();
+      const password = document.getElementById('studentPassword').value;
+      const students = getStudents();
+      const student = students.find(item => item.username === username && item.password === password);
+      if (!student) {
+        showAlert('Username atau password siswa tidak cocok.', 'danger');
+        return;
+      }
+      student.isLoggedIn = true;
+      student.lastSeen = Date.now();
+      saveStudents(students);
+      setSession({ role: 'student', studentId: student.id, loginAt: Date.now() });
+      hidePanels();
+      document.getElementById('studentPanel').classList.remove('hidden-safe');
+      addLog('login', student.name, 'Masuk ke portal siswa');
+      renderAll();
+      showAlert(`Selamat datang, ${student.name}.`, 'success');
+      document.getElementById('studentPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function upsertMaterial(event) {
+    function logoutCurrent() {
+      const session = getSession();
+      if (!session) return;
+      if (session.role === 'student') {
+        const students = getStudents();
+        const student = students.find(item => item.id === session.studentId);
+        if (student) {
+          student.isLoggedIn = false;
+          saveStudents(students);
+          addLog('logout', student.name, 'Keluar dari portal siswa');
+        }
+      }
+      if (session.role === 'admin') {
+        addLog('logout', 'Admin', 'Keluar dari dashboard admin');
+      }
+      clearSession();
+      hidePanels();
+      showAlert('Sesi sudah ditutup.', 'info');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function syncStudentActivity() {
+      const session = getSession();
+      if (!session || session.role !== 'student') return;
+      const students = getStudents();
+      const student = students.find(item => item.id === session.studentId);
+      if (!student) return;
+      student.lastSeen = Date.now();
+      student.isLoggedIn = true;
+      localStorage.setItem(STORAGE.students, JSON.stringify(students));
+      const statusText = document.getElementById('studentStatusText');
+      if (statusText) statusText.textContent = 'Aktif';
+      renderAdminStudents();
+    }
+
+    function passiveStatusRefresh() {
+      const students = getStudents();
+      let changed = false;
+      students.forEach(student => {
+        const active = Date.now() - (student.lastSeen || 0) <= ACTIVE_WINDOW_MS;
+        const next = !!student.isLoggedIn && active;
+        if (student.isLoggedIn !== next && !next) {
+          student.isLoggedIn = false;
+          changed = true;
+        }
+      });
+      if (changed) localStorage.setItem(STORAGE.students, JSON.stringify(students));
+      renderAdminStudents();
+      const session = getSession();
+      if (session?.role === 'student') {
+        const current = students.find(s => s.id === session.studentId);
+        const statusText = document.getElementById('studentStatusText');
+        if (statusText && current) statusText.textContent = studentStatus(current) === 'active' ? 'Aktif' : 'Offline';
+      }
+    }
+
+    document.getElementById('adminLoginBtn').addEventListener('click', loginAdmin);
+    document.getElementById('studentLoginBtn').addEventListener('click', loginStudent);
+    document.getElementById('adminLogoutBtn').addEventListener('click', logoutCurrent);
+    document.getElementById('studentLogoutBtn').addEventListener('click', logoutCurrent);
+
+    document.getElementById('studentForm').addEventListener('submit', (event) => {
       event.preventDefault();
-      const id = document.getElementById('materialId').value.trim();
+      const name = document.getElementById('studentNameInput').value.trim();
+      const username = document.getElementById('studentUserInput').value.trim();
+      const password = document.getElementById('studentPassInput').value;
+      if (!name || !username || !password) return;
+      const students = getStudents();
+      if (students.some(item => item.username.toLowerCase() === username.toLowerCase())) {
+        showAlert('Username siswa sudah dipakai.', 'warning');
+        return;
+      }
+      students.unshift({
+        id: uid('student'),
+        name,
+        username,
+        password,
+        lastSeen: 0,
+        isLoggedIn: false,
+        createdAt: Date.now()
+      });
+      saveStudents(students);
+      addLog('login', 'Admin', `Menambahkan siswa baru: ${name}`);
+      event.target.reset();
+      showAlert('Siswa berhasil ditambahkan.', 'success');
+    });
+
+    document.getElementById('materialForm').addEventListener('submit', (event) => {
+      event.preventDefault();
       const title = document.getElementById('materialTitle').value.trim();
       const category = document.getElementById('materialCategory').value.trim();
       const source = document.getElementById('materialSource').value.trim();
       const summary = document.getElementById('materialSummary').value.trim();
-      if (!title || !category || !summary) {
-        showAlert('Judul, kategori, dan ringkasan materi wajib diisi.', 'danger');
-        return;
-      }
+      if (!title || !category || !summary) return;
       const materials = getMaterials();
-      if (id) {
-        const idx = materials.findIndex(m => m.id === id);
-        if (idx >= 0) materials[idx] = { id, title, category, source, summary };
-        showAlert('Materi berhasil diperbarui.', 'success');
-      } else {
-        materials.unshift({ id: 'm' + Date.now(), title, category, source, summary });
-        showAlert('Materi baru berhasil ditambahkan.', 'success');
-      }
+      materials.unshift({ id: uid('material'), title, category, source, summary });
       saveMaterials(materials);
-      resetMaterialForm();
-    }
+      addLog('login', 'Admin', `Menambahkan materi: ${title}`);
+      event.target.reset();
+      showAlert('Materi berhasil ditambahkan.', 'success');
+    });
 
-    function loginDemo(type) {
-      const account = demoAccounts[type];
-      const username = document.getElementById(type === 'admin' ? 'adminUsername' : 'studentUsername').value.trim();
-      const password = document.getElementById(type === 'admin' ? 'adminPassword' : 'studentPassword').value.trim();
-      if (username === account.username && password === account.password) {
-        hidePanels();
-        renderMaterials();
-        document.getElementById(account.panel).classList.remove('hidden');
-        showAlert(`Login berhasil sebagai ${account.role}.`, 'success');
-        document.getElementById(account.panel).scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } else {
-        hidePanels();
-        showAlert(`Login gagal untuk ${account.role}.`, 'danger');
+    document.addEventListener('click', (event) => {
+      const materialBtn = event.target.closest('[data-delete-material]');
+      if (materialBtn) {
+        const id = materialBtn.getAttribute('data-delete-material');
+        const materials = getMaterials().filter(item => item.id !== id);
+        saveMaterials(materials);
+        showAlert('Materi berhasil dihapus.', 'info');
       }
+      const studentBtn = event.target.closest('[data-delete-student]');
+      if (studentBtn) {
+        const id = studentBtn.getAttribute('data-delete-student');
+        const students = getStudents().filter(item => item.id !== id);
+        saveStudents(students);
+        showAlert('Siswa berhasil dihapus.', 'info');
+      }
+    });
+
+    ['scroll', 'mousemove', 'keydown', 'click', 'touchstart'].forEach(eventName => {
+      window.addEventListener(eventName, () => syncStudentActivity(), { passive: true });
+    });
+
+    window.addEventListener('beforeunload', () => {
+      const session = getSession();
+      if (session?.role === 'student') {
+        const students = getStudents();
+        const student = students.find(item => item.id === session.studentId);
+        if (student) {
+          student.isLoggedIn = false;
+          localStorage.setItem(STORAGE.students, JSON.stringify(students));
+        }
+      }
+    });
+
+    window.addEventListener('storage', (event) => {
+      if ([STORAGE.students, STORAGE.materials, STORAGE.logs].includes(event.key)) renderAll();
+    });
+
+    document.querySelectorAll('.reveal').forEach((el, index) => setTimeout(() => el.classList.add('in'), 120 * index));
+
+    const currentSession = getSession();
+    if (currentSession?.role === 'admin') {
+      document.getElementById('adminPanel').classList.remove('hidden-safe');
+    } else if (currentSession?.role === 'student') {
+      document.getElementById('studentPanel').classList.remove('hidden-safe');
     }
 
-    function logoutDemo() {
-      hidePanels();
-      showAlert('Logout berhasil. Silakan login lagi.', 'info');
-      document.getElementById('portal').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    document.getElementById('materialForm')?.addEventListener('submit', upsertMaterial);
-    document.getElementById('adminLoginBtn')?.addEventListener('click', () => loginDemo('admin'));
-    document.getElementById('studentLoginBtn')?.addEventListener('click', () => loginDemo('siswa'));
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('show');
-      });
-    }, { threshold: .14 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    renderAll();
+    passiveStatusRefresh();
+    setInterval(passiveStatusRefresh, 15000);
 
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
     }
-
-    renderMaterials();
   </script>
 </body>
 </html>

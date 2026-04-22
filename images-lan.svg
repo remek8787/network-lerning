@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Ilustrasi LAN">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07101f"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="520" rx="36" fill="url(#bg)"/>
+  <circle cx="400" cy="250" r="72" fill="#13223e" stroke="#38bdf8" stroke-width="4"/>
+  <rect x="360" y="218" width="80" height="64" rx="14" fill="#38bdf8" opacity="0.92"/>
+  <rect x="120" y="80" width="140" height="96" rx="18" fill="#111c34" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="540" y="80" width="140" height="96" rx="18" fill="#111c34" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="120" y="340" width="140" height="96" rx="18" fill="#111c34" stroke="#60a5fa" stroke-width="3"/>
+  <rect x="540" y="340" width="140" height="96" rx="18" fill="#111c34" stroke="#60a5fa" stroke-width="3"/>
+  <path d="M260 128 L340 196" stroke="url(#line)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M540 128 L460 196" stroke="url(#line)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M260 388 L340 306" stroke="url(#line)" stroke-width="6" stroke-linecap="round"/>
+  <path d="M540 388 L460 306" stroke="url(#line)" stroke-width="6" stroke-linecap="round"/>
+  <rect x="150" y="106" width="80" height="44" rx="8" fill="#e2e8f0" opacity="0.95"/>
+  <rect x="570" y="106" width="80" height="44" rx="8" fill="#e2e8f0" opacity="0.95"/>
+  <rect x="150" y="366" width="80" height="44" rx="8" fill="#e2e8f0" opacity="0.95"/>
+  <rect x="570" y="366" width="80" height="44" rx="8" fill="#e2e8f0" opacity="0.95"/>
+  <text x="400" y="420" text-anchor="middle" fill="#cbd5e1" font-family="Inter, Arial" font-size="28" font-weight="700">LAN: perangkat terhubung dalam area lokal</text>
+</svg>

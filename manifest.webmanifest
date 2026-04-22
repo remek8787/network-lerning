@@ -1,15 +1,16 @@
 {
-  "name": "Alvii Network Learning Hub",
-  "short_name": "Alvii Hub",
-  "description": "Platform belajar jaringan modern untuk siswa SMK TKJ/ASJ.",
+  "name": "Alvii Learning Hub",
+  "short_name": "Learning Hub",
+  "description": "Portal belajar jaringan yang rapi, hidup, dan nyaman dipakai untuk admin maupun siswa.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#08111f",
-  "theme_color": "#0f172a",
+  "background_color": "#07101f",
+  "theme_color": "#081226",
+  "lang": "id-ID",
   "icons": [
     {
       "src": "/icon.svg",
-      "sizes": "any",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }

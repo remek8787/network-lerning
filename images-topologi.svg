@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Ilustrasi topologi jaringan">
+  <rect width="800" height="520" rx="36" fill="#091427"/>
+  <g font-family="Inter, Arial" fill="#e2e8f0">
+    <text x="120" y="90" font-size="28" font-weight="700">Star</text>
+    <text x="360" y="90" font-size="28" font-weight="700">Ring</text>
+    <text x="600" y="90" font-size="28" font-weight="700">Bus</text>
+  </g>
+  <g stroke="#38bdf8" stroke-width="5" fill="#13223e">
+    <circle cx="150" cy="210" r="20"/><circle cx="90" cy="150" r="16"/><circle cx="210" cy="150" r="16"/><circle cx="90" cy="270" r="16"/><circle cx="210" cy="270" r="16"/>
+    <path d="M150 210 L90 150 M150 210 L210 150 M150 210 L90 270 M150 210 L210 270"/>
+    <circle cx="400" cy="150" r="16"/><circle cx="480" cy="210" r="16"/><circle cx="450" cy="300" r="16"/><circle cx="350" cy="300" r="16"/><circle cx="320" cy="210" r="16"/>
+    <path d="M400 150 L480 210 L450 300 L350 300 L320 210 Z"/>
+    <circle cx="590" cy="210" r="16"/><circle cx="650" cy="210" r="16"/><circle cx="710" cy="210" r="16"/>
+    <path d="M560 210 H740"/>
+  </g>
+  <g fill="#cbd5e1" font-family="Inter, Arial" font-size="20">
+    <text x="82" y="360">Star cocok untuk lab dan sekolah</text>
+    <text x="314" y="360">Ring menekankan alur melingkar</text>
+    <text x="550" y="360">Bus memakai satu jalur utama</text>
+  </g>
+</svg>
