@@ -3,120 +3,474 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Network Learning</title>
+  <title>Network Learning Academy</title>
+  <meta name="description" content="Platform pembelajaran jaringan dasar untuk anak PKL/Prakerin: UTP, topologi, MikroTik, OLT, dan FTTH." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body{background:linear-gradient(135deg,#0f172a,#111827,#1e293b);color:#e5e7eb}
-    .glass{background:rgba(255,255,255,.06);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1)}
+    :root{
+      --bg:#07111f;
+      --bg-soft:#0d182b;
+      --card:rgba(255,255,255,.05);
+      --line:rgba(255,255,255,.08);
+      --text:#e5eefb;
+      --muted:#9db0cc;
+      --brand:#22d3ee;
+      --brand2:#60a5fa;
+      --success:#22c55e;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(34,211,238,.16), transparent 25%),
+        radial-gradient(circle at bottom right, rgba(96,165,250,.14), transparent 25%),
+        linear-gradient(135deg,#04101d,#07111f,#0b1728);
+      min-height:100vh;
+    }
+    .glass{
+      background:var(--card);
+      border:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      box-shadow:0 18px 50px rgba(0,0,0,.22);
+    }
+    .section-title{font-size:clamp(1.6rem,2vw,2.4rem);font-weight:800;letter-spacing:-.03em}
+    .muted{color:var(--muted)}
+    .topbar{backdrop-filter:blur(18px);background:rgba(4,16,29,.72);border-bottom:1px solid rgba(255,255,255,.06)}
+    .hero-card{background:linear-gradient(135deg, rgba(34,211,238,.12), rgba(96,165,250,.10));border:1px solid rgba(125,211,252,.18)}
+    .badge-soft{display:inline-flex;align-items:center;gap:.45rem;padding:.45rem .8rem;border-radius:999px;border:1px solid rgba(125,211,252,.18);background:rgba(34,211,238,.08);color:#bff3ff;font-size:.85rem;font-weight:700}
+    .stat-card h3{font-size:2rem;font-weight:800;margin:0}
+    .login-box input,.login-box select{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.08)!important;color:#fff!important}
+    .login-box input::placeholder{color:#8ca0bd}
+    .road-card,.module-card,.ref-card,.mini-card,.story-card{transition:.22s ease}
+    .road-card:hover,.module-card:hover,.ref-card:hover,.mini-card:hover,.story-card:hover{transform:translateY(-4px);border-color:rgba(125,211,252,.24)}
+    .pill{padding:.35rem .7rem;border-radius:999px;font-size:.82rem;font-weight:700}
+    .pill-info{background:rgba(34,211,238,.10);color:#bff3ff;border:1px solid rgba(34,211,238,.18)}
+    .pill-success{background:rgba(34,197,94,.10);color:#b8f7c7;border:1px solid rgba(34,197,94,.18)}
+    .timeline-line{position:absolute;left:23px;top:22px;bottom:-22px;width:2px;background:linear-gradient(180deg, rgba(34,211,238,.5), rgba(96,165,250,.05))}
+    .timeline-dot{width:16px;height:16px;border-radius:999px;background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 0 0 8px rgba(34,211,238,.08)}
+    .module-tabs .nav-link{color:#bfd3f0;border:none;background:transparent}
+    .module-tabs .nav-link.active{background:rgba(34,211,238,.12)!important;color:#dafeff;border-radius:12px}
+    .footer-note{color:#7f93af;font-size:.92rem}
+    .gradient-text{background:linear-gradient(135deg,#dafeff,#7dd3fc,#60a5fa);-webkit-background-clip:text;background-clip:text;color:transparent}
+    @media (max-width: 992px){
+      .hero-actions,.hero-grid,.audit-grid{grid-template-columns:1fr!important}
+    }
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark px-4 py-3">
-    <div class="container-fluid">
-      <a class="navbar-brand fw-bold" href="#">Network Learning</a>
-      <div class="d-flex gap-2">
-        <a href="#login" class="btn btn-outline-light btn-sm">Login</a>
-        <a href="#modul" class="btn btn-info btn-sm text-dark fw-semibold">Lihat Modul</a>
+  <nav class="navbar navbar-expand-lg topbar sticky-top px-3 px-lg-4 py-3">
+    <div class="container-xxl">
+      <a class="navbar-brand text-white fw-bold fs-4" href="#home">Network Learning Academy</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link text-light" href="#roadmap">Roadmap</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="#materi">Materi</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="#referensi">Referensi</a></li>
+          <li class="nav-item"><a class="nav-link text-light" href="#audit">Audit</a></li>
+          <li class="nav-item"><a class="btn btn-info text-dark fw-semibold rounded-4 px-3" href="#login">Masuk Portal</a></li>
+        </ul>
       </div>
     </div>
   </nav>
 
-  <main class="container py-5">
-    <section class="row align-items-center g-4 mb-5">
+  <main id="home" class="container-xxl px-3 px-lg-4 py-4 py-lg-5">
+    <section class="row g-4 align-items-center mb-5">
       <div class="col-lg-7">
-        <div class="badge bg-info text-dark mb-3">Platform Pembelajaran Jaringan PKL / Prakerin</div>
-        <h1 class="display-5 fw-bold mb-3">Belajar jaringan dari dasar: UTP, topologi, MikroTik, OLT, sampai FTTH.</h1>
-        <p class="lead text-slate-300">Dirancang untuk siswa PKL agar belajar bertahap, sederhana, tapi tetap lengkap dan nyambung ke dunia lapangan.</p>
-        <div class="d-flex flex-wrap gap-2 mt-4">
-          <a class="btn btn-info text-dark fw-semibold" href="#roadmap">Lihat Roadmap</a>
-          <a class="btn btn-outline-light" href="#referensi">Referensi Awal</a>
+        <div class="badge-soft mb-3">Platform internal untuk anak PKL / Prakerin</div>
+        <h1 class="display-4 fw-bold lh-sm mb-3">
+          Belajar jaringan dari <span class="gradient-text">nol sampai paham</span>.
+        </h1>
+        <p class="fs-5 muted mb-4" style="max-width:780px">
+          Fokus pembelajaran dibuat tajam: <b>kabel UTP</b>, <b>topologi jaringan</b>, <b>router MikroTik</b>, <b>OLT</b>, dan <b>FTTH</b>.
+          Tujuannya bukan sekadar baca materi, tapi membentuk pondasi teknisi lapangan yang benar-benar ngerti dasar jaringan.
+        </p>
+        <div class="d-flex flex-wrap gap-2 mb-4">
+          <span class="pill pill-info">UTP</span>
+          <span class="pill pill-info">Topologi</span>
+          <span class="pill pill-info">MikroTik</span>
+          <span class="pill pill-info">OLT</span>
+          <span class="pill pill-info">FTTH</span>
+        </div>
+        <div class="d-flex flex-wrap gap-3 hero-actions">
+          <a href="#roadmap" class="btn btn-info text-dark fw-semibold px-4 py-3 rounded-4">Lihat Roadmap Belajar</a>
+          <a href="#materi" class="btn btn-outline-light px-4 py-3 rounded-4">Buka Materi Dasar</a>
         </div>
       </div>
       <div class="col-lg-5">
-        <div class="glass rounded-4 p-4 shadow-lg">
-          <h3 class="fw-bold mb-3">Akses Portal</h3>
-          <div class="d-grid gap-3">
-            <div class="rounded-4 p-3 bg-slate-900/60 border border-slate-700">
-              <div class="text-info fw-semibold">Login Pemateri</div>
-              <div class="small text-secondary">Kelola modul, materi, tugas, dan siswa.</div>
+        <div class="glass hero-card rounded-5 p-4 p-lg-4">
+          <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+              <div class="text-info fw-bold">Portal Pembelajaran</div>
+              <div class="muted small">Versi pengembangan aktif</div>
             </div>
-            <div class="rounded-4 p-3 bg-slate-900/60 border border-slate-700">
-              <div class="text-info fw-semibold">Login Siswa</div>
-              <div class="small text-secondary">Belajar materi, lihat progres, dan kerjakan tugas.</div>
+            <span class="pill pill-success">Live</span>
+          </div>
+          <div class="row g-3 mb-3">
+            <div class="col-6">
+              <div class="glass rounded-4 p-3 stat-card h-100">
+                <div class="muted small">Target awal</div>
+                <h3>5</h3>
+                <div class="small muted">topik pondasi</div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="glass rounded-4 p-3 stat-card h-100">
+                <div class="muted small">Mode belajar</div>
+                <h3>Praktik</h3>
+                <div class="small muted">lebih dominan</div>
+              </div>
+            </div>
+          </div>
+          <div class="glass rounded-4 p-3">
+            <div class="fw-semibold mb-2">Hasil akhir yang diinginkan</div>
+            <ul class="mb-0 small muted ps-3">
+              <li>siswa paham perangkat dan alur jaringan dasar</li>
+              <li>siswa bisa membaca jalur distribusi internet</li>
+              <li>siswa mengenal dasar kerja kabel, router, dan FTTH</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-4 mb-5">
+      <div class="col-md-4">
+        <div class="glass rounded-5 p-4 mini-card h-100">
+          <div class="text-info fw-bold mb-2">Sederhana tapi lengkap</div>
+          <div class="muted">Materi dibuat dengan bahasa awam dulu, baru masuk istilah teknis secara bertahap.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass rounded-5 p-4 mini-card h-100">
+          <div class="text-info fw-bold mb-2">Nyambung ke lapangan</div>
+          <div class="muted">Fokusnya bukan teori sekolah, tapi pondasi yang relevan untuk kerja teknisi junior di dunia nyata.</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="glass rounded-5 p-4 mini-card h-100">
+          <div class="text-info fw-bold mb-2">Bisa dikembangkan</div>
+          <div class="muted">Nanti bisa ditambah kuis, tugas, dashboard siswa, dashboard pemateri, dan tracking progres.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="login" class="mb-5">
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 login-box h-100">
+            <div class="badge-soft mb-3">Portal Pemateri</div>
+            <h2 class="section-title mb-3">Login pemateri</h2>
+            <p class="muted mb-4">Masuk untuk mengelola modul, upload materi, menambah referensi, dan memonitor pemahaman siswa.</p>
+            <div class="mb-3"><input class="form-control form-control-lg rounded-4" placeholder="Email / Username Pemateri"></div>
+            <div class="mb-3"><input type="password" class="form-control form-control-lg rounded-4" placeholder="Password"></div>
+            <button class="btn btn-info text-dark fw-semibold px-4 py-3 rounded-4 w-100">Masuk sebagai Pemateri</button>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 login-box h-100">
+            <div class="badge-soft mb-3">Portal Siswa</div>
+            <h2 class="section-title mb-3">Login siswa</h2>
+            <p class="muted mb-4">Masuk untuk belajar modul, membuka video / PDF / gambar, dan mengerjakan tugas setelah memahami materi.</p>
+            <div class="mb-3"><input class="form-control form-control-lg rounded-4" placeholder="Username / ID Siswa"></div>
+            <div class="mb-3"><input type="password" class="form-control form-control-lg rounded-4" placeholder="Password"></div>
+            <button class="btn btn-outline-light px-4 py-3 rounded-4 w-100">Masuk sebagai Siswa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="mb-5">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+        <div>
+          <div class="badge-soft mb-2">Roadmap bertahap</div>
+          <h2 class="section-title mb-0">Jalur belajar dasar jaringan</h2>
+        </div>
+        <div class="muted">Fokus utama: dari kabel fisik sampai distribusi fiber ke pelanggan</div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 road-card h-100 position-relative overflow-hidden">
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 0 — Pengenalan jaringan</div>
+              <div class="muted">Memahami apa itu jaringan, fungsi jaringan, perangkat dasar, dan kenapa jaringan penting.</div>
+            </div>
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 1 — Kabel UTP</div>
+              <div class="muted">RJ45, susunan warna, straight, crossover, crimping, dan pengecekan kabel.</div>
+            </div>
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 2 — Topologi jaringan</div>
+              <div class="muted">Mengenali bentuk jaringan seperti star, bus, ring, tree, dan mesh.</div>
+            </div>
+            <div class="position-relative ps-5">
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 3 — Router MikroTik</div>
+              <div class="muted">Mengenal peran router, Winbox, IP address dasar, DHCP, dan NAT dasar.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 road-card h-100 position-relative overflow-hidden">
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 4 — OLT dan FTTH</div>
+              <div class="muted">Memahami peran OLT, ONT/ONU, splitter, dan distribusi internet fiber ke rumah pelanggan.</div>
+            </div>
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 5 — Operasional dasar lapangan</div>
+              <div class="muted">Membedakan masalah kabel, router, dan jalur distribusi secara sederhana.</div>
+            </div>
+            <div class="position-relative ps-5 mb-4">
+              <div class="timeline-line"></div>
+              <div class="timeline-dot position-absolute start-0 top-0"></div>
+              <div class="fw-bold fs-5 mb-1">Level 6 — Validasi pemahaman</div>
+              <div class="muted">Kuis, tugas identifikasi perangkat, dan penjelasan alur jaringan dari sumber ke pelanggan.</div>
+            </div>
+            <div class="glass rounded-4 p-3 mt-4">
+              <div class="fw-semibold mb-2">Catatan pendekatan</div>
+              <div class="muted small">Versi ini sengaja dibuat fokus dan tidak melebar ke semua cabang networking, supaya anak PKL tidak bingung di awal.</div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="login" class="row g-4 mb-5">
-      <div class="col-md-6">
-        <div class="glass rounded-4 p-4 h-100">
-          <h4 class="fw-bold mb-3">Login Pemateri</h4>
-          <input class="form-control mb-3" placeholder="Email / Username Pemateri">
-          <input class="form-control mb-3" type="password" placeholder="Password">
-          <button class="btn btn-info text-dark fw-semibold w-100">Masuk sebagai Pemateri</button>
+    <section id="materi" class="mb-5">
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+        <div>
+          <div class="badge-soft mb-2">Materi inti</div>
+          <h2 class="section-title mb-0">Modul pengenalan jaringan dasar</h2>
         </div>
+        <div class="muted">Disusun supaya mudah dipahami oleh pemula</div>
       </div>
-      <div class="col-md-6">
-        <div class="glass rounded-4 p-4 h-100">
-          <h4 class="fw-bold mb-3">Login Siswa</h4>
-          <input class="form-control mb-3" placeholder="NIS / Username Siswa">
-          <input class="form-control mb-3" type="password" placeholder="Password">
-          <button class="btn btn-outline-light w-100">Masuk sebagai Siswa</button>
+
+      <ul class="nav module-tabs mb-4 gap-2" id="moduleTab" role="tablist">
+        <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#utp" type="button">Kabel UTP</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#topologi" type="button">Topologi</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#mikrotik" type="button">MikroTik</button></li>
+        <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#oltftth" type="button">OLT & FTTH</button></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="utp">
+          <div class="glass rounded-5 p-4 p-lg-5 module-card">
+            <div class="row g-4 align-items-start">
+              <div class="col-lg-8">
+                <h3 class="fw-bold mb-3">Modul 1 — Kabel UTP dan pondasi fisik jaringan</h3>
+                <p class="muted">Kabel UTP adalah salah satu media paling umum untuk menghubungkan perangkat jaringan pada area lokal. Sebelum paham router atau internet, siswa harus paham dulu bagaimana koneksi fisik dibuat.</p>
+                <div class="row g-3 mt-1">
+                  <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="text-info fw-bold mb-2">Yang dipelajari</div><ul class="small muted mb-0 ps-3"><li>apa itu kabel UTP</li><li>fungsi konektor RJ45</li><li>urutan warna kabel</li><li>straight dan crossover</li><li>dasar crimping</li><li>cek kabel dan kesalahan umum</li></ul></div></div>
+                  <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="text-info fw-bold mb-2">Hasil akhir</div><ul class="small muted mb-0 ps-3"><li>siswa bisa membedakan straight dan crossover</li><li>siswa tahu peran kabel dalam jaringan</li><li>siswa punya pondasi fisik sebelum masuk konfigurasi</li></ul></div></div>
+                </div>
+                <div class="glass rounded-4 p-3 mt-3">
+                  <div class="fw-semibold mb-2">Penjelasan singkat</div>
+                  <div class="muted small">UTP (Unshielded Twisted Pair) adalah kabel tembaga dengan pasangan inti yang dipilin untuk mengurangi gangguan. Di lapangan, kabel ini sering dipakai untuk koneksi dari perangkat ke switch, router, atau akses point pada jaringan lokal.</div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="text-info fw-bold mb-2">Checklist belajar</div>
+                  <ul class="small muted mb-3 ps-3">
+                    <li>pahami perbedaan straight dan crossover</li>
+                    <li>hafal dasar warna T568A/T568B</li>
+                    <li>kenali fungsi RJ45</li>
+                    <li>pahami kenapa crimping harus rapi</li>
+                  </ul>
+                  <div class="text-info fw-bold mb-2">Contoh tugas</div>
+                  <div class="small muted">Jelaskan kapan kabel straight dipakai dan kapan crossover dipakai, lalu sebutkan kesalahan paling umum saat crimping.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="topologi">
+          <div class="glass rounded-5 p-4 p-lg-5 module-card">
+            <h3 class="fw-bold mb-3">Modul 2 — Topologi jaringan dasar</h3>
+            <p class="muted">Topologi jaringan adalah bentuk atau pola hubungan antar perangkat dalam sebuah jaringan. Dengan memahami topologi, siswa bisa membaca jalur koneksi lebih mudah dan memahami kenapa desain tertentu dipakai.</p>
+            <div class="row g-3 mt-2">
+              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Star</div><div class="small muted">Semua perangkat terhubung ke satu pusat seperti switch atau hub. Ini paling umum dipakai karena mudah dikelola.</div></div></div>
+              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Bus</div><div class="small muted">Semua perangkat berbagi satu jalur utama. Sederhana, tapi tidak fleksibel untuk jaringan modern.</div></div></div>
+              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Ring</div><div class="small muted">Perangkat membentuk lingkaran. Data mengalir dari satu perangkat ke perangkat lain secara berurutan.</div></div></div>
+              <div class="col-md-6 col-xl-3"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Tree / Mesh</div><div class="small muted">Dipakai untuk jaringan yang lebih bercabang atau butuh banyak jalur cadangan.</div></div></div>
+            </div>
+            <div class="glass rounded-4 p-3 mt-3">
+              <div class="fw-semibold mb-2">Kenapa penting?</div>
+              <div class="muted small">Saat siswa masuk lapangan, dia harus bisa melihat jaringan bukan sekadar kumpulan kabel. Dia harus paham bentuk hubungan antar perangkat supaya tahu jalur masalah dan jalur distribusi.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="mikrotik">
+          <div class="glass rounded-5 p-4 p-lg-5 module-card">
+            <div class="row g-4">
+              <div class="col-lg-7">
+                <h3 class="fw-bold mb-3">Modul 3 — Router dan MikroTik dasar</h3>
+                <p class="muted">Router adalah perangkat yang membantu mengarahkan dan membagikan koneksi jaringan. Dalam banyak implementasi lokal dan ISP kecil, MikroTik sering dipakai karena fleksibel dan kaya fitur.</p>
+                <div class="glass rounded-4 p-3 mb-3">
+                  <div class="fw-semibold mb-2">Materi inti</div>
+                  <ul class="small muted mb-0 ps-3">
+                    <li>apa itu router</li>
+                    <li>fungsi MikroTik dalam jaringan</li>
+                    <li>pengenalan Winbox</li>
+                    <li>IP address dasar</li>
+                    <li>DHCP dasar</li>
+                    <li>NAT dasar</li>
+                  </ul>
+                </div>
+                <div class="glass rounded-4 p-3">
+                  <div class="fw-semibold mb-2">Contoh alur sederhana</div>
+                  <div class="small muted">Internet masuk dari modem / uplink → router MikroTik → switch / access point → perangkat pengguna. Dengan memahami alur ini, siswa mulai paham posisi router sebagai pengatur distribusi koneksi.</div>
+                </div>
+              </div>
+              <div class="col-lg-5">
+                <div class="glass rounded-4 p-4 h-100">
+                  <div class="text-info fw-bold mb-2">Catatan penting</div>
+                  <div class="small muted mb-3">Di tahap awal, siswa belum perlu langsung masuk konfigurasi berat. Yang penting adalah paham posisi, fungsi, dan alur dasarnya dulu.</div>
+                  <div class="text-info fw-bold mb-2">Latihan</div>
+                  <div class="small muted">Minta siswa menjelaskan dengan bahasanya sendiri: bedanya modem, router, switch, dan access point itu apa.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-pane fade" id="oltftth">
+          <div class="glass rounded-5 p-4 p-lg-5 module-card">
+            <h3 class="fw-bold mb-3">Modul 4 — OLT dan FTTH</h3>
+            <p class="muted">Setelah memahami jaringan dasar kabel dan router, siswa dikenalkan ke distribusi fiber. Di sinilah konsep OLT dan FTTH mulai dipahami sebagai sistem penyaluran layanan internet ke pelanggan rumah.</p>
+            <div class="row g-3 mt-2">
+              <div class="col-md-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">OLT</div><div class="small muted">Perangkat pusat yang menjadi titik distribusi utama layanan fiber ke banyak pelanggan.</div></div></div>
+              <div class="col-md-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">ONT / ONU</div><div class="small muted">Perangkat di sisi pelanggan untuk menerima sinyal fiber dan mengubahnya jadi akses jaringan yang bisa dipakai.</div></div></div>
+              <div class="col-md-4"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">FTTH</div><div class="small muted">Fiber To The Home, yaitu jaringan fiber yang masuk sampai rumah pelanggan.</div></div></div>
+            </div>
+            <div class="glass rounded-4 p-3 mt-3">
+              <div class="fw-semibold mb-2">Alur sederhana FTTH</div>
+              <div class="small muted">Sumber internet → perangkat pusat → OLT → splitter / jalur distribusi fiber → ONT / ONU pelanggan → router / perangkat rumah.</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="roadmap" class="mb-5">
-      <h2 class="fw-bold mb-4">Roadmap Belajar Dasar</h2>
+    <section id="story" class="mb-5">
       <div class="row g-4">
-        <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><h5>1. Kabel UTP</h5><p>Pengenalan UTP, RJ45, urutan warna, straight, crossover, crimping, dan pengecekan kabel.</p></div></div>
-        <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><h5>2. Topologi Jaringan</h5><p>Memahami topologi star, bus, ring, tree, mesh, dan contoh pemakaiannya di lapangan.</p></div></div>
-        <div class="col-md-4"><div class="glass rounded-4 p-4 h-100"><h5>3. Router MikroTik</h5><p>Pengenalan router, Winbox, IP dasar, DHCP, NAT, dan alur distribusi internet.</p></div></div>
-        <div class="col-md-6"><div class="glass rounded-4 p-4 h-100"><h5>4. OLT</h5><p>Pengenalan OLT sebagai perangkat pusat distribusi jaringan fiber ke pelanggan.</p></div></div>
-        <div class="col-md-6"><div class="glass rounded-4 p-4 h-100"><h5>5. FTTH</h5><p>Memahami alur jaringan fiber ke rumah pelanggan, ONT/ONU, splitter, dan distribusi layanan.</p></div></div>
-      </div>
-    </section>
-
-    <section id="modul" class="mb-5">
-      <h2 class="fw-bold mb-4">Modul Awal</h2>
-      <div class="accordion" id="accordionModul">
-        <div class="accordion-item bg-dark text-light border-secondary">
-          <h2 class="accordion-header"><button class="accordion-button bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#m1">Modul 1 - Pengenalan Kabel UTP</button></h2>
-          <div id="m1" class="accordion-collapse collapse show" data-bs-parent="#accordionModul"><div class="accordion-body">Materi dasar tentang fungsi kabel UTP, warna kabel, straight/crossover, dan praktik crimping sederhana.</div></div>
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 story-card h-100">
+            <div class="badge-soft mb-3">Tutorial belajar</div>
+            <h2 class="section-title mb-3">Cara pakai platform ini</h2>
+            <ol class="muted mb-0 ps-3" style="line-height:1.9">
+              <li>Mulai dari roadmap, jangan loncat-loncat dulu.</li>
+              <li>Buka satu modul, pahami istilah pentingnya.</li>
+              <li>Cocokkan materi dengan perangkat nyata kalau memungkinkan.</li>
+              <li>Catat istilah yang belum paham.</li>
+              <li>Setelah itu baru kerjakan tugas / pertanyaan pemahaman.</li>
+            </ol>
+          </div>
         </div>
-        <div class="accordion-item bg-dark text-light border-secondary">
-          <h2 class="accordion-header"><button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#m2">Modul 2 - Topologi Dasar</button></h2>
-          <div id="m2" class="accordion-collapse collapse" data-bs-parent="#accordionModul"><div class="accordion-body">Materi bentuk-bentuk topologi dan bagaimana membaca jalur koneksi jaringan sederhana.</div></div>
-        </div>
-        <div class="accordion-item bg-dark text-light border-secondary">
-          <h2 class="accordion-header"><button class="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#m3">Modul 3 - MikroTik Dasar</button></h2>
-          <div id="m3" class="accordion-collapse collapse" data-bs-parent="#accordionModul"><div class="accordion-body">Mengenal router, Winbox, antarmuka dasar, IP address, dan pembagian internet dasar.</div></div>
+        <div class="col-lg-6">
+          <div class="glass rounded-5 p-4 p-lg-5 story-card h-100">
+            <div class="badge-soft mb-3">Prinsip pembelajaran</div>
+            <h2 class="section-title mb-3">Arah pendekatan materi</h2>
+            <ul class="muted mb-0 ps-3" style="line-height:1.9">
+              <li>awali dengan penjelasan sederhana</li>
+              <li>hubungkan dengan contoh lapangan</li>
+              <li>hindari istilah terlalu berat di awal</li>
+              <li>pakai visual, alur, dan analogi supaya mudah masuk</li>
+              <li>ukur pemahaman, bukan cuma kehadiran belajar</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="referensi" class="mb-5">
-      <h2 class="fw-bold mb-4">Referensi Awal</h2>
+      <div class="d-flex justify-content-between align-items-end flex-wrap gap-3 mb-4">
+        <div>
+          <div class="badge-soft mb-2">Sumber belajar awal</div>
+          <h2 class="section-title mb-0">Referensi yang bisa dipakai lanjut</h2>
+        </div>
+        <div class="muted">Dipilih sebagai sumber pembuka untuk pendalaman materi</div>
+      </div>
       <div class="row g-4">
-        <div class="col-md-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light" href="https://help.mikrotik.com/docs/spaces/ROS/pages/328129/WinBox" target="_blank"><h5 class="text-info">WinBox - MikroTik</h5><p class="mb-0">Dokumentasi resmi WinBox untuk pengenalan konfigurasi MikroTik.</p></a></div>
-        <div class="col-md-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light" href="https://www.cloudflare.com/learning/network-layer/what-is-a-network-topology/" target="_blank"><h5 class="text-info">Network Topology</h5><p class="mb-0">Artikel pengantar topologi jaringan untuk memahami bentuk koneksi antar perangkat.</p></a></div>
-        <div class="col-md-4"><a class="glass rounded-4 p-4 h-100 d-block text-decoration-none text-light" href="https://www.cisco.com/c/en/us/solutions/enterprise-networks/what-is-ftth.html" target="_blank"><h5 class="text-info">FTTH Overview</h5><p class="mb-0">Gambaran umum FTTH untuk mengenal jaringan fiber ke pelanggan.</p></a></div>
+        <div class="col-md-6 col-xl-3">
+          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://help.mikrotik.com/docs/spaces/ROS/pages/328129/WinBox" target="_blank" rel="noopener">
+            <div class="text-info fw-bold mb-2">MikroTik WinBox</div>
+            <div class="small muted mb-3">Referensi resmi untuk pengenalan antarmuka WinBox dan akses awal ke perangkat MikroTik.</div>
+            <span class="pill pill-info">Official</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.cloudflare.com/learning/network-layer/what-is-a-network-topology/" target="_blank" rel="noopener">
+            <div class="text-info fw-bold mb-2">Cloudflare - Topologi Jaringan</div>
+            <div class="small muted mb-3">Artikel pengantar untuk memahami bentuk hubungan antar perangkat dalam jaringan.</div>
+            <span class="pill pill-info">Reference</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.computercablestore.com/straight-through-crossover-and-rollover-wiring" target="_blank" rel="noopener">
+            <div class="text-info fw-bold mb-2">Straight vs Crossover</div>
+            <div class="small muted mb-3">Referensi dasar untuk membedakan jenis penyusunan kabel jaringan.</div>
+            <span class="pill pill-info">Reference</span>
+          </a>
+        </div>
+        <div class="col-md-6 col-xl-3">
+          <a class="glass rounded-5 p-4 h-100 d-block text-decoration-none text-light ref-card" href="https://www.techtarget.com/searchnetworking/definition/fiber-to-the-home-FTTH" target="_blank" rel="noopener">
+            <div class="text-info fw-bold mb-2">FTTH Overview</div>
+            <div class="small muted mb-3">Gambaran umum FTTH, distribusi fiber, dan komponen dasar menuju pelanggan.</div>
+            <span class="pill pill-info">Reference</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="glass rounded-4 p-4 mb-5">
-      <h2 class="fw-bold mb-3">Arah Pengembangan Berikutnya</h2>
-      <ul class="mb-0">
-        <li>CRUD modul dan media video / gambar / PDF</li>
-        <li>Dashboard pemateri dan dashboard siswa</li>
-        <li>Progress belajar dan validasi pemahaman</li>
-        <li>Tugas / kuis untuk tiap level</li>
-        <li>Manajemen siswa PKL / Prakerin</li>
-      </ul>
+    <section id="audit" class="mb-5">
+      <div class="glass rounded-5 p-4 p-lg-5">
+        <div class="row g-4 audit-grid">
+          <div class="col-lg-7">
+            <div class="badge-soft mb-3">Audit internal versi ini</div>
+            <h2 class="section-title mb-3">Status kesiapan saat ini</h2>
+            <div class="row g-3">
+              <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Yang sudah kuat</div><ul class="small muted mb-0 ps-3"><li>arah visual lebih premium</li><li>roadmap materi lebih jelas</li><li>modul dasar sudah lebih hidup</li><li>referensi awal sudah ditampilkan</li></ul></div></div>
+              <div class="col-md-6"><div class="glass rounded-4 p-3 h-100"><div class="fw-bold text-info mb-2">Yang belum final penuh</div><ul class="small muted mb-0 ps-3"><li>belum ada login real backend</li><li>belum ada dashboard dinamis</li><li>belum ada kuis / tugas aktif</li><li>belum ada upload video / PDF real</li></ul></div></div>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="glass rounded-4 p-4 h-100">
+              <div class="fw-bold text-info mb-2">Kesimpulan Alvii</div>
+              <div class="muted small mb-3">Versi ini sudah layak sebagai fondasi visual + konsep pembelajaran dasar yang lebih enak dipandang dan lebih menjelaskan isi. Tapi untuk benar-benar disebut final aplikasi, tahap berikutnya tetap perlu dashboard, sistem akun, modul dinamis, dan evaluasi siswa.</div>
+              <div class="fw-semibold mb-2">Prioritas berikutnya</div>
+              <ol class="small muted mb-0 ps-3">
+                <li>dashboard pemateri</li>
+                <li>dashboard siswa</li>
+                <li>halaman detail modul</li>
+                <li>sistem tugas / kuis</li>
+                <li>struktur data dan login real</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
+
+    <footer class="py-4 text-center footer-note">
+      Network Learning Academy • Fokus awal: UTP, topologi, MikroTik, OLT, FTTH • Dibangun untuk anak PKL / Prakerin
+    </footer>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
