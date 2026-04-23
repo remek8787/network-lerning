@@ -26,13 +26,14 @@ Yang sudah berjalan:
 
 ## Struktur file penting
 - `index.html` — aplikasi utama frontend
+- `dsg-topology.html` — halaman detail materi topologi DSG
 - `manifest.webmanifest` — konfigurasi PWA
 - `sw.js` — service worker ringan
-- `icon.svg` — ikon aplikasi
-- `images-lan.svg` — ilustrasi LAN
-- `images-topologi.svg` — ilustrasi topologi
-- `images-mikrotik.svg` — ilustrasi MikroTik
-- `images-ip.svg` — ilustrasi IP / alur data
+- `images/illustrations/` — aset ilustrasi / diagram buatan internal
+- `images/materials/` — aset materi nyata / upload lapangan
+- `images/materials/topology/` — materi gambar topologi
+- `images/materials/ip/` — materi gambar IP address dan subnet
+- `images/materials/mikrotik/` — materi gambar terkait MikroTik
 
 ## Akun demo default
 - Admin: `admin` / `admin123`
@@ -76,6 +77,21 @@ mirror -R --verbose \
   --exclude-glob .well-known/** \
   ./ ./
 ```
+
+## Konvensi aset gambar
+Agar hosting dan repo tetap rapi, gunakan aturan ini untuk aset baru:
+
+- semua nama file pakai **huruf kecil + kebab-case**
+- hindari spasi pada nama file
+- pisahkan berdasarkan fungsi:
+  - `images/illustrations/` → ikon, diagram, SVG buatan internal
+  - `images/materials/topology/` → topologi lapangan / topologi pembelajaran
+  - `images/materials/ip/` → materi IP, subnet, addressing
+  - `images/materials/mikrotik/` → materi MikroTik / router
+- contoh nama yang benar:
+  - `topologi-dsg.png`
+  - `dasar-ip-address.png`
+  - `dasar-ip-address-per-class.png`
 
 ## Arah produk
 Portal ini cocok dijadikan pondasi untuk aplikasi pembelajaran jaringan bertahap, terutama untuk siswa yang fundamentalnya masih lemah dan perlu jembatan dari konsep dasar ke praktik lapangan.
