@@ -1,53 +1,44 @@
 <!doctype html>
-<html lang="id">
+<html lang="id" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Alvii Learning Hub</title>
-  <meta name="description" content="Portal belajar jaringan yang lebih rapi, hidup, dan nyaman dipakai untuk admin maupun siswa." />
-  <meta name="theme-color" content="#081226" />
+  <title>Alvii Learning Hub — Materi Jaringan Modern</title>
+  <meta name="description" content="Portal materi jaringan modern yang fokus ke visual, studi kasus, dan pembelajaran dasar yang gampang dicerna." />
+  <meta name="theme-color" content="#0b1020" />
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="icon" href="/images/illustrations/icon.svg" type="image/svg+xml" />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
           fontFamily: {
             sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif']
-          },
-          boxShadow: {
-            glow: '0 0 0 1px rgba(255,255,255,.06), 0 18px 60px rgba(8,18,38,.36)',
-            soft: '0 16px 45px rgba(2,6,23,.22)'
           },
           keyframes: {
             floaty: {
               '0%,100%': { transform: 'translateY(0px)' },
               '50%': { transform: 'translateY(-10px)' }
             },
-            pulseGlow: {
-              '0%,100%': { boxShadow: '0 0 0 0 rgba(56,189,248,.22)' },
-              '50%': { boxShadow: '0 0 0 12px rgba(56,189,248,0)' }
-            },
             fadeUp: {
-              '0%': { opacity: '0', transform: 'translateY(16px)' },
+              '0%': { opacity: '0', transform: 'translateY(18px)' },
               '100%': { opacity: '1', transform: 'translateY(0)' }
             },
-            shimmer: {
-              '0%': { backgroundPosition: '-200% 0' },
-              '100%': { backgroundPosition: '200% 0' }
-            },
-            drift: {
-              '0%,100%': { transform: 'translate3d(0,0,0) scale(1)' },
-              '50%': { transform: 'translate3d(0,-16px,0) scale(1.03)' }
+            pulseSoft: {
+              '0%,100%': { transform: 'scale(1)', opacity: '.9' },
+              '50%': { transform: 'scale(1.04)', opacity: '1' }
             }
           },
           animation: {
             floaty: 'floaty 7s ease-in-out infinite',
-            pulseGlow: 'pulseGlow 2.8s infinite',
             fadeUp: 'fadeUp .75s ease forwards',
-            shimmer: 'shimmer 6s linear infinite',
-            drift: 'drift 9s ease-in-out infinite'
+            pulseSoft: 'pulseSoft 3.5s ease-in-out infinite'
+          },
+          boxShadow: {
+            glow: '0 20px 60px rgba(59,130,246,.18)',
+            soft: '0 16px 40px rgba(15,23,42,.12)'
           }
         }
       }
@@ -57,228 +48,121 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#07101f;
-      --bg-2:#0b162b;
-      --panel:rgba(15,23,42,.72);
-      --panel-2:rgba(30,41,59,.55);
-      --line:rgba(255,255,255,.08);
-      --text:#e5eefb;
-      --muted:#93a4c5;
-      --cyan:#38bdf8;
-      --sky:#60a5fa;
-      --violet:#8b5cf6;
-      --pink:#ec4899;
-      --emerald:#34d399;
-      --amber:#f59e0b;
-      --rose:#fb7185;
-    }
-    * { box-sizing: border-box; }
+    :root { color-scheme: dark; }
     html { scroll-behavior: smooth; }
     body {
-      margin: 0;
-      color: var(--text);
       font-family: 'Inter', sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, rgba(56,189,248,.18), transparent 22%),
-        radial-gradient(circle at 85% 14%, rgba(168,85,247,.18), transparent 18%),
-        radial-gradient(circle at 86% 80%, rgba(236,72,153,.14), transparent 20%),
-        linear-gradient(180deg, #07101f 0%, #081226 40%, #091427 100%);
-      min-height: 100vh;
+        radial-gradient(circle at top left, rgba(59,130,246,.18), transparent 24%),
+        radial-gradient(circle at top right, rgba(217,70,239,.15), transparent 20%),
+        linear-gradient(180deg, #070b16 0%, #0b1020 100%);
+    }
+    html.light body {
+      background:
+        radial-gradient(circle at top left, rgba(59,130,246,.14), transparent 24%),
+        radial-gradient(circle at top right, rgba(217,70,239,.10), transparent 20%),
+        linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
     }
     .glass {
-      background: linear-gradient(180deg, rgba(15,23,42,.78), rgba(15,23,42,.56));
-      border: 1px solid rgba(255,255,255,.08);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 18px 60px rgba(2,6,23,.28);
     }
-    .glass-soft {
-      background: linear-gradient(180deg, rgba(15,23,42,.62), rgba(15,23,42,.4));
-      border: 1px solid rgba(255,255,255,.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-    .gradient-border {
-      position: relative;
-      isolation: isolate;
-    }
-    .gradient-border::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      padding: 1px;
-      border-radius: inherit;
-      background: linear-gradient(135deg, rgba(56,189,248,.45), rgba(139,92,246,.25), rgba(236,72,153,.18));
-      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .grid-lines {
-      background-image:
-        linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
-      background-size: 28px 28px;
-      background-position: center;
-    }
-    .noise::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: .08;
-      mix-blend-mode: soft-light;
-      background-image:
-        radial-gradient(circle at 20% 20%, rgba(255,255,255,.35) 0 1px, transparent 1px),
-        radial-gradient(circle at 80% 50%, rgba(255,255,255,.25) 0 1px, transparent 1px),
-        radial-gradient(circle at 60% 80%, rgba(255,255,255,.25) 0 1px, transparent 1px);
-      background-size: 18px 18px, 26px 26px, 22px 22px;
-    }
-    .text-gradient {
-      background: linear-gradient(90deg, #ffffff 0%, #9ae6ff 25%, #d8b4fe 60%, #fbcfe8 100%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      background-size: 200% 100%;
-    }
-    .hero-card {
-      animation: floaty 8s ease-in-out infinite;
-    }
-    .hero-card:nth-child(2) { animation-delay: -2s; }
-    .hero-card:nth-child(3) { animation-delay: -4s; }
-    .input-ui, .textarea-ui, .select-ui {
-      border: 1px solid rgba(255,255,255,.08);
-      background: rgba(8,15,30,.72);
-      color: white;
-      transition: .18s ease;
-    }
-    .input-ui:focus, .textarea-ui:focus, .select-ui:focus {
-      border-color: rgba(56,189,248,.38);
-      box-shadow: 0 0 0 4px rgba(56,189,248,.08);
-      outline: none;
-    }
-    .dot-active { box-shadow: 0 0 0 8px rgba(52,211,153,.12); }
-    .dot-idle { box-shadow: 0 0 0 8px rgba(148,163,184,.10); }
-    .hidden-safe { display: none !important; }
-    .reveal { opacity: 0; transform: translateY(12px); }
-    .reveal.in { opacity: 1; transform: translateY(0); transition: all .7s ease; }
+    .reveal { opacity: 0; transform: translateY(18px); }
+    .reveal.in { opacity: 1; transform: translateY(0); transition: all .75s ease; }
     @media (prefers-reduced-motion: reduce) {
-      .hero-card, .animate-floaty, .animate-pulseGlow, .animate-drift, .animate-shimmer { animation: none !important; }
       .reveal { opacity: 1; transform: none; }
+      .animate-floaty, .animate-pulseSoft { animation: none !important; }
     }
   </style>
 </head>
-<body>
+<body class="text-slate-100 dark:text-slate-100 light:text-slate-900">
   <div class="fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute left-[-8%] top-[8%] h-64 w-64 rounded-full bg-cyan-400/16 blur-3xl animate-drift"></div>
-    <div class="absolute right-[-4%] top-[14%] h-72 w-72 rounded-full bg-fuchsia-500/16 blur-3xl animate-drift" style="animation-delay:-3s"></div>
-    <div class="absolute bottom-[6%] left-[28%] h-72 w-72 rounded-full bg-violet-500/14 blur-3xl animate-drift" style="animation-delay:-6s"></div>
+    <div class="absolute left-[-6%] top-[6%] h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute right-[-8%] top-[12%] h-72 w-72 rounded-full bg-fuchsia-500/20 blur-3xl animate-pulseSoft"></div>
+    <div class="absolute bottom-[8%] left-[32%] h-72 w-72 rounded-full bg-violet-500/16 blur-3xl animate-floaty"></div>
   </div>
 
-  <header class="sticky top-0 z-40 border-b border-white/5 bg-slate-950/45 backdrop-blur-xl">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <div class="flex items-center gap-3">
-        <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-cyan-400 via-sky-500 to-violet-500 text-sm font-black text-slate-950 shadow-glow">A</div>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-slate-950/55 backdrop-blur-xl dark:bg-slate-950/55 light:bg-white/70">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#top" class="flex items-center gap-3">
+        <img src="images/illustrations/icon.svg" alt="Alvii Learning Hub" class="h-11 w-11 rounded-2xl shadow-glow" />
         <div>
-          <div class="text-sm font-bold text-white">Alvii Learning Hub</div>
-          <div class="text-xs text-slate-400">Portal materi jaringan yang siap dipakai ngajarin</div>
+          <div class="text-sm font-black tracking-wide text-white dark:text-white light:text-slate-900">Alvii Learning Hub</div>
+          <div class="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Materi jaringan modern, santai tapi ngena</div>
         </div>
-      </div>
-      <nav class="hidden items-center gap-6 text-sm text-slate-300 md:flex">
-        <a href="#fitur" class="transition hover:text-white">Solusi</a>
-        <a href="#portal" class="transition hover:text-white">Portal</a>
-        <a href="#materi" class="transition hover:text-white">Materi</a>
-        <a href="#aktivitas" class="transition hover:text-white">Sistem</a>
-      </nav>
-      <button id="mobileMenuBtn" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold text-white md:hidden">Menu</button>
-    </div>
-    <div id="mobileMenu" class="mx-4 mb-4 hidden rounded-3xl border border-white/10 bg-slate-950/65 p-4 text-sm text-slate-300 md:hidden">
-      <div class="flex flex-col gap-3">
-        <a href="#fitur">Solusi</a>
-        <a href="#portal">Portal</a>
-        <a href="#materi">Materi</a>
-        <a href="#aktivitas">Sistem</a>
+      </a>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <nav class="hidden items-center gap-5 text-sm font-medium text-slate-300 dark:text-slate-300 light:text-slate-700 md:flex">
+          <a href="#materi" class="hover:text-white light:hover:text-slate-900">Materi</a>
+          <a href="#visual" class="hover:text-white light:hover:text-slate-900">Visual</a>
+          <a href="#studi-kasus" class="hover:text-white light:hover:text-slate-900">Studi Kasus</a>
+        </nav>
+        <button id="themeToggle" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-2 text-xs font-bold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300/60 light:bg-white/70 light:text-slate-900">Light mode</button>
       </div>
     </div>
   </header>
 
-  <main class="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
-    <section class="relative overflow-hidden rounded-[2rem] glass gradient-border grid-lines noise px-6 py-8 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
-      <div class="grid gap-8 lg:grid-cols-[1.08fr_.92fr] lg:items-center">
+  <main id="top" class="mx-auto max-w-7xl px-4 pb-24 pt-6 sm:px-6 lg:px-8">
+    <section class="glass reveal overflow-hidden rounded-[2rem] border border-white/10 bg-slate-900/55 px-6 py-8 shadow-glow dark:bg-slate-900/55 light:border-slate-200/70 light:bg-white/70 sm:px-8 sm:py-10 lg:px-12 lg:py-14">
+      <div class="grid gap-8 lg:grid-cols-[1.1fr_.9fr] lg:items-center">
         <div>
-          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/15 bg-cyan-400/10 px-4 py-2 text-xs font-semibold text-cyan-200 animate-pulseGlow">Limited slot pembinaan • cocok untuk TKJ / ASJ / PKL</div>
-          <h1 class="max-w-5xl text-4xl font-black leading-tight sm:text-5xl lg:text-6xl">
-            Kami bantu siswa memahami <span class="text-gradient animate-shimmer">dunia jaringan modern</span> dari nol, tanpa bikin mereka tenggelam di teori yang membingungkan.
+          <div class="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-bold uppercase tracking-[.2em] text-cyan-200 dark:text-cyan-200 light:text-cyan-700">Public material mode • tanpa login dulu</div>
+          <h1 class="max-w-5xl text-4xl font-black leading-tight text-white dark:text-white light:text-slate-900 sm:text-5xl lg:text-6xl">
+            Belajar jaringan itu nggak harus kaku —<br />
+            <span class="bg-gradient-to-r from-cyan-300 via-sky-300 to-fuchsia-300 bg-clip-text text-transparent">dibikin visual, santai, dan gampang nempel di kepala.</span>
           </h1>
-          <p class="mt-5 max-w-3xl text-base leading-8 text-slate-300 sm:text-lg">
-            Portal ini dirancang untuk kondisi nyata di lapangan: fundamental siswa masih lemah, materi harus runtut, visual harus enak dilihat, dan pembimbing perlu alat yang cepat untuk mengatur materi, siswa, dan ritme belajar.
+          <p class="mt-5 max-w-3xl text-base leading-8 text-slate-300 dark:text-slate-300 light:text-slate-700 sm:text-lg">
+            Fokus versi sekarang cuma satu: bikin siswa nyaman buka materi. Jadi isinya lebih banyak visual, contoh nyata, grouping per topik, dan studi kasus lapangan biar nggak sekadar hafal istilah doang.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
-            <a href="#portal" class="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-soft transition hover:scale-[1.02]">Mulai dari Portal</a>
-            <a href="#fitur" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:border-cyan-300/30 hover:bg-white/10">Lihat Solusinya</a>
+            <a href="#materi" class="rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-5 py-3 text-sm font-black text-slate-950 shadow-soft transition hover:scale-[1.02]">Gas ke materi</a>
+            <a href="dsg-topology.html" class="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-bold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300/70 light:bg-white/70 light:text-slate-900">Buka materi DSG</a>
           </div>
           <div class="mt-8 grid gap-4 sm:grid-cols-3">
-            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
-              <div class="text-xs uppercase tracking-[.2em] text-cyan-300">Masalah</div>
-              <div class="mt-2 text-2xl font-black">Fundamental lemah</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Banyak siswa kenal internet, tapi belum paham LAN, topologi, IP, router, atau alur data dasar.</p>
+            <div class="animate-floaty rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+              <div class="text-xs uppercase tracking-[.2em] text-cyan-300 light:text-cyan-700">Visual first</div>
+              <div class="mt-2 text-2xl font-black text-white dark:text-white light:text-slate-900">Nggak bikin ngantuk</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Materi dibuat lebih gampang ditangkap lewat gambar, pola, dan contoh yang relate.</p>
             </div>
-            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
-              <div class="text-xs uppercase tracking-[.2em] text-fuchsia-300">Solusi</div>
-              <div class="mt-2 text-2xl font-black">Belajar lebih runtut</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Materi, visual bantu ajar, dan pengelolaan siswa dikemas dalam satu portal yang lebih modern.</p>
+            <div class="animate-floaty rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80" style="animation-delay:-2s">
+              <div class="text-xs uppercase tracking-[.2em] text-fuchsia-300 light:text-fuchsia-700">Gen Z vibe</div>
+              <div class="mt-2 text-2xl font-black text-white dark:text-white light:text-slate-900">Santai tapi jelas</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Bahasa dibuat lebih ringan tanpa ngebuang inti teknisnya.</p>
             </div>
-            <div class="hero-card rounded-[1.5rem] glass-soft p-4">
-              <div class="text-xs uppercase tracking-[.2em] text-emerald-300">Hasil</div>
-              <div class="mt-2 text-2xl font-black">Lebih siap praktik</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Siswa tidak cuma baca, tapi mulai paham hubungan konsep dengan praktik jaringan lapangan.</p>
-            </div>
-          </div>
-
-          <div class="mt-8 grid gap-4 sm:grid-cols-3">
-            <div class="rounded-[1.4rem] border border-white/10 bg-white/[.03] p-4">
-              <div class="text-3xl font-black text-white">8+</div>
-              <div class="mt-1 text-sm text-slate-300">materi dasar siap pakai untuk pembinaan awal</div>
-            </div>
-            <div class="rounded-[1.4rem] border border-white/10 bg-white/[.03] p-4">
-              <div class="text-3xl font-black text-white">2 role</div>
-              <div class="mt-1 text-sm text-slate-300">admin dan siswa dalam satu portal yang sama</div>
-            </div>
-            <div class="rounded-[1.4rem] border border-white/10 bg-white/[.03] p-4">
-              <div class="text-3xl font-black text-white">PWA</div>
-              <div class="mt-1 text-sm text-slate-300">nyaman dibuka dari Android maupun desktop</div>
+            <div class="animate-floaty rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80" style="animation-delay:-4s">
+              <div class="text-xs uppercase tracking-[.2em] text-emerald-300 light:text-emerald-700">Real case</div>
+              <div class="mt-2 text-2xl font-black text-white dark:text-white light:text-slate-900">Nempel ke lapangan</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Topologi DSG dan materi nyata bikin siswa kebayang dunia kerja beneran.</p>
             </div>
           </div>
         </div>
 
-        <div class="rounded-[2rem] glass p-5 sm:p-6">
+        <div class="glass rounded-[2rem] border border-white/10 bg-slate-950/45 p-5 dark:bg-slate-950/45 light:border-slate-200/70 light:bg-white/70 sm:p-6">
           <div class="mb-4 flex items-center justify-between">
             <div>
-              <div class="text-sm font-bold text-white">Nilai utama portal</div>
-              <div class="text-xs text-slate-400">lebih meyakinkan, lebih modern, lebih siap dipakai</div>
+              <div class="text-sm font-black text-white dark:text-white light:text-slate-900">Quick mood check</div>
+              <div class="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">arah portal versi sekarang</div>
             </div>
-            <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">live</div>
+            <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300 light:text-emerald-700">live</div>
           </div>
           <div class="grid gap-3 sm:grid-cols-2">
             <div class="rounded-2xl border border-cyan-400/10 bg-gradient-to-br from-cyan-400/10 to-sky-500/10 p-4">
-              <div class="text-xs uppercase tracking-[.18em] text-cyan-300">Visual</div>
-              <div class="mt-2 text-2xl font-black">Lebih premium</div>
-              <div class="mt-1 text-sm text-slate-300">headline kuat, glow, grid, dan susunan section yang terasa lebih profesional</div>
+              <div class="text-xs uppercase tracking-[.18em] text-cyan-300 light:text-cyan-700">Akses</div>
+              <div class="mt-2 text-2xl font-black text-white dark:text-white light:text-slate-900">Tanpa login</div>
+              <div class="mt-1 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Buka materi langsung, tanpa ribet akun dulu.</div>
             </div>
             <div class="rounded-2xl border border-fuchsia-400/10 bg-gradient-to-br from-violet-500/10 to-pink-500/10 p-4">
-              <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300">Struktur</div>
-              <div class="mt-2 text-2xl font-black">Lebih persuasif</div>
-              <div class="mt-1 text-sm text-slate-300">alur copy diarahkan ke masalah, solusi, hasil, lalu ajakan masuk portal</div>
+              <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300 light:text-fuchsia-700">Fokus</div>
+              <div class="mt-2 text-2xl font-black text-white dark:text-white light:text-slate-900">Materi dulu</div>
+              <div class="mt-1 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">Nanti baru bisa naik level ke mode course.</div>
             </div>
-            <div class="rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[.02] p-4 sm:col-span-2">
-              <div class="text-sm font-semibold text-white">Yang dibawa di versi ini</div>
-              <ul class="mt-3 space-y-2 text-sm text-slate-300">
-                <li>• gaya landing page lebih mirip agency / consultant modern</li>
-                <li>• copy lebih tegas untuk menjelaskan masalah pembinaan siswa</li>
-                <li>• portal login tetap bersih tanpa memajang kredensial admin</li>
-                <li>• visual bantu ajar tetap dipertahankan supaya tidak cuma cantik, tapi berguna</li>
+            <div class="rounded-2xl border border-white/10 bg-white/[.04] p-4 sm:col-span-2 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+              <div class="text-sm font-bold text-white dark:text-white light:text-slate-900">Yang sudah disiapkan</div>
+              <ul class="mt-3 space-y-2 text-sm text-slate-300 dark:text-slate-300 light:text-slate-700">
+                <li>• grouping materi per jenis</li>
+                <li>• visual bantu ajar yang lebih hidup</li>
+                <li>• materi IP Address biar nggak berasa horor</li>
+                <li>• studi kasus DSG dan halaman detail mandiri</li>
               </ul>
             </div>
           </div>
@@ -286,226 +170,65 @@
       </div>
     </section>
 
-    <section id="fitur" class="mt-10 reveal">
-      <div class="mb-5 flex items-center justify-between gap-3">
-        <div>
-          <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">solusi yang dibawa</div>
-          <h2 class="mt-1 text-2xl font-black sm:text-3xl">Bukan sekadar website belajar, tapi sistem pembinaan dasar yang lebih enak dipakai</h2>
-        </div>
-        <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">lebih matang</div>
-      </div>
-      <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        <div class="rounded-[1.5rem] glass-soft p-5">
-          <div class="text-sm font-bold text-white">Copy lebih kuat</div>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Narasi portal sekarang lebih jelas menjawab masalah siswa yang fundamentalnya masih kosong.</p>
-        </div>
-        <div class="rounded-[1.5rem] glass-soft p-5">
-          <div class="text-sm font-bold text-white">Visual lebih profesional</div>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Grid, gradient, badge, dan section dibuat lebih dekat ke gaya website modern masa sekarang.</p>
-        </div>
-        <div class="rounded-[1.5rem] glass-soft p-5">
-          <div class="text-sm font-bold text-white">Portal tetap fungsional</div>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Login admin, login siswa, materi, dan pantauan aktivitas tetap jalan seperti sebelumnya.</p>
-        </div>
-        <div class="rounded-[1.5rem] glass-soft p-5">
-          <div class="text-sm font-bold text-white">Arah produk lebih jelas</div>
-          <p class="mt-2 text-sm leading-7 text-slate-300">Sekarang tampilannya lebih cocok untuk demo, presentasi, sekaligus dasar pengembangan ke aplikasi sungguhan.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="portal" class="mt-10 grid gap-6 lg:grid-cols-[.92fr_1.08fr] reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold text-slate-300">Portal Login</div>
-        <h2 class="text-2xl font-black sm:text-3xl">Masuk ke portal</h2>
-        <p class="mt-3 text-sm leading-7 text-slate-300">Halaman masuk dibikin tetap bersih. Akses admin dan siswa tetap jalan, tapi kredensial admin tidak dipajang di layar.</p>
-        <div id="loginAlert" class="mt-5 hidden rounded-2xl border px-4 py-3 text-sm"></div>
-        <div class="mt-6 grid gap-4 sm:grid-cols-2">
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="mb-2 text-sm font-bold text-cyan-300">Admin</div>
-            <p class="mb-4 text-sm text-slate-400">Kelola materi, siswa, status aktivitas, dan log portal.</p>
-            <div class="space-y-3">
-              <input id="adminUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username admin" autocomplete="username" />
-              <input id="adminPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password admin" autocomplete="current-password" />
-              <button id="adminLoginBtn" class="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.01]">Masuk sebagai Admin</button>
-            </div>
-          </div>
-          <div class="rounded-[1.6rem] glass-soft p-5">
-            <div class="mb-2 text-sm font-bold text-fuchsia-300">Siswa</div>
-            <p class="mb-4 text-sm text-slate-400">Masuk ke portal, baca materi, dan tercatat saat aktif di halaman.</p>
-            <div class="space-y-3">
-              <input id="studentUsername" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username siswa" autocomplete="username" />
-              <input id="studentPassword" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password siswa" autocomplete="current-password" />
-              <button id="studentLoginBtn" class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white transition hover:border-fuchsia-400/25 hover:bg-white/10">Masuk sebagai Siswa</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-5 flex items-center justify-between gap-3">
-          <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">sekilas</div>
-            <h3 class="mt-1 text-xl font-black">Rasanya sekarang lebih enak dipakai</h3>
-          </div>
-          <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-bold text-emerald-300">lebih rapi</div>
-        </div>
-        <div class="grid gap-4 sm:grid-cols-2">
-          <div class="rounded-[1.4rem] border border-cyan-400/10 bg-gradient-to-br from-cyan-400/10 via-sky-500/10 to-transparent p-5">
-            <div class="text-sm font-bold text-white">Panel lebih lega</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Titik fokusnya dibenerin supaya mata lebih gampang nangkap isi penting.</p>
-          </div>
-          <div class="rounded-[1.4rem] border border-fuchsia-400/10 bg-gradient-to-br from-violet-500/10 via-fuchsia-500/10 to-transparent p-5">
-            <div class="text-sm font-bold text-white">Warna lebih luwes</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Aksen warnanya dibuat hidup, tapi tetap dijaga biar nggak terasa ramai sendiri.</p>
-          </div>
-          <div class="rounded-[1.4rem] border border-emerald-400/10 bg-gradient-to-br from-emerald-400/10 via-cyan-400/5 to-transparent p-5">
-            <div class="text-sm font-bold text-white">Baca lebih santai</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Jarak, ukuran panel, dan ritme kontennya dibikin lebih adem buat layar kecil maupun besar.</p>
-          </div>
-          <div class="rounded-[1.4rem] border border-amber-400/10 bg-gradient-to-br from-amber-400/10 via-orange-400/5 to-transparent p-5">
-            <div class="text-sm font-bold text-white">Akses cepat</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Tetap enak dibuka kapan saja, dan kalau dipasang di perangkat rasanya lebih ringkas.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="adminPanel" class="mt-10 hidden-safe reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
+    <section id="materi" class="mt-10 reveal">
+      <div class="glass rounded-[2rem] border border-white/10 bg-slate-900/45 p-6 dark:bg-slate-900/45 light:border-slate-200/70 light:bg-white/70 sm:p-8">
         <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.22em] text-cyan-300">Admin dashboard</div>
-            <h2 class="mt-1 text-2xl font-black">Kelola kelas dan pantau aktivitas siswa</h2>
+            <div class="text-xs font-bold uppercase tracking-[.22em] text-fuchsia-300 light:text-fuchsia-700">Zona materi</div>
+            <h2 class="mt-1 text-2xl font-black text-white dark:text-white light:text-slate-900">Biar nggak pusing, materinya saya kelompokkan per vibes topik 😎</h2>
+            <p class="mt-2 text-sm text-slate-400 dark:text-slate-400 light:text-slate-600">Start dari basic dulu, terus naik ke visual, lalu masuk ke contoh lapangan yang lebih real.</p>
           </div>
           <div class="flex flex-wrap gap-3">
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Siswa aktif: <span id="onlineStudentCount" class="font-bold text-white">0</span></div>
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Total siswa: <span id="totalStudentCount" class="font-bold text-white">0</span></div>
-            <button id="adminLogoutBtn" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/25 hover:bg-white/5">Logout</button>
+            <a href="#visual" class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10 dark:text-white light:border-slate-300/70 light:bg-white/70 light:text-slate-900">Ke visual bantu ajar</a>
+            <a href="dsg-topology.html" class="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-3 text-sm font-semibold text-cyan-200 transition hover:bg-cyan-400/15 light:text-cyan-700">Buka materi DSG</a>
           </div>
         </div>
-
-        <div class="grid gap-6 xl:grid-cols-[.9fr_1.1fr]">
-          <div class="space-y-6">
-            <div class="rounded-[1.6rem] glass-soft p-5">
-              <div class="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <div class="text-lg font-bold text-white">Tambah siswa</div>
-                  <div class="text-sm text-slate-400">Buat akun siswa baru dari panel admin.</div>
-                </div>
-              </div>
-              <form id="studentForm" class="space-y-3">
-                <input id="studentNameInput" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Nama siswa" required />
-                <input id="studentUserInput" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Username siswa" required />
-                <input id="studentPassInput" type="password" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Password siswa" required />
-                <button class="w-full rounded-2xl bg-gradient-to-r from-cyan-400 to-sky-500 px-4 py-3 text-sm font-bold text-slate-950 transition hover:scale-[1.01]">Simpan siswa</button>
-              </form>
-            </div>
-
-            <div class="rounded-[1.6rem] glass-soft p-5">
-              <div class="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <div class="text-lg font-bold text-white">Tambah materi</div>
-                  <div class="text-sm text-slate-400">Materi baru langsung tampil di portal siswa.</div>
-                </div>
-                <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">Materi: <span id="adminMaterialCount">0</span></div>
-              </div>
-              <form id="materialForm" class="space-y-3">
-                <input id="materialTitle" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Judul materi" required />
-                <div class="grid gap-3 sm:grid-cols-2">
-                  <input id="materialCategory" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Kategori" required />
-                  <input id="materialSource" class="input-ui w-full rounded-2xl px-4 py-3 text-sm" placeholder="Link sumber" />
-                </div>
-                <textarea id="materialSummary" class="textarea-ui h-32 w-full rounded-2xl px-4 py-3 text-sm" placeholder="Ringkasan materi" required></textarea>
-                <button class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-bold text-white transition hover:border-cyan-300/25 hover:bg-white/10">Simpan materi</button>
-              </form>
-            </div>
-          </div>
-
-          <div class="space-y-6">
-            <div class="rounded-[1.6rem] glass-soft p-5">
-              <div class="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <div class="text-lg font-bold text-white">Daftar siswa</div>
-                  <div class="text-sm text-slate-400">Status aktif diambil dari aktivitas terbaru siswa.</div>
-                </div>
-                <div class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">live</div>
-              </div>
-              <div id="studentList" class="space-y-3"></div>
-            </div>
-
-            <div class="rounded-[1.6rem] glass-soft p-5">
-              <div class="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <div class="text-lg font-bold text-white">Log login & logout</div>
-                  <div class="text-sm text-slate-400">Ringkas dan cukup buat lihat aktivitas portal.</div>
-                </div>
-              </div>
-              <div id="activityLogList" class="space-y-3"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mt-6 rounded-[1.6rem] glass-soft p-5">
-          <div class="mb-4 text-lg font-bold text-white">Materi yang tersedia</div>
-          <div id="adminMaterialList" class="grid gap-4 md:grid-cols-2"></div>
-        </div>
+        <div id="materi-groups" class="space-y-6"></div>
       </div>
     </section>
-
-    <section id="studentPanel" class="mt-10 hidden-safe reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-6 flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <div class="text-xs font-bold uppercase tracking-[.22em] text-fuchsia-300">Portal siswa</div>
-            <h2 class="mt-1 text-2xl font-black">Belajar lebih santai, materi lebih gampang diikuti</h2>
-            <p id="studentWelcome" class="mt-2 text-sm text-slate-400"></p>
-          </div>
-          <div class="flex flex-wrap gap-3">
-            <div class="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-slate-300">Status: <span id="studentStatusText" class="font-bold text-emerald-300">Aktif</span></div>
-            <button id="studentLogoutBtn" class="rounded-2xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-fuchsia-400/25 hover:bg-white/5">Logout</button>
-          </div>
-        </div>
-        <div id="materi" class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"></div>
-      </div>
-    </section>
-
-    <section id="aktivitas" class="mt-10 reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-5 flex items-center justify-between gap-3">
-          <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">cara kerja aktivitas</div>
-            <h3 class="mt-1 text-xl font-black">Status siswa dibaca dari kegiatan di halaman</h3>
-          </div>
-        </div>
-        <div class="grid gap-4 md:grid-cols-3">
-          <div class="rounded-[1.4rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Kalau siswa gerak</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Scroll, klik, sentuh layar, atau menekan tombol akan menyegarkan status aktif siswa.</p>
-          </div>
-          <div class="rounded-[1.4rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Kalau sudah diam</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Kalau lama tidak ada aktivitas, status otomatis dianggap offline supaya admin lebih mudah pantau.</p>
-          </div>
-          <div class="rounded-[1.4rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Log sederhana</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Masuk dan keluar portal langsung tercatat singkat agar admin tahu alur pemakaian.</p>
-          </div>
-        </div>
-      </div>
-
 
     <section id="visual" class="mt-10 reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
+      <div class="glass rounded-[2rem] border border-white/10 bg-slate-900/45 p-6 dark:bg-slate-900/45 light:border-slate-200/70 light:bg-white/70 sm:p-8">
         <div class="mb-5 flex items-center justify-between gap-3">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">visual bantu ajar</div>
-            <h3 class="mt-1 text-xl font-black">Ilustrasi biar penjelasan lebih gampang ditangkap</h3>
+            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300 light:text-cyan-700">Visual bantu ajar</div>
+            <h3 class="mt-1 text-xl font-black text-white dark:text-white light:text-slate-900">Belajar dari gambar biar materi lebih cepat nempel</h3>
           </div>
-          <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">siap dipakai</div>
+          <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300 dark:text-slate-300 light:border-slate-300 light:bg-white/70 light:text-slate-700">public material</div>
         </div>
+
         <div class="grid gap-5 lg:grid-cols-2">
-          <article class="rounded-[1.6rem] glass-soft p-4 lg:col-span-2">
+          <article class="rounded-[1.6rem] border border-fuchsia-400/15 bg-gradient-to-br from-fuchsia-400/10 via-violet-500/5 to-transparent p-4 lg:col-span-2">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <div class="inline-flex rounded-full border border-fuchsia-400/15 bg-fuchsia-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.2em] text-fuchsia-200 light:text-fuchsia-700">Materi IP favorit</div>
+                <div class="mt-3 text-lg font-black text-white dark:text-white light:text-slate-900">IP Address biar nggak berasa horor buat siswa</div>
+                <p class="mt-2 max-w-3xl text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Dua gambar ini cocok buat ngebuka materi IP Address secara visual — dari pengenalan dasar sampai pembagian per class. Cocok buat siswa yang lebih gampang nangkep dari gambar daripada teori panjang.</p>
+              </div>
+            </div>
+            <div class="grid gap-5 lg:grid-cols-2">
+              <article class="rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+                <button type="button" class="group block w-full text-left" data-open-image="images/materials/ip/dasar-ip-address.png" data-image-title="Dasar IP Address" data-image-caption="Visual dasar untuk menjelaskan pengertian IP address, network, host, dan gambaran penggunaan alamat di jaringan.">
+                  <img src="images/materials/ip/dasar-ip-address.png" alt="Dasar IP Address" class="w-full rounded-[1.1rem] border border-white/10 bg-slate-950/40 transition duration-300 group-hover:scale-[1.01]" />
+                </button>
+                <div class="mt-4">
+                  <div class="text-base font-black text-white dark:text-white light:text-slate-900">Dasar IP Address</div>
+                  <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Buat pembukaan yang santai: apa itu IP, kenapa device butuh alamat, dan gimana komunikasi jaringan bisa jalan.</p>
+                </div>
+              </article>
+              <article class="rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+                <button type="button" class="group block w-full text-left" data-open-image="images/materials/ip/dasar-ip-address-per-class.png" data-image-title="Dasar IP Address per Class" data-image-caption="Visual per class untuk membantu siswa memahami class A, B, C dan gambaran pembagian network secara sederhana.">
+                  <img src="images/materials/ip/dasar-ip-address-per-class.png" alt="Dasar IP Address per Class" class="w-full rounded-[1.1rem] border border-white/10 bg-slate-950/40 transition duration-300 group-hover:scale-[1.01]" />
+                </button>
+                <div class="mt-4">
+                  <div class="text-base font-black text-white dark:text-white light:text-slate-900">Dasar IP Address per Class</div>
+                  <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Lanjut ke class A, B, C biar angka IP nggak lagi terasa random dan bikin pusing.</p>
+                </div>
+              </article>
+            </div>
+          </article>
+
+          <article class="rounded-[1.6rem] border border-cyan-400/15 bg-gradient-to-br from-cyan-400/10 via-sky-500/5 to-transparent p-4 lg:col-span-2">
             <div class="relative">
               <button type="button" class="group block w-full text-left" data-open-image="images/materials/topology/topologi-dsg.png" data-image-title="Topologi DSG" data-image-caption="Contoh topologi jaringan lapangan yang bisa dipakai untuk melatih siswa membaca hubungan antar titik, jalur distribusi, dan struktur koneksi nyata.">
                 <img src="images/materials/topology/topologi-dsg.png" alt="Topologi DSG" class="w-full rounded-[1.2rem] border border-cyan-400/10 bg-slate-950/40 transition duration-300 group-hover:scale-[1.01] group-hover:border-cyan-300/30" />
@@ -515,609 +238,233 @@
               <div class="pointer-events-none absolute left-[18%] bottom-[14%] rounded-full border border-emerald-300/40 bg-emerald-300/12 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-emerald-100">Node turunan</div>
             </div>
             <div class="mt-4">
-              <div class="inline-flex rounded-full border border-cyan-400/15 bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.2em] text-cyan-200">Topologi nyata</div>
-              <div class="mt-3 text-lg font-bold text-white">Topologi DSG sebagai contoh jaringan lapangan</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Ini bisa dipakai buat mengenalkan ke siswa bahwa topologi jaringan di dunia nyata tidak selalu sesederhana gambar teori. Dari sini siswa bisa belajar membaca hubungan antar titik, jalur distribusi, dan gambaran struktur koneksi yang benar-benar dipakai di lapangan.</p>
+              <div class="inline-flex rounded-full border border-cyan-400/15 bg-cyan-400/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.2em] text-cyan-200 light:text-cyan-700">Topologi nyata</div>
+              <div class="mt-3 text-lg font-black text-white dark:text-white light:text-slate-900">Topologi DSG sebagai contoh jaringan lapangan</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Biar siswa sadar kalau topologi nyata itu nggak selalu sesimpel gambar teori. Dari sini mereka bisa belajar baca struktur koneksi yang beneran kepakai di lapangan.</p>
               <div class="mt-4 grid gap-3 md:grid-cols-3">
-                <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-                  <div class="text-xs uppercase tracking-[.18em] text-cyan-300">Apa yang dilihat</div>
-                  <div class="mt-2 text-sm leading-7 text-slate-300">Siswa bisa mulai dari mengenali node utama, jalur antar perangkat, dan arah distribusi koneksi.</div>
+                <div class="rounded-2xl border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+                  <div class="text-xs uppercase tracking-[.18em] text-cyan-300 light:text-cyan-700">Apa yang dilihat</div>
+                  <div class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Node utama, jalur antar perangkat, dan arah distribusi koneksi.</div>
                 </div>
-                <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-                  <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300">Apa yang dipahami</div>
-                  <div class="mt-2 text-sm leading-7 text-slate-300">Siswa belajar bahwa jaringan nyata punya struktur bertingkat, titik pusat, dan hubungan yang tidak selalu linear.</div>
+                <div class="rounded-2xl border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+                  <div class="text-xs uppercase tracking-[.18em] text-fuchsia-300 light:text-fuchsia-700">Apa yang dipahami</div>
+                  <div class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Jaringan nyata itu bisa bertingkat, bercabang, dan nggak selalu linear.</div>
                 </div>
-                <div class="rounded-2xl border border-white/10 bg-white/[.03] p-4">
-                  <div class="text-xs uppercase tracking-[.18em] text-emerald-300">Apa manfaatnya</div>
-                  <div class="mt-2 text-sm leading-7 text-slate-300">Membantu siswa siap membaca topologi proyek lapangan, troubleshooting, dan dokumentasi jaringan nyata.</div>
+                <div class="rounded-2xl border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+                  <div class="text-xs uppercase tracking-[.18em] text-emerald-300 light:text-emerald-700">Apa manfaatnya</div>
+                  <div class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Ngebantu siswa siap baca dokumen topologi dan mikir troubleshooting sederhana.</div>
                 </div>
               </div>
               <div class="mt-4 flex flex-wrap gap-3">
-                <p class="text-xs text-slate-400">Tip: klik gambar untuk melihat versi lebih besar.</p>
-                <a href="dsg-topology.html" class="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-bold text-cyan-200 transition hover:border-cyan-300/35 hover:bg-cyan-400/15">Buka materi detail DSG</a>
+                <p class="text-xs text-slate-400 dark:text-slate-400 light:text-slate-600">Tip: klik gambar buat lihat versi lebih gede.</p>
+                <a href="dsg-topology.html" class="rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-black text-cyan-200 transition hover:bg-cyan-400/15 light:text-cyan-700">Buka materi detail DSG</a>
               </div>
             </div>
           </article>
-          <article class="rounded-[1.6rem] glass-soft p-4">
+
+          <article class="rounded-[1.6rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
             <img src="images/illustrations/lan.svg" alt="Ilustrasi LAN" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
             <div class="mt-4">
-              <div class="text-lg font-bold text-white">LAN dan hubungan perangkat lokal</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Cocok dipakai saat jelasin hubungan komputer, switch, dan pertukaran data dalam satu area seperti lab sekolah atau kantor kecil.</p>
+              <div class="text-lg font-black text-white dark:text-white light:text-slate-900">LAN dan hubungan perangkat lokal</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Cocok buat jelasin hubungan komputer, switch, dan pertukaran data dalam area kecil kayak lab atau kantor.</p>
             </div>
           </article>
-          <article class="rounded-[1.6rem] glass-soft p-4">
+          <article class="rounded-[1.6rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
             <img src="images/illustrations/topologi-jaringan.svg" alt="Ilustrasi topologi jaringan" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
             <div class="mt-4">
-              <div class="text-lg font-bold text-white">Topologi jaringan yang umum dipelajari</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Bisa langsung dipakai untuk bandingin star, ring, dan bus supaya siswa lebih cepat paham bentuk dan logika jalurnya.</p>
+              <div class="text-lg font-black text-white dark:text-white light:text-slate-900">Topologi jaringan yang umum dipelajari</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Buat ngebandingin star, ring, dan bus biar siswa lebih cepat paham bentuk dan logikanya.</p>
             </div>
           </article>
-          <article class="rounded-[1.6rem] glass-soft p-4">
+          <article class="rounded-[1.6rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
             <img src="images/illustrations/mikrotik.svg" alt="Ilustrasi MikroTik" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
             <div class="mt-4">
-              <div class="text-lg font-bold text-white">Dasar konfigurasi MikroTik</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Enak dipakai buat jelasin alur WAN ke LAN, DHCP, DNS, dan NAT sebelum masuk praktik langsung di router.</p>
+              <div class="text-lg font-black text-white dark:text-white light:text-slate-900">Dasar konfigurasi MikroTik</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Cocok buat ngenalin WAN ke LAN, DHCP, DNS, dan NAT sebelum masuk praktik langsung.</p>
             </div>
           </article>
-          <article class="rounded-[1.6rem] glass-soft p-4">
+          <article class="rounded-[1.6rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
             <img src="images/illustrations/ip-address.svg" alt="Ilustrasi IP address" class="w-full rounded-[1.2rem] border border-white/10 bg-slate-950/40" />
             <div class="mt-4">
-              <div class="text-lg font-bold text-white">IP address, subnet, dan host</div>
-              <p class="mt-2 text-sm leading-7 text-slate-300">Bagian ini bantu jelasin pecahan IP secara visual biar siswa nggak cuma hafal angka, tapi paham fungsi tiap bloknya.</p>
+              <div class="text-lg font-black text-white dark:text-white light:text-slate-900">IP address, subnet, dan host</div>
+              <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Bantu jelasin pecahan IP secara visual biar siswa nggak cuma hafal angka, tapi ngerti fungsi tiap blok.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section id="studi-kasus-dsg" class="mt-10 reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
+    <section id="studi-kasus" class="mt-10 reveal">
+      <div class="glass rounded-[2rem] border border-white/10 bg-slate-900/45 p-6 dark:bg-slate-900/45 light:border-slate-200/70 light:bg-white/70 sm:p-8">
         <div class="mb-5 flex items-center justify-between gap-3">
           <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">studi kasus lapangan</div>
-            <h3 class="mt-1 text-xl font-black">Cara memakai topologi DSG sebagai bahan ajar siswa</h3>
+            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300 light:text-cyan-700">Studi kasus lapangan</div>
+            <h3 class="mt-1 text-xl font-black text-white dark:text-white light:text-slate-900">Cara pakai topologi DSG buat bahan ajar yang nggak ngebosenin</h3>
           </div>
-          <div class="rounded-full border border-cyan-400/15 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200">real case</div>
+          <div class="rounded-full border border-cyan-400/15 bg-cyan-400/10 px-3 py-1 text-xs font-semibold text-cyan-200 light:text-cyan-700">real case</div>
         </div>
         <div class="grid gap-4 lg:grid-cols-3">
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Langkah 1 — Kenali titik utama</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Ajak siswa mencari titik pusat jaringan, perangkat utama, dan koneksi yang menjadi jalur distribusi inti.</p>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/[.04] p-5 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+            <div class="text-sm font-black text-white dark:text-white light:text-slate-900">1. Cari titik inti dulu</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Ajak siswa mulai dari pusat koneksi, perangkat utama, dan node yang paling berpengaruh.</p>
           </div>
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Langkah 2 — Baca alur koneksi</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Minta siswa menjelaskan dari mana koneksi datang, bagaimana jalurnya diteruskan, dan titik mana yang berperan sebagai penghubung.</p>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/[.04] p-5 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+            <div class="text-sm font-black text-white dark:text-white light:text-slate-900">2. Baca alur koneksi</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Minta siswa jelasin koneksi datang dari mana, lewat jalur apa, terus turun ke titik mana aja.</p>
           </div>
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">Langkah 3 — Diskusi gangguan</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Gunakan topologi ini untuk simulasi: kalau satu titik mati, bagian mana yang terdampak dan kenapa.</p>
+          <div class="rounded-[1.5rem] border border-white/10 bg-white/[.04] p-5 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+            <div class="text-sm font-black text-white dark:text-white light:text-slate-900">3. Bayangin gangguan</div>
+            <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">Simulasiin kalau satu titik mati, bagian mana aja yang bakal ikut kena impact.</p>
           </div>
-        </div>
-        <div class="mt-5 rounded-[1.5rem] border border-white/10 bg-white/[.03] p-5">
-          <div class="text-sm font-bold text-white">Contoh pertanyaan untuk siswa</div>
-          <ul class="mt-3 space-y-2 text-sm leading-7 text-slate-300">
-            <li>• Mana titik pusat/top node pada topologi ini?</li>
-            <li>• Jalur mana yang terlihat sebagai distribusi utama?</li>
-            <li>• Jika satu node terputus, node mana saja yang kemungkinan ikut terdampak?</li>
-            <li>• Menurutmu, apakah topologi ini lebih dekat ke model star, tree, atau gabungan beberapa bentuk?</li>
-            <li>• Kenapa topologi lapangan sering terlihat lebih kompleks daripada gambar teori di buku?</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="kuis-dsg" class="mt-10 reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-5 flex items-center justify-between gap-3">
-          <div>
-            <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">kuis singkat</div>
-            <h3 class="mt-1 text-xl font-black">Cek pemahaman siswa tentang topologi DSG</h3>
-          </div>
-          <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold text-slate-300">latihan cepat</div>
-        </div>
-        <div class="grid gap-4 lg:grid-cols-3">
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">1. Fungsi gambar ini apa?</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Jawaban yang diharapkan: untuk membaca hubungan node, jalur koneksi, dan struktur jaringan nyata.</p>
-          </div>
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">2. Apa beda topologi nyata dan teori?</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Jawaban yang diharapkan: topologi nyata lebih kompleks, bercabang, dan dipengaruhi kebutuhan lapangan.</p>
-          </div>
-          <div class="rounded-[1.5rem] glass-soft p-5">
-            <div class="text-sm font-bold text-white">3. Jika satu titik bermasalah?</div>
-            <p class="mt-2 text-sm leading-7 text-slate-300">Jawaban yang diharapkan: siswa harus bisa menebak node mana saja yang mungkin ikut terdampak.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="rundown" class="mt-10 reveal">
-      <div class="glass gradient-border rounded-[2rem] p-6 sm:p-8">
-        <div class="mb-5">
-          <div class="text-xs font-bold uppercase tracking-[.25em] text-cyan-300">alur ngajarnya</div>
-          <h3 class="mt-1 text-xl font-black">Urutan materi yang enak dipakai saat mengajar</h3>
-        </div>
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">1. Dasar jaringan</div><p class="mt-2 text-sm leading-7 text-slate-300">Mulai dari LAN, manfaat jaringan, dan contoh sederhana yang dekat dengan keseharian siswa.</p></div>
-          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">2. Topologi & perangkat</div><p class="mt-2 text-sm leading-7 text-slate-300">Lanjut ke bentuk jaringan, fungsi router, switch, access point, kabel, dan konektor.</p></div>
-          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">3. IP & konfigurasi</div><p class="mt-2 text-sm leading-7 text-slate-300">Masuk ke IP address, subnet, gateway, lalu latihan dasar konfigurasi perangkat dan klien.</p></div>
-          <div class="rounded-[1.4rem] glass-soft p-5"><div class="text-sm font-bold text-white">4. Praktik & cek gangguan</div><p class="mt-2 text-sm leading-7 text-slate-300">Tutup dengan crimping, pengujian koneksi, dan alur troubleshooting agar siswa lebih siap praktik.</p></div>
         </div>
       </div>
     </section>
   </main>
 
   <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/80 p-4 backdrop-blur-sm">
-    <div class="relative w-full max-w-6xl rounded-[1.8rem] border border-white/10 bg-slate-950/92 p-4 shadow-2xl">
-      <button type="button" id="closeImageModal" class="absolute right-4 top-4 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white">Tutup</button>
+    <div class="w-full max-w-6xl rounded-[1.8rem] border border-white/10 bg-slate-950/92 p-4 shadow-2xl dark:bg-slate-950/92 light:border-slate-200 light:bg-white">
+      <button type="button" id="closeImageModal" class="absolute right-8 top-8 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-bold text-white dark:text-white light:border-slate-300 light:bg-white light:text-slate-900">Tutup</button>
       <div class="mb-4 pr-20">
-        <div id="imageModalTitle" class="text-lg font-bold text-white">Preview Gambar</div>
-        <div id="imageModalCaption" class="mt-1 text-sm leading-7 text-slate-300"></div>
+        <div id="imageModalTitle" class="text-lg font-black text-white dark:text-white light:text-slate-900">Preview Gambar</div>
+        <div id="imageModalCaption" class="mt-1 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700"></div>
       </div>
-      <div class="overflow-auto rounded-[1.2rem] border border-white/10 bg-slate-900/80 p-2">
+      <div class="overflow-auto rounded-[1.2rem] border border-white/10 bg-slate-900/80 p-2 light:border-slate-200 light:bg-slate-100">
         <img id="imageModalTarget" src="" alt="Preview gambar" class="mx-auto h-auto max-h-[75vh] w-auto rounded-xl" />
       </div>
     </div>
   </div>
 
   <script>
-    const ADMIN_CREDENTIAL = { username: 'admin', password: 'admin2026' };
-    const STORAGE = {
-      materials: 'alvii-learning-materials-v2',
-      students: 'alvii-learning-students-v2',
-      logs: 'alvii-learning-logs-v2',
-      session: 'alvii-learning-session-v2'
-    };
-    const ACTIVE_WINDOW_MS = 90000;
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('alvii-learning-theme');
+    if (savedTheme === 'light') {
+      root.classList.remove('dark');
+      root.classList.add('light');
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#eef4ff');
+      themeToggle.textContent = 'Dark mode';
+    }
+
+    themeToggle?.addEventListener('click', () => {
+      const isLight = root.classList.contains('light');
+      root.classList.toggle('light', !isLight);
+      root.classList.toggle('dark', isLight);
+      localStorage.setItem('alvii-learning-theme', isLight ? 'dark' : 'light');
+      themeToggle.textContent = isLight ? 'Light mode' : 'Dark mode';
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', isLight ? '#0b1020' : '#eef4ff');
+    });
 
     const defaultMaterials = [
       {
-        id: 'm1',
-        title: 'Pengertian LAN dan fungsi jaringan lokal',
+        title: 'Kenalan sama jaringan dari nol',
+        category: 'Dasar Jaringan',
+        summary: 'Pembuka buat siswa yang masih baru banget: apa itu jaringan, kenapa penting, dan gimana internet nyambung ke hidup sehari-hari.',
+        source: '#visual'
+      },
+      {
+        title: 'LAN dan perangkat lokal',
         category: 'LAN',
-        source: 'https://www.gramedia.com/literasi/pengertian-lan/',
-        summary: 'LAN adalah jaringan komputer dalam area terbatas seperti rumah, sekolah, kantor, atau lab. LAN dipakai untuk menghubungkan perangkat agar bisa berbagi data, printer, dan akses jaringan secara lokal.'
+        summary: 'Ngerti relasi komputer, switch, kabel, dan perangkat lain di jaringan lokal tanpa drama.',
+        source: '#visual'
       },
       {
-        id: 'm2',
-        title: 'Jenis topologi jaringan yang umum dipakai',
+        title: 'Topologi jaringan dasar',
         category: 'Topologi',
-        source: 'https://jakarta.telkomuniversity.ac.id/jenis-jenis-topologi-jaringan-komputer/',
-        summary: 'Topologi yang umum dipelajari adalah star, bus, ring, mesh, tree, dan hybrid. Di lingkungan sekolah atau lab, topologi star paling sering dipakai karena mudah dikelola dan mudah ditelusuri saat ada gangguan.'
+        summary: 'Belajar bentuk jaringan yang umum dan cara ngebedain star, ring, bus, sampai tree.',
+        source: '#visual'
       },
       {
-        id: 'm3',
-        title: 'Konfigurasi dasar MikroTik untuk pemula',
-        category: 'MikroTik',
-        source: 'https://www.idn.id/konfigurasi-dasar-mikrotik/',
-        summary: 'Langkah dasar belajar MikroTik biasanya dimulai dari pengaturan WAN, IP LAN, DHCP Server, DNS, NAT masquerade, lalu pengujian koneksi dari klien hingga internet.'
+        title: 'Topologi DSG real case',
+        category: 'Topologi',
+        summary: 'Contoh topologi lapangan yang bikin siswa sadar kalau dunia nyata itu lebih kompleks dari teori buku.',
+        source: 'dsg-topology.html'
       },
       {
-        id: 'm4',
-        title: 'Pengenalan IP Address dan subnet sederhana',
+        title: 'Dasar IP Address',
         category: 'IP Address',
-        source: '',
-        summary: 'Siswa perlu paham bedanya network address, host address, gateway, serta cara membaca subnet sederhana agar tidak bingung saat praktek konfigurasi perangkat.'
+        summary: 'Visual dasar buat pahamin IP, host, network, dan kenapa tiap device butuh alamat.',
+        source: '#visual'
       },
       {
-        id: 'm5',
-        title: 'Perangkat jaringan dan fungsi dasarnya',
-        category: 'Perangkat',
-        source: '',
-        summary: 'Kenali fungsi router, switch, access point, modem, kabel UTP, konektor RJ45, dan server agar siswa tidak hanya hafal nama, tapi paham perannya dalam alur jaringan.'
+        title: 'IP Address per Class',
+        category: 'IP Address',
+        summary: 'Biar class A, B, C nggak kelihatan random dan lebih gampang kebayang pembagiannya.',
+        source: '#visual'
       },
       {
-        id: 'm6',
-        title: 'Langkah crimping kabel straight dan crossover',
-        category: 'Praktik Kabel',
-        source: '',
-        summary: 'Urutan warna kabel, perbedaan straight dan crossover, serta cara tes hasil crimping penting untuk praktik dasar di lab jaringan.'
-      },
-      {
-        id: 'm7',
-        title: 'Troubleshooting dasar koneksi jaringan',
-        category: 'Troubleshooting',
-        source: '',
-        summary: 'Mulai dari cek power perangkat, lampu indikator, kabel, IP client, ping gateway, sampai uji DNS dan internet agar siswa punya alur cek yang runtut.'
-      },
-      {
-        id: 'm8',
-        title: 'Pengenalan routing dan gateway',
-        category: 'Routing',
-        source: '',
-        summary: 'Gateway adalah pintu keluar menuju jaringan lain. Dari sini siswa bisa mulai paham kenapa router dibutuhkan dan bagaimana paket data diarahkan.'
+        title: 'MikroTik basic vibes',
+        category: 'MikroTik',
+        summary: 'Awalan buat masuk dunia router: distribusi koneksi, DHCP, DNS, dan NAT dengan bahasa yang nggak kaku.',
+        source: '#visual'
       }
     ];
 
-    const defaultStudents = [
-      {
-        id: 's1',
-        name: 'Siswa Demo',
-        username: 'siswa',
-        password: 'siswa123',
-        lastSeen: 0,
-        isLoggedIn: false,
-        createdAt: Date.now()
-      }
-    ];
-
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    mobileMenuBtn?.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-
-    function formatDateTime(ts) {
-      if (!ts) return '-';
-      return new Date(ts).toLocaleString('id-ID', {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    }
-
-    function uid(prefix='id') {
-      return `${prefix}_${Math.random().toString(36).slice(2, 9)}_${Date.now().toString(36)}`;
-    }
-
-    function showAlert(message, type='info') {
-      const alertBox = document.getElementById('loginAlert');
-      const palette = {
-        success: 'border-emerald-400/20 bg-emerald-400/10 text-emerald-200',
-        danger: 'border-rose-400/20 bg-rose-400/10 text-rose-200',
-        warning: 'border-amber-400/20 bg-amber-400/10 text-amber-200',
-        info: 'border-cyan-400/20 bg-cyan-400/10 text-cyan-200'
-      };
-      alertBox.className = `mt-5 rounded-2xl border px-4 py-3 text-sm ${palette[type] || palette.info}`;
-      alertBox.textContent = message;
-      alertBox.classList.remove('hidden');
-    }
-
-    function hidePanels() {
-      document.getElementById('adminPanel').classList.add('hidden-safe');
-      document.getElementById('studentPanel').classList.add('hidden-safe');
-    }
-
-    function getMaterials() {
-      const raw = localStorage.getItem(STORAGE.materials);
-      if (!raw) {
-        localStorage.setItem(STORAGE.materials, JSON.stringify(defaultMaterials));
-        return [...defaultMaterials];
-      }
-      try {
-        return JSON.parse(raw);
-      } catch {
-        localStorage.setItem(STORAGE.materials, JSON.stringify(defaultMaterials));
-        return [...defaultMaterials];
-      }
-    }
-
-    function saveMaterials(materials) {
-      localStorage.setItem(STORAGE.materials, JSON.stringify(materials));
-      renderAll();
-    }
-
-    function getStudents() {
-      const raw = localStorage.getItem(STORAGE.students);
-      if (!raw) {
-        localStorage.setItem(STORAGE.students, JSON.stringify(defaultStudents));
-        return [...defaultStudents];
-      }
-      try {
-        return JSON.parse(raw);
-      } catch {
-        localStorage.setItem(STORAGE.students, JSON.stringify(defaultStudents));
-        return [...defaultStudents];
-      }
-    }
-
-    function saveStudents(students) {
-      localStorage.setItem(STORAGE.students, JSON.stringify(students));
-      renderAll();
-    }
-
-    function getLogs() {
-      const raw = localStorage.getItem(STORAGE.logs);
-      if (!raw) return [];
-      try { return JSON.parse(raw); } catch { return []; }
-    }
-
-    function addLog(type, actor, detail) {
-      const logs = getLogs();
-      logs.unshift({ id: uid('log'), type, actor, detail, time: Date.now() });
-      localStorage.setItem(STORAGE.logs, JSON.stringify(logs.slice(0, 60)));
-      renderLogs();
-    }
-
-    function getSession() {
-      const raw = sessionStorage.getItem(STORAGE.session);
-      if (!raw) return null;
-      try { return JSON.parse(raw); } catch { return null; }
-    }
-
-    function setSession(data) {
-      sessionStorage.setItem(STORAGE.session, JSON.stringify(data));
-    }
-
-    function clearSession() {
-      sessionStorage.removeItem(STORAGE.session);
-    }
-
-    function studentStatus(student) {
-      const active = student.isLoggedIn && Date.now() - (student.lastSeen || 0) <= ACTIVE_WINDOW_MS;
-      return active ? 'active' : 'offline';
-    }
-
-    function materialCard(item, mode='student') {
+    function materialCard(item) {
       return `
-        <article class="rounded-[1.4rem] border border-white/10 bg-white/[.03] p-5 shadow-soft">
-          <div class="mb-3 flex items-start justify-between gap-3">
-            <div>
-              <div class="inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.2em] text-cyan-200">${item.category}</div>
-              <h3 class="mt-3 text-lg font-bold text-white">${item.title}</h3>
-            </div>
-            ${mode === 'admin' ? `<button data-delete-material="${item.id}" class="rounded-xl border border-rose-400/20 bg-rose-400/10 px-3 py-2 text-xs font-semibold text-rose-200">Hapus</button>` : ''}
-          </div>
-          <p class="text-sm leading-7 text-slate-300">${item.summary}</p>
-          <div class="mt-4 flex items-center justify-between gap-3">
-            <div class="text-xs text-slate-400">${item.source ? 'Sumber tersedia' : 'Ringkasan internal'}</div>
-            ${item.source ? `<a class="text-sm font-semibold text-cyan-300 hover:text-cyan-200" href="${item.source}" target="_blank" rel="noreferrer">Buka sumber</a>` : ''}
-          </div>
+        <article class="rounded-[1.4rem] border border-white/10 bg-white/[.04] p-4 dark:bg-white/[.04] light:border-slate-200 light:bg-white/80">
+          <div class="mb-3 inline-flex rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-bold uppercase tracking-[.18em] text-slate-300 dark:text-slate-300 light:border-slate-300 light:bg-slate-50 light:text-slate-700">${item.category}</div>
+          <div class="text-lg font-black text-white dark:text-white light:text-slate-900">${item.title}</div>
+          <p class="mt-2 text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${item.summary}</p>
+          <a href="${item.source}" class="mt-4 inline-flex rounded-2xl border border-cyan-400/20 bg-cyan-400/10 px-4 py-2 text-xs font-black text-cyan-200 transition hover:bg-cyan-400/15 light:text-cyan-700">Buka materi</a>
         </article>
       `;
     }
 
-    function studentRow(student) {
-      const status = studentStatus(student);
-      const isActive = status === 'active';
-      return `
-        <div class="rounded-[1.35rem] border ${isActive ? 'border-emerald-400/18 bg-emerald-400/10' : 'border-white/10 bg-white/[.03]'} p-4">
-          <div class="flex items-start justify-between gap-3">
-            <div>
-              <div class="flex items-center gap-3">
-                <span class="h-3 w-3 rounded-full ${isActive ? 'bg-emerald-400 dot-active' : 'bg-slate-500 dot-idle'}"></span>
-                <div>
-                  <div class="font-bold text-white">${student.name}</div>
-                  <div class="text-xs text-slate-400">@${student.username}</div>
-                </div>
-              </div>
-              <div class="mt-3 grid gap-1 text-xs text-slate-400 sm:grid-cols-2">
-                <div>Status: <span class="font-semibold ${isActive ? 'text-emerald-300' : 'text-slate-300'}">${isActive ? 'Aktif' : 'Offline'}</span></div>
-                <div>Terakhir aktif: <span class="text-slate-200">${formatDateTime(student.lastSeen)}</span></div>
-              </div>
-            </div>
-            <button data-delete-student="${student.id}" class="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-white hover:border-rose-400/25 hover:text-rose-200">Hapus</button>
-          </div>
-        </div>
-      `;
-    }
-
-    function renderAdminStudents() {
-      const students = getStudents();
-      document.getElementById('studentList').innerHTML = students.length
-        ? students.map(studentRow).join('')
-        : `<div class="rounded-[1.35rem] border border-white/10 bg-white/[.03] p-4 text-sm text-slate-400">Belum ada siswa.</div>`;
-      document.getElementById('totalStudentCount').textContent = students.length;
-      document.getElementById('onlineStudentCount').textContent = students.filter(s => studentStatus(s) === 'active').length;
-    }
-
-    function renderLogs() {
-      const logs = getLogs();
-      const wrap = document.getElementById('activityLogList');
-      wrap.innerHTML = logs.length
-        ? logs.slice(0, 10).map(log => `
-          <div class="rounded-[1.25rem] border border-white/10 bg-white/[.03] p-4">
-            <div class="flex items-center justify-between gap-3">
-              <div>
-                <div class="font-semibold text-white">${log.actor}</div>
-                <div class="mt-1 text-sm text-slate-300">${log.detail}</div>
-              </div>
-              <div class="text-right">
-                <div class="text-xs font-semibold uppercase tracking-[.16em] ${log.type === 'login' ? 'text-emerald-300' : 'text-amber-300'}">${log.type}</div>
-                <div class="mt-1 text-xs text-slate-500">${formatDateTime(log.time)}</div>
-              </div>
-            </div>
-          </div>`).join('')
-        : `<div class="rounded-[1.25rem] border border-white/10 bg-white/[.03] p-4 text-sm text-slate-400">Belum ada catatan aktivitas.</div>`;
-    }
-
-    function renderAdminMaterials() {
-      const materials = getMaterials();
-      document.getElementById('adminMaterialCount').textContent = materials.length;
-      document.getElementById('adminMaterialList').innerHTML = materials.map(item => materialCard(item, 'admin')).join('');
-    }
-
     function renderStudentMaterials() {
-      const materials = getMaterials();
-      document.getElementById('materi').innerHTML = materials.map(item => materialCard(item, 'student')).join('');
+      const grouped = defaultMaterials.reduce((acc, item) => {
+        const key = item.category || 'Lainnya';
+        (acc[key] ||= []).push(item);
+        return acc;
+      }, {});
+
+      const categoryNotes = {
+        'Dasar Jaringan': 'Pondasi buat yang masih nol banget, jadi nggak langsung tenggelam di istilah teknis.',
+        'LAN': 'Materi yang bikin siswa paham koneksi lokal, perangkat sekitar, dan alur jaringan area kecil.',
+        'Topologi': 'Belajar baca bentuk jaringan, hubungan node, dan kenapa topologi nyata kadang lebih kompleks dari teori buku.',
+        'IP Address': 'Belajar IP tanpa mumet: class, subnet, host, gateway, dan logika pembagian jaringan biar lebih masuk akal.',
+        'MikroTik': 'Masuk ke vibe router: kenalan sama distribusi koneksi, setup dasar, dan pola pikir konfigurasi praktis.'
+      };
+
+      const categoryStyles = {
+        'Dasar Jaringan': { chip: 'border-cyan-400/20 bg-cyan-400/10 text-cyan-200 light:text-cyan-700', card: 'border-cyan-400/15 bg-gradient-to-br from-cyan-400/10 via-sky-500/5 to-transparent', title: 'Start dari nol, pelan tapi ngena' },
+        'LAN': { chip: 'border-emerald-400/20 bg-emerald-400/10 text-emerald-200 light:text-emerald-700', card: 'border-emerald-400/15 bg-gradient-to-br from-emerald-400/10 via-cyan-400/5 to-transparent', title: 'Ngerti koneksi lokal tanpa drama' },
+        'Topologi': { chip: 'border-fuchsia-400/20 bg-fuchsia-400/10 text-fuchsia-200 light:text-fuchsia-700', card: 'border-fuchsia-400/15 bg-gradient-to-br from-fuchsia-400/10 via-violet-500/5 to-transparent', title: 'Baca bentuk jaringan biar nggak cuma bengong' },
+        'IP Address': { chip: 'border-amber-400/20 bg-amber-400/10 text-amber-200 light:text-amber-700', card: 'border-amber-400/15 bg-gradient-to-br from-amber-400/10 via-orange-400/5 to-transparent', title: 'IP itu nggak seserem yang dibayangin' },
+        'MikroTik': { chip: 'border-violet-400/20 bg-violet-400/10 text-violet-200 light:text-violet-700', card: 'border-violet-400/15 bg-gradient-to-br from-violet-400/10 via-cyan-400/5 to-transparent', title: 'Router vibes mulai kerasa di sini' }
+      };
+
+      const order = ['Dasar Jaringan', 'LAN', 'Topologi', 'IP Address', 'MikroTik'];
+      const sortedKeys = Object.keys(grouped).sort((a, b) => order.indexOf(a) - order.indexOf(b));
+
+      document.getElementById('materi-groups').innerHTML = sortedKeys.map(key => {
+        const style = categoryStyles[key];
+        return `
+          <section class="rounded-[1.8rem] border ${style.card} p-5 sm:p-6">
+            <div class="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <div class="inline-flex rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[.2em] ${style.chip}">${key}</div>
+                <div class="mt-3 text-xl font-black text-white dark:text-white light:text-slate-900">${style.title}</div>
+                <p class="mt-2 max-w-3xl text-sm leading-7 text-slate-300 dark:text-slate-300 light:text-slate-700">${categoryNotes[key]}</p>
+              </div>
+              <div class="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-slate-300 dark:text-slate-300 light:border-slate-300 light:bg-white light:text-slate-700">${grouped[key].length} materi</div>
+            </div>
+            <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              ${grouped[key].map(materialCard).join('')}
+            </div>
+          </section>
+        `;
+      }).join('');
     }
-
-    function renderStudentWelcome() {
-      const session = getSession();
-      if (session?.role !== 'student') return;
-      const students = getStudents();
-      const activeStudent = students.find(s => s.id === session.studentId);
-      document.getElementById('studentWelcome').textContent = activeStudent
-        ? `Halo, ${activeStudent.name}. Silakan lanjut belajar dari materi yang tersedia di bawah.`
-        : '';
-    }
-
-    function renderAll() {
-      renderAdminStudents();
-      renderLogs();
-      renderAdminMaterials();
-      renderStudentMaterials();
-      renderStudentWelcome();
-    }
-
-    function loginAdmin() {
-      const username = document.getElementById('adminUsername').value.trim();
-      const password = document.getElementById('adminPassword').value;
-      if (username !== ADMIN_CREDENTIAL.username || password !== ADMIN_CREDENTIAL.password) {
-        showAlert('Username atau password admin tidak cocok.', 'danger');
-        return;
-      }
-      setSession({ role: 'admin', loginAt: Date.now() });
-      hidePanels();
-      document.getElementById('adminPanel').classList.remove('hidden-safe');
-      document.getElementById('studentPanel').classList.add('hidden-safe');
-      addLog('login', 'Admin', 'Masuk ke dashboard admin');
-      renderAll();
-      showAlert('Admin berhasil masuk.', 'success');
-      document.getElementById('adminPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function loginStudent() {
-      const username = document.getElementById('studentUsername').value.trim();
-      const password = document.getElementById('studentPassword').value;
-      const students = getStudents();
-      const student = students.find(item => item.username === username && item.password === password);
-      if (!student) {
-        showAlert('Username atau password siswa tidak cocok.', 'danger');
-        return;
-      }
-      student.isLoggedIn = true;
-      student.lastSeen = Date.now();
-      saveStudents(students);
-      setSession({ role: 'student', studentId: student.id, loginAt: Date.now() });
-      hidePanels();
-      document.getElementById('studentPanel').classList.remove('hidden-safe');
-      addLog('login', student.name, 'Masuk ke portal siswa');
-      renderAll();
-      showAlert(`Selamat datang, ${student.name}.`, 'success');
-      document.getElementById('studentPanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    function logoutCurrent() {
-      const session = getSession();
-      if (!session) return;
-      if (session.role === 'student') {
-        const students = getStudents();
-        const student = students.find(item => item.id === session.studentId);
-        if (student) {
-          student.isLoggedIn = false;
-          saveStudents(students);
-          addLog('logout', student.name, 'Keluar dari portal siswa');
-        }
-      }
-      if (session.role === 'admin') {
-        addLog('logout', 'Admin', 'Keluar dari dashboard admin');
-      }
-      clearSession();
-      hidePanels();
-      showAlert('Sesi sudah ditutup.', 'info');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function syncStudentActivity() {
-      const session = getSession();
-      if (!session || session.role !== 'student') return;
-      const students = getStudents();
-      const student = students.find(item => item.id === session.studentId);
-      if (!student) return;
-      student.lastSeen = Date.now();
-      student.isLoggedIn = true;
-      localStorage.setItem(STORAGE.students, JSON.stringify(students));
-      const statusText = document.getElementById('studentStatusText');
-      if (statusText) statusText.textContent = 'Aktif';
-      renderAdminStudents();
-    }
-
-    function passiveStatusRefresh() {
-      const students = getStudents();
-      let changed = false;
-      students.forEach(student => {
-        const active = Date.now() - (student.lastSeen || 0) <= ACTIVE_WINDOW_MS;
-        const next = !!student.isLoggedIn && active;
-        if (student.isLoggedIn !== next && !next) {
-          student.isLoggedIn = false;
-          changed = true;
-        }
-      });
-      if (changed) localStorage.setItem(STORAGE.students, JSON.stringify(students));
-      renderAdminStudents();
-      const session = getSession();
-      if (session?.role === 'student') {
-        const current = students.find(s => s.id === session.studentId);
-        const statusText = document.getElementById('studentStatusText');
-        if (statusText && current) statusText.textContent = studentStatus(current) === 'active' ? 'Aktif' : 'Offline';
-      }
-    }
-
-    document.getElementById('adminLoginBtn').addEventListener('click', loginAdmin);
-    document.getElementById('studentLoginBtn').addEventListener('click', loginStudent);
-    document.getElementById('adminLogoutBtn').addEventListener('click', logoutCurrent);
-    document.getElementById('studentLogoutBtn').addEventListener('click', logoutCurrent);
-
-    document.getElementById('studentForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const name = document.getElementById('studentNameInput').value.trim();
-      const username = document.getElementById('studentUserInput').value.trim();
-      const password = document.getElementById('studentPassInput').value;
-      if (!name || !username || !password) return;
-      const students = getStudents();
-      if (students.some(item => item.username.toLowerCase() === username.toLowerCase())) {
-        showAlert('Username siswa sudah dipakai.', 'warning');
-        return;
-      }
-      students.unshift({
-        id: uid('student'),
-        name,
-        username,
-        password,
-        lastSeen: 0,
-        isLoggedIn: false,
-        createdAt: Date.now()
-      });
-      saveStudents(students);
-      addLog('login', 'Admin', `Menambahkan siswa baru: ${name}`);
-      event.target.reset();
-      showAlert('Siswa berhasil ditambahkan.', 'success');
-    });
-
-    document.getElementById('materialForm').addEventListener('submit', (event) => {
-      event.preventDefault();
-      const title = document.getElementById('materialTitle').value.trim();
-      const category = document.getElementById('materialCategory').value.trim();
-      const source = document.getElementById('materialSource').value.trim();
-      const summary = document.getElementById('materialSummary').value.trim();
-      if (!title || !category || !summary) return;
-      const materials = getMaterials();
-      materials.unshift({ id: uid('material'), title, category, source, summary });
-      saveMaterials(materials);
-      addLog('login', 'Admin', `Menambahkan materi: ${title}`);
-      event.target.reset();
-      showAlert('Materi berhasil ditambahkan.', 'success');
-    });
 
     document.addEventListener('click', (event) => {
       const imageBtn = event.target.closest('[data-open-image]');
       if (imageBtn) {
         const modal = document.getElementById('imageModal');
-        const target = document.getElementById('imageModalTarget');
-        const title = document.getElementById('imageModalTitle');
-        const caption = document.getElementById('imageModalCaption');
-        const src = imageBtn.getAttribute('data-open-image') || '';
-        target.src = src;
-        title.textContent = imageBtn.getAttribute('data-image-title') || 'Preview Gambar';
-        caption.textContent = imageBtn.getAttribute('data-image-caption') || '';
+        document.getElementById('imageModalTarget').src = imageBtn.getAttribute('data-open-image') || '';
+        document.getElementById('imageModalTitle').textContent = imageBtn.getAttribute('data-image-title') || 'Preview Gambar';
+        document.getElementById('imageModalCaption').textContent = imageBtn.getAttribute('data-image-caption') || '';
         modal.classList.remove('hidden');
         modal.classList.add('flex');
-      }
-      const materialBtn = event.target.closest('[data-delete-material]');
-      if (materialBtn) {
-        const id = materialBtn.getAttribute('data-delete-material');
-        const materials = getMaterials().filter(item => item.id !== id);
-        saveMaterials(materials);
-        showAlert('Materi berhasil dihapus.', 'info');
-      }
-      const studentBtn = event.target.closest('[data-delete-student]');
-      if (studentBtn) {
-        const id = studentBtn.getAttribute('data-delete-student');
-        const students = getStudents().filter(item => item.id !== id);
-        saveStudents(students);
-        showAlert('Siswa berhasil dihapus.', 'info');
       }
     });
 
@@ -1134,44 +481,14 @@
       }
     });
 
-    ['scroll', 'mousemove', 'keydown', 'click', 'touchstart'].forEach(eventName => {
-      window.addEventListener(eventName, () => syncStudentActivity(), { passive: true });
-    });
-
-    window.addEventListener('beforeunload', () => {
-      const session = getSession();
-      if (session?.role === 'student') {
-        const students = getStudents();
-        const student = students.find(item => item.id === session.studentId);
-        if (student) {
-          student.isLoggedIn = false;
-          localStorage.setItem(STORAGE.students, JSON.stringify(students));
-        }
-      }
-    });
-
-    window.addEventListener('storage', (event) => {
-      if ([STORAGE.students, STORAGE.materials, STORAGE.logs].includes(event.key)) renderAll();
-    });
-
-    document.querySelectorAll('.reveal').forEach((el, index) => setTimeout(() => el.classList.add('in'), 120 * index));
-
-    const currentSession = getSession();
-    if (currentSession?.role === 'admin') {
-      document.getElementById('adminPanel').classList.remove('hidden-safe');
-    } else if (currentSession?.role === 'student') {
-      document.getElementById('studentPanel').classList.remove('hidden-safe');
-    }
-
-    renderAll();
-    passiveStatusRefresh();
-    setInterval(passiveStatusRefresh, 15000);
-
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').catch(() => {});
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('in');
       });
-    }
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    renderStudentMaterials();
   </script>
 </body>
 </html>
