@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Alvii Learning Hub icon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="55%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#8b5cf6"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.92"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="128" fill="#07101f"/>
+  <rect x="36" y="36" width="440" height="440" rx="112" fill="url(#bg)"/>
+  <circle cx="390" cy="122" r="36" fill="#34d399" opacity="0.95"/>
+  <path d="M136 128h240c30.93 0 56 25.07 56 56v114c0 30.93-25.07 56-56 56H260l-80 58v-58h-44c-30.93 0-56-25.07-56-56V184c0-30.93 25.07-56 56-56z" fill="url(#card)"/>
+  <rect x="150" y="194" width="118" height="28" rx="14" fill="#2563eb"/>
+  <rect x="150" y="246" width="214" height="22" rx="11" fill="#94a3b8" opacity="0.86"/>
+  <rect x="150" y="288" width="150" height="22" rx="11" fill="#cbd5e1" opacity="0.96"/>
+</svg>

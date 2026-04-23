@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Ilustrasi IP address dan subnet">
+  <rect width="800" height="520" rx="36" fill="#081226"/>
+  <rect x="110" y="120" width="580" height="240" rx="28" fill="#0f172a" stroke="#38bdf8" stroke-width="4"/>
+  <g font-family="Inter, Arial" font-weight="800" font-size="42" text-anchor="middle">
+    <rect x="150" y="180" width="110" height="100" rx="20" fill="#38bdf8"/><text x="205" y="242" fill="#07101f">192</text>
+    <rect x="280" y="180" width="110" height="100" rx="20" fill="#60a5fa"/><text x="335" y="242" fill="#07101f">168</text>
+    <rect x="410" y="180" width="110" height="100" rx="20" fill="#8b5cf6"/><text x="465" y="242" fill="#ffffff">1</text>
+    <rect x="540" y="180" width="110" height="100" rx="20" fill="#ec4899"/><text x="595" y="242" fill="#ffffff">10</text>
+  </g>
+  <g fill="#cbd5e1" font-family="Inter, Arial" font-size="24" font-weight="700">
+    <text x="205" y="320" text-anchor="middle">Network</text>
+    <text x="335" y="320" text-anchor="middle">Network</text>
+    <text x="465" y="320" text-anchor="middle">Subnet</text>
+    <text x="595" y="320" text-anchor="middle">Host</text>
+  </g>
+  <text x="400" y="408" text-anchor="middle" fill="#e2e8f0" font-family="Inter, Arial" font-size="28" font-weight="700">Pahami network, subnet, host, dan gateway</text>
+</svg>
